@@ -4,7 +4,7 @@ Tags: stewardship, cleanup, volunteers, map, community
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 8.2
-Stable tag: 1.0.0-beta.1
+Stable tag: 1.0.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,7 @@ Pack-Out Spot is how a community looks after places: someone reports a Spot that
 
 Pack-Out Spot Partner runs the same work on your own WordPress site. Your records stay in your database. If you choose to connect the site to packout.spot, your organization appears there as a Partner, and the Spots, missions, and results you publish are shown there too.
 
-**This is the beta of version 1.0.** It has everything version 1.0 will have, and it is here to be tried first: people sign up, report Spots, start organizations and teams, plan campaigns and missions, record what a cleanup removed, and see the totals; an administrator sets the site up in a few steps, which make its pages, and can connect it to packout.spot; a connected site's Spots are on the hub's map, with the hub's Spots available on yours; a person can report a Spot and work a mission on a phone with no signal; and an organization on a connected site can take part in a campaign with other partners, or host one. Try it on a site you can afford to set up again. The [partner guide](https://packout.spot/partner-guide/) walks through installing it, setting it up, and connecting.
+With it, people sign up, report Spots, start organizations and teams, plan campaigns and missions, record what a cleanup removed, and see the totals; an administrator sets the site up in a few steps, which make its pages, and can connect it to packout.spot; a connected site's Spots are on the hub's map, with the hub's Spots available on yours; a person can report a Spot and work a mission on a phone with no signal; and an organization on a connected site can take part in a campaign with other partners, or host one. The plugin works in full without connecting, and its Connection screen says whether packout.spot is taking new partner sites. The [partner guide](https://packout.spot/partner-guide/) walks through installing it, setting it up, and connecting.
 
 The plugin needs no other plugin and works with any theme.
 
@@ -276,6 +276,13 @@ Versions released for testing before they become the stable version. Tick "Get b
 On [GitHub](https://github.com/campdads/packout-partner/issues). For a security problem, report it privately as [SECURITY.md](https://github.com/campdads/packout-partner/blob/main/SECURITY.md) describes.
 
 == Changelog ==
+
+= 1.0.0 =
+
+The first stable version. It is 1.0.0-beta.1 with its version changed: nothing the plugin does is different.
+
+* Sites that did not ask for beta versions are offered the plugin from this version on.
+* The plugin's source is public at [github.com/campdads/packout-partner](https://github.com/campdads/packout-partner), where a problem can be reported.
 
 = 1.0.0-beta.1 =
 

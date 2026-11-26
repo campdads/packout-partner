@@ -2,6 +2,16 @@
 
 Every version of Pack-Out Spot Partner, newest first.
 
+## 1.0.0
+
+The first stable version. It is 1.0.0-beta.1 with its version changed: nothing the plugin does is different.
+
+- Sites that did not ask for beta versions are offered the plugin from this version on.
+- This repository is public. It began again with one commit at 1.0.0-beta.1; the versions before that were built in private, and this file lists them.
+- Before a version reaches packout.spot's catalog, a connected site on the release before it updates to it on a test hub. For this version that release is 1.0.0-beta.1.
+
+Not in this version: shipped translations.
+
 ## 1.0.0-beta.1
 
 The beta of version 1.0. The plugin does what 0.8.0-beta.1 does. What is new is the guide, and two checks a release now waits on.

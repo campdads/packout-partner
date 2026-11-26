@@ -4,7 +4,7 @@ Community stewardship for places that need attention, on your own WordPress site
 
 [Pack-Out Spot](https://packout.spot) is how a community looks after places: someone reports a Spot that needs attention, an organization plans a mission to clean it, and the result is recorded. packout.spot is the hub. This plugin runs the same work on a partner's own site, keeps the partner's records in the partner's database, and can connect the site to the hub so the work is shown there too.
 
-> **The beta of version 1.0.** It has the application (Spots, organizations and teams, campaigns, missions, programs, the calendar, impact, accounts, and the dashboard screens), the connection to packout.spot, which is off until an administrator turns it on, the Spot exchange for a connected site, the setup that makes a site's pages, the field app, joint campaigns with other partners, and the report of a program or a campaign. [CHANGELOG.md](CHANGELOG.md) says what each version has, and the [partner guide](https://packout.spot/partner-guide/) is for the people who run a site.
+> **Version 1.0.** It has the application (Spots, organizations and teams, campaigns, missions, programs, the calendar, impact, accounts, and the dashboard screens), the connection to packout.spot, which is off until an administrator turns it on, the Spot exchange for a connected site, the setup that makes a site's pages, the field app, joint campaigns with other partners, and the report of a program or a campaign. [CHANGELOG.md](CHANGELOG.md) says what each version has, and the [partner guide](https://packout.spot/partner-guide/) is for the people who run a site.
 
 ## Requirements
 
