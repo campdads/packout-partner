@@ -260,7 +260,7 @@ try {
 	$check( 'it opens with the header of a Place, on the cover', false !== strpos( $html, 'pos-team-page' ) && false !== strpos( $html, 'pos-place__hero--cover' ) && false !== strpos( $html, 'class="pos-place__cover"' ) && false !== strpos( $html, '<p class="pos-place__kind">Organization</p>' ) );
 	$check( 'with the name as the heading, the description, and the facts', false !== strpos( $html, '<h1 class="pos-place__name">' . esc_html( $name ) . '</h1>' ) && false !== strpos( $html, 'A crew that walks the rim road every month.' ) && 1 === preg_match( '#<p class="pos-place__facts">.*Coconino rim.*4 people.*example\.org#s', $html ) );
 	$check( 'and the sponsor under Supported by', 1 === preg_match( '#<aside class="pos-place__support".*Test Outfitters#s', $html ) );
-	$check( 'how people join is in the header, with no separate about section', false === strpos( $html, 'About this organization' ) && false === strpos( $html, 'Works in' ) && false !== strpos( $html, 'People ask, and the lead accepts or declines' ) );
+	$check( 'how people join is in the header, with no separate about section', false === strpos( $html, 'About this organization' ) && false === strpos( $html, 'Works in' ) && false !== strpos( $html, 'Ask to join' ) );
 	$check( 'it has the way to join, as before', false !== strpos( $html, 'pos-team-page__join' ) && false !== strpos( $html, 'id="pos-join"' ) && false !== strpos( $html, 'Sign in to join' ) );
 	$check( 'it names no person', false === strpos( $html, 'Testperson' ) );
 	$check( 'it lists no team that has no page', false === strpos( $html, 'pos-team-page__subteams' ) && false === strpos( $html, 'North Wash' ) );

@@ -110,9 +110,14 @@ class Teams_Screen {
 				/* translators: %s: partner name. */
 				echo '<p>' . esc_html( sprintf( __( 'Organizations of %s.', 'packout-core' ), get_the_title( $under ) ) ) . ' <a href="' . esc_url( admin_url( 'admin.php?page=' . self::PAGE ) ) . '">' . esc_html__( 'Show every organization', 'packout-core' ) . '</a></p>';
 			}
+			$group_labels = Vocabularies::labels( Vocabularies::GROUP_TYPE );
+			$state_labels = Vocabularies::labels( Vocabularies::ORG_STATE );
+			$unset        = __( 'Not set', 'packout-core' );
 			foreach ( $teams as $team ) {
 				$lead   = get_userdata( Teams::lead( $team->ID ) );
 				$over   = Partners::get( Partners::of_team( $team->ID ) );
+				$type   = Teams::group_type( $team->ID );
+				$state  = Teams::active( $team->ID ) ? 'active' : 'pending';
 				$rows[] = array(
 					'id'       => (string) $team->ID,
 					'title'    => $team->post_title,
@@ -121,6 +126,8 @@ class Teams_Screen {
 					'lead'     => $lead ? $lead->display_name : '—',
 					'members'  => count( Teams::members( $team->ID ) ),
 					'missions' => self::open_missions( $team->ID ),
+					'group'    => '' === $type ? $unset : ( $group_labels[ $type ] ?? $type ),
+					'state'    => $state_labels[ $state ] ?? $state,
 					'listing'  => ! Teams::active( $team->ID ) ? __( 'Waiting for approval', 'packout-core' ) : ( 'publish' === $team->post_status ? __( 'Listed publicly', 'packout-core' ) : __( 'Not listed', 'packout-core' ) ),
 				);
 			}
@@ -144,6 +151,11 @@ class Teams_Screen {
 						'label' => __( 'Open missions', 'packout-core' ),
 						'type'  => 'integer',
 					),
+					'group'    => array(
+						'label'   => __( 'Type of group', 'packout-core' ),
+						'primary' => true,
+					),
+					'state'    => array( 'label' => __( 'State', 'packout-core' ) ),
 					'listing'  => array( 'label' => __( 'Listing', 'packout-core' ) ),
 				),
 				$rows,
@@ -320,6 +332,13 @@ class Teams_Screen {
 		self::open_form( $id, 'save' );
 		echo '<p><label>' . esc_html__( 'Name', 'packout-core' ) . '<br /><input type="text" name="name" class="widefat" maxlength="120" required value="' . esc_attr( $team ? $team->post_title : '' ) . '" /></label></p>';
 		echo '<p><label>' . esc_html__( 'Description, shown on the public list', 'packout-core' ) . '<br /><textarea name="description" rows="3">' . esc_textarea( $team ? $team->post_content : '' ) . '</textarea></label></p>';
+		$types        = array( '' => __( 'Not set', 'packout-core' ) ) + Vocabularies::labels( Vocabularies::GROUP_TYPE );
+		$current_type = $team ? Teams::group_type( $id ) : '';
+		echo '<p><label>' . esc_html__( 'Type of group', 'packout-core' ) . '<br /><select name="group_type">';
+		foreach ( $types as $slug => $label ) {
+			echo '<option value="' . esc_attr( (string) $slug ) . '"' . selected( $current_type, (string) $slug, false ) . '>' . esc_html( $label ) . '</option>';
+		}
+		echo '</select></label></p>';
 		if ( $team ) {
 			$status = 'packout-team-address-' . $id;
 			echo '<p><label>' . esc_html__( 'Address', 'packout-core' ) . '<br /><code>' . esc_html( trailingslashit( Teams::address_url( $id, '' ) ) ) . '</code> <input type="text" name="address" required value="' . esc_attr( Teams::address( $id ) ) . '"' . Teams::address_attributes( $id, $status ) . ' /></label><br /><span class="packout-address-status" id="' . esc_attr( $status ) . '" role="status"></span></p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- address_attributes() escapes.
@@ -455,6 +474,7 @@ class Teams_Screen {
 						'description' => isset( $_POST['description'] ) ? sanitize_textarea_field( wp_unslash( $_POST['description'] ) ) : '',
 						'lead'        => isset( $_POST['lead'] ) ? (int) $_POST['lead'] : 0,
 						'listed'      => ! empty( $_POST['listed'] ),
+						'group_type'  => isset( $_POST['group_type'] ) ? sanitize_title( wp_unslash( $_POST['group_type'] ) ) : '',
 					)
 				);
 				if ( ! is_wp_error( $done ) ) {

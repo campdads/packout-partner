@@ -143,6 +143,8 @@ class Spots {
 		self::store( $id, $fields );
 		update_post_meta( $id, '_pos_status', 'spotted' );
 		update_post_meta( $id, '_pos_precision', 'exact' );
+		Vocabularies::assign( $id, Vocabularies::STAGE, 'spotted' );
+		Vocabularies::assign( $id, Vocabularies::PRECISION, 'exact' );
 		update_post_meta( $id, '_pos_revision', 1 );
 
 		if ( ! empty( $extra['client_id'] ) ) {
@@ -504,7 +506,7 @@ class Spots {
 	 * @param int $id Spot ID.
 	 */
 	public static function blocked( int $id ): bool {
-		return 'none' !== self::field( $id, 'hazard', 'none' ) && ! self::clearance( $id );
+		return Vocabularies::hazard_blocks( self::field( $id, 'hazard', 'none' ) ) && ! self::clearance( $id );
 	}
 
 	/**
@@ -641,7 +643,7 @@ class Spots {
 			);
 		}
 		return array(
-			'blocked'    => 'none' !== $hazard,
+			'blocked'    => Vocabularies::hazard_blocks( $hazard ),
 			'authorized' => false,
 			'guidance'   => Schema::hazard_guidance( $hazard ),
 		);
@@ -1215,6 +1217,12 @@ class Spots {
 				update_post_meta( $id, '_pos_' . $key, wp_slash( $fields[ $key ] ) );
 			}
 		}
+		if ( isset( $fields['hazard'] ) ) {
+			Vocabularies::assign( $id, Vocabularies::HAZARD, (string) $fields['hazard'] );
+		}
+		if ( isset( $fields['location_kind'] ) ) {
+			Vocabularies::assign( $id, Vocabularies::LOCATION_KIND, (string) $fields['location_kind'] );
+		}
 	}
 
 	/**
@@ -1278,9 +1286,21 @@ class Spots {
 		if ( ! self::get( $id ) ) {
 			return false;
 		}
+		if ( 'location_kind' === $key && '' === Vocabularies::location_shape( $value ) ) {
+			return false;
+		}
 		if ( self::field( $id, $key ) !== $value ) {
 			update_post_meta( $id, '_pos_' . $key, $value );
 			self::touch( $id );
+		}
+		$terms = array(
+			'status'        => Vocabularies::STAGE,
+			'hazard'        => Vocabularies::HAZARD,
+			'location_kind' => Vocabularies::LOCATION_KIND,
+			'precision'     => Vocabularies::PRECISION,
+		);
+		if ( isset( $terms[ $key ] ) ) {
+			Vocabularies::assign( $id, $terms[ $key ], $value );
 		}
 		return true;
 	}

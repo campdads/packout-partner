@@ -232,13 +232,7 @@ class Partners {
 	 * @return array<string, string>
 	 */
 	public static function states(): array {
-		return array(
-			'pending'      => __( 'Waiting for approval', 'packout-core' ),
-			'active'       => __( 'Active', 'packout-core' ),
-			'suspended'    => __( 'Suspended', 'packout-core' ),
-			'dormant'      => __( 'Not heard from', 'packout-core' ),
-			'disconnected' => __( 'Disconnected', 'packout-core' ),
-		);
+		return Vocabularies::labels( Vocabularies::PARTNER_STATE );
 	}
 
 	/**
@@ -584,6 +578,7 @@ class Partners {
 		$id = (int) $id;
 		update_post_meta( $id, '_pos_lead', $user_id );
 		update_post_meta( $id, '_pos_state', 'pending' );
+		Vocabularies::assign( $id, Vocabularies::PARTNER_STATE, 'pending' );
 		self::write_profile( $id, $input );
 		self::flush();
 
@@ -720,6 +715,7 @@ class Partners {
 		}
 		if ( '' !== $next ) {
 			update_post_meta( $id, '_pos_state', $next );
+			Vocabularies::assign( $id, Vocabularies::PARTNER_STATE, $next );
 		}
 		self::flush();
 		return $next;

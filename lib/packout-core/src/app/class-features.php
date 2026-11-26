@@ -39,11 +39,7 @@ class Features {
 	 * @return array<string, string>
 	 */
 	public static function kinds(): array {
-		return array(
-			self::KIND_POINT    => __( 'Point of interest', 'packout-core' ),
-			self::KIND_ROUTE    => __( 'Route', 'packout-core' ),
-			self::KIND_BOUNDARY => __( 'Boundary', 'packout-core' ),
-		);
+		return Vocabularies::labels( Vocabularies::FEATURE_KIND );
 	}
 
 	/**
@@ -52,48 +48,7 @@ class Features {
 	 * @return array<int, array{name: string, slug: string, color: string}>
 	 */
 	public static function palette(): array {
-		return array(
-			array(
-				'name'  => __( 'Rust', 'packout-core' ),
-				'slug'  => 'rust',
-				'color' => '#bb5e28',
-			),
-			array(
-				'name'  => __( 'Navy', 'packout-core' ),
-				'slug'  => 'navy',
-				'color' => '#25486b',
-			),
-			array(
-				'name'  => __( 'Forest', 'packout-core' ),
-				'slug'  => 'forest',
-				'color' => '#415840',
-			),
-			array(
-				'name'  => __( 'Bark', 'packout-core' ),
-				'slug'  => 'bark',
-				'color' => '#863d14',
-			),
-			array(
-				'name'  => __( 'Gold', 'packout-core' ),
-				'slug'  => 'gold',
-				'color' => '#9a7b12',
-			),
-			array(
-				'name'  => __( 'Charcoal', 'packout-core' ),
-				'slug'  => 'charcoal',
-				'color' => '#2f3232',
-			),
-			array(
-				'name'  => __( 'Plum', 'packout-core' ),
-				'slug'  => 'plum',
-				'color' => '#6b3d54',
-			),
-			array(
-				'name'  => __( 'Slate', 'packout-core' ),
-				'slug'  => 'slate',
-				'color' => '#3d5a6b',
-			),
-		);
+		return Vocabularies::color_palette();
 	}
 
 	/**
@@ -201,12 +156,21 @@ class Features {
 	}
 
 	/**
+	 * Whether this kind draws as a point.
+	 *
+	 * @param string $kind Feature kind slug.
+	 */
+	public static function is_point( string $kind ): bool {
+		return 'point' === Vocabularies::feature_geometry( $kind );
+	}
+
+	/**
 	 * The icon of a point, or empty for a route or boundary.
 	 *
 	 * @param int $id Feature ID.
 	 */
 	public static function icon( int $id ): string {
-		if ( self::KIND_POINT !== self::kind( $id ) ) {
+		if ( ! self::is_point( self::kind( $id ) ) ) {
 			return '';
 		}
 		return self::icon_id( self::field( $id, 'icon' ) );
@@ -557,14 +521,14 @@ class Features {
 			return new \WP_Error( 'packout_feature_name', __( 'Give the feature a name of up to 120 characters.', 'packout-core' ), array( 'status' => 400 ) );
 		}
 		$kind = sanitize_key( (string) ( $input['kind'] ?? ( $id > 0 ? self::kind( $id ) : self::KIND_POINT ) ) );
-		if ( ! isset( self::kinds()[ $kind ] ) ) {
+		if ( '' === Vocabularies::feature_geometry( $kind ) || ! isset( self::kinds()[ $kind ] ) ) {
 			return new \WP_Error( 'packout_feature_kind', __( 'Choose a point, a route, or a boundary.', 'packout-core' ), array( 'status' => 400 ) );
 		}
 		$raw_geometry = $input['geometry'] ?? null;
 		if ( ( null === $raw_geometry || '' === $raw_geometry || array() === $raw_geometry ) && $id > 0 ) {
 			$raw_geometry = self::geometry( $id );
 		}
-		$geometry = self::parse_geometry( $kind, $raw_geometry ?? '' );
+		$geometry = self::parse_geometry( Vocabularies::feature_draw_kind( $kind ), $raw_geometry ?? '' );
 		if ( is_wp_error( $geometry ) ) {
 			return $geometry;
 		}
@@ -576,7 +540,7 @@ class Features {
 			$color = '#415840';
 		}
 		$icon = (string) ( $input['icon'] ?? ( $id > 0 ? self::field( $id, 'icon' ) : '' ) );
-		if ( self::KIND_POINT !== $kind ) {
+		if ( ! self::is_point( $kind ) ) {
 			$icon = '';
 		} else {
 			$icon = self::icon_id( $icon );
@@ -612,11 +576,24 @@ class Features {
 		$id = (int) $saved;
 		update_post_meta( $id, '_pos_kind', $kind );
 		update_post_meta( $id, '_pos_color', $color );
+		Vocabularies::assign( $id, Vocabularies::FEATURE_KIND, $kind );
+		$color_slug = '';
+		foreach ( self::palette() as $row ) {
+			if ( $row['color'] === $color ) {
+				$color_slug = $row['slug'];
+				break;
+			}
+		}
+		if ( '' !== $color_slug ) {
+			Vocabularies::assign( $id, Vocabularies::FEATURE_COLOR, $color_slug );
+		}
 		update_post_meta( $id, '_pos_geometry', wp_slash( (string) wp_json_encode( $geometry ) ) );
 		if ( '' === $icon ) {
 			delete_post_meta( $id, '_pos_icon' );
+			wp_set_object_terms( $id, array(), Vocabularies::FEATURE_ICON );
 		} else {
 			update_post_meta( $id, '_pos_icon', $icon );
+			Vocabularies::assign( $id, Vocabularies::FEATURE_ICON, Vocabularies::icon_slug( $icon ) );
 		}
 		if ( $place > 0 ) {
 			update_post_meta( $id, '_pos_place', $place );

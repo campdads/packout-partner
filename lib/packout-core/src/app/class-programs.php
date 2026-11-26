@@ -63,6 +63,24 @@ class Programs {
 	}
 
 	/**
+	 * Program types and their labels.
+	 *
+	 * @return array<string, string>
+	 */
+	public static function types(): array {
+		return Vocabularies::labels( Vocabularies::PROGRAM_TYPE );
+	}
+
+	/**
+	 * Program type slug, or empty when not set.
+	 *
+	 * @param int $id Program ID.
+	 */
+	public static function type( int $id ): string {
+		return Vocabularies::slug( $id, Vocabularies::PROGRAM_TYPE );
+	}
+
+	/**
 	 * Who owns a program.
 	 *
 	 * @param int $id Program ID.
@@ -449,7 +467,19 @@ class Programs {
 			Schema::write_list( $saved, 'sponsors', wp_list_pluck( Sponsors::named( $owner['id'], (array) $input['sponsors'] ), 'id' ) );
 		}
 		if ( array_key_exists( 'state', $input ) ) {
-			'closed' === Program::state( $input['state'] ) ? update_post_meta( $saved, '_pos_state', 'closed' ) : delete_post_meta( $saved, '_pos_state' );
+			$state = Program::state( $input['state'] );
+			'closed' === $state ? update_post_meta( $saved, '_pos_state', 'closed' ) : delete_post_meta( $saved, '_pos_state' );
+			Vocabularies::assign( $saved, Vocabularies::PROGRAM_STATE, $state );
+		} else {
+			Vocabularies::assign( $saved, Vocabularies::PROGRAM_STATE, self::state( $saved ) );
+		}
+		if ( array_key_exists( 'program_type', $input ) ) {
+			$type = sanitize_title( (string) $input['program_type'] );
+			if ( '' === $type ) {
+				wp_set_object_terms( $saved, array(), Vocabularies::PROGRAM_TYPE );
+			} elseif ( isset( self::types()[ $type ] ) ) {
+				Vocabularies::assign( $saved, Vocabularies::PROGRAM_TYPE, $type );
+			}
 		}
 
 		if ( ! $existing ) {

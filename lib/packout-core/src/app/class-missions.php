@@ -63,12 +63,7 @@ class Missions {
 	 * @return array<string, string>
 	 */
 	public static function statuses(): array {
-		return array(
-			'planned'     => __( 'Planned', 'packout-core' ),
-			'in_progress' => __( 'In progress', 'packout-core' ),
-			'completed'   => __( 'Completed', 'packout-core' ),
-			'called_off'  => __( 'Called off', 'packout-core' ),
-		);
+		return Vocabularies::labels( Vocabularies::MISSION_STATUS );
 	}
 
 	/**
@@ -79,12 +74,7 @@ class Missions {
 	 * @return array<string, string>
 	 */
 	public static function outcomes(): array {
-		return array(
-			'cleaned' => __( 'Cleaned', 'packout-core' ),
-			'open'    => __( 'Still open', 'packout-core' ),
-			'left'    => __( 'Left: needs authorization', 'packout-core' ),
-			'reopen'  => __( 'Still open: back to spotted', 'packout-core' ),
-		);
+		return Vocabularies::labels( Vocabularies::OUTCOME );
 	}
 
 	/**
@@ -577,6 +567,7 @@ class Missions {
 
 		if ( ! $existing ) {
 			update_post_meta( $saved, '_pos_status', 'planned' );
+			Vocabularies::assign( $saved, Vocabularies::MISSION_STATUS, 'planned' );
 		}
 
 		$next = self::revision( $saved ) + 1;
@@ -677,6 +668,7 @@ class Missions {
 			$copy = (int) $copy;
 			update_post_meta( $copy, '_pos_team', $team );
 			update_post_meta( $copy, '_pos_status', 'planned' );
+			Vocabularies::assign( $copy, Vocabularies::MISSION_STATUS, 'planned' );
 			foreach ( array( 'objective', 'description' ) as $key ) {
 				self::set( $copy, $key, self::field( $id, $key ) );
 			}
@@ -765,6 +757,7 @@ class Missions {
 				}
 			}
 			update_post_meta( $id, '_pos_status', 'in_progress' );
+			Vocabularies::assign( $id, Vocabularies::MISSION_STATUS, 'in_progress' );
 			self::touch( $id );
 			return true;
 		}
@@ -800,6 +793,7 @@ class Missions {
 			self::write( $id, 'outcomes', $recorded );
 			self::write( $id, 'proposals', array() );
 			update_post_meta( $id, '_pos_status', 'completed' );
+			Vocabularies::assign( $id, Vocabularies::MISSION_STATUS, 'completed' );
 			update_post_meta( $id, '_pos_completed_at', gmdate( 'c' ) );
 			self::touch( $id );
 
@@ -814,6 +808,7 @@ class Missions {
 
 		if ( 'called_off' === $status ) {
 			update_post_meta( $id, '_pos_status', 'called_off' );
+			Vocabularies::assign( $id, Vocabularies::MISSION_STATUS, 'called_off' );
 			foreach ( $spots as $spot_id ) {
 				self::release( $id, $spot_id, false );
 			}
@@ -1549,6 +1544,9 @@ class Missions {
 			delete_post_meta( $id, '_pos_' . $key );
 		} else {
 			update_post_meta( $id, '_pos_' . $key, wp_slash( $value ) );
+		}
+		if ( 'status' === $key && '' !== $value ) {
+			Vocabularies::assign( $id, Vocabularies::MISSION_STATUS, $value );
 		}
 	}
 

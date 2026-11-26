@@ -2,6 +2,13 @@
 
 Every version of Pack-Out Spot Partner, newest first.
 
+## 1.0.1
+
+Choosable options as terms.
+
+- **The lists a person picks from** are taxonomies: Spot categories, stages, hazards, organization and program types, and the rest. A coordinator can add a term. Seed terms cannot be deleted. The old stored values are still written this version.
+- Carries the shared Pack-Out Spot library, version 0.13.1. A listing can name `group_type` and `program_type`. A Spot's `status` and `hazard` are any short slug. packout.spot at 0.29.2 or later takes them, which it is.
+
 ## 1.0.0
 
 The first stable version. It is 1.0.0-beta.1 with its version changed: nothing the plugin does is different.

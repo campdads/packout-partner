@@ -4,7 +4,7 @@ Tags: stewardship, cleanup, volunteers, map, community
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 8.2
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -276,6 +276,13 @@ Versions released for testing before they become the stable version. Tick "Get b
 On [GitHub](https://github.com/campdads/packout-partner/issues). For a security problem, report it privately as [SECURITY.md](https://github.com/campdads/packout-partner/blob/main/SECURITY.md) describes.
 
 == Changelog ==
+
+= 1.0.1 =
+
+Choosable options as terms.
+
+* The lists a person picks from are taxonomies a coordinator can add to: Spot categories, stages, hazards, organization and program types, and the rest. Seed terms cannot be deleted.
+* Carries the shared Pack-Out Spot library, version 0.13.1. A listing can name its organization type and program type. A Spot's status and hazard are any short slug. packout.spot at 0.29.2 or later takes them, which it is.
 
 = 1.0.0 =
 

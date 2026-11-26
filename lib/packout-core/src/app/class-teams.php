@@ -198,11 +198,7 @@ class Teams {
 	 * @return array<string, string>
 	 */
 	public static function join_policies(): array {
-		return array(
-			'request' => __( 'People ask, and the lead accepts or declines', 'packout-core' ),
-			'open'    => __( 'Anyone signed in can join at once', 'packout-core' ),
-			'closed'  => __( 'By invitation only', 'packout-core' ),
-		);
+		return Vocabularies::labels( Vocabularies::JOIN );
 	}
 
 	/**
@@ -213,6 +209,15 @@ class Teams {
 	public static function join_policy( int $id ): string {
 		$policy = self::field( $id, 'join', 'request' );
 		return isset( self::join_policies()[ $policy ] ) ? $policy : 'request';
+	}
+
+	/**
+	 * Group type slug, or empty when not set.
+	 *
+	 * @param int $id Team ID.
+	 */
+	public static function group_type( int $id ): string {
+		return Vocabularies::slug( $id, Vocabularies::GROUP_TYPE );
 	}
 
 	/**
@@ -449,6 +454,12 @@ class Teams {
 		// A lead is not also listed as a member or a co-lead.
 		delete_post_meta( $saved, '_pos_member', $lead );
 		delete_post_meta( $saved, '_pos_colead', $lead );
+		if ( array_key_exists( 'group_type', $input ) ) {
+			self::write_profile( (int) $saved, array( 'group_type' => $input['group_type'] ) );
+		}
+		if ( self::active( (int) $saved ) ) {
+			Vocabularies::assign( (int) $saved, Vocabularies::ORG_STATE, 'active' );
+		}
 		self::flush();
 		if ( $before > 0 && $before !== $lead ) {
 			self::settle_lead( $before );
@@ -572,6 +583,7 @@ class Teams {
 		$id = (int) $id;
 		update_post_meta( $id, '_pos_lead', $user_id );
 		update_post_meta( $id, '_pos_state', 'pending' );
+		Vocabularies::assign( $id, Vocabularies::ORG_STATE, 'pending' );
 		self::write_profile( $id, $input );
 		self::flush();
 
@@ -634,7 +646,17 @@ class Teams {
 			'' === $website ? delete_post_meta( $id, '_pos_website' ) : update_post_meta( $id, '_pos_website', $website );
 		}
 		if ( array_key_exists( 'join', $input ) && isset( self::join_policies()[ (string) $input['join'] ] ) ) {
-			update_post_meta( $id, '_pos_join', (string) $input['join'] );
+			$join = (string) $input['join'];
+			update_post_meta( $id, '_pos_join', $join );
+			Vocabularies::assign( $id, Vocabularies::JOIN, $join );
+		}
+		if ( array_key_exists( 'group_type', $input ) ) {
+			$type = sanitize_title( (string) $input['group_type'] );
+			if ( '' === $type ) {
+				wp_set_object_terms( $id, array(), Vocabularies::GROUP_TYPE );
+			} elseif ( isset( Vocabularies::labels( Vocabularies::GROUP_TYPE )[ $type ] ) ) {
+				Vocabularies::assign( $id, Vocabularies::GROUP_TYPE, $type );
+			}
 		}
 		if ( array_key_exists( 'member_plans', $input ) ) {
 			empty( $input['member_plans'] ) ? delete_post_meta( $id, '_pos_member_plans' ) : update_post_meta( $id, '_pos_member_plans', '1' );
@@ -659,6 +681,7 @@ class Teams {
 			return true;
 		}
 		delete_post_meta( $id, '_pos_state' );
+		Vocabularies::assign( $id, Vocabularies::ORG_STATE, 'active' );
 		$lead = self::lead( $id );
 		foreach ( self::leads( $id ) as $person ) {
 			self::make_lead( $person );
@@ -1409,7 +1432,7 @@ class Teams {
 	/**
 	 * Listed teams with their public mission counts, for the Team list block.
 	 *
-	 * @return array<int, array{id: int, name: string, description: string, url: string, planned: int, completed: int, logo: string}>
+	 * @return array<int, array{id: int, name: string, description: string, url: string, planned: int, completed: int, logo: string, group_type: string}>
 	 */
 	public static function listed(): array {
 		$teams = array();
@@ -1426,6 +1449,7 @@ class Teams {
 				'planned'     => count( array_filter( $missions, static fn( $mission ) => in_array( $mission['status'], array( 'planned', 'in_progress' ), true ) ) ),
 				'completed'   => count( array_filter( $missions, static fn( $mission ) => 'completed' === $mission['status'] ) ),
 				'logo'        => self::logo_html( $team->ID, 'pos-teams__logo', 'thumbnail' ),
+				'group_type'  => self::group_type( $team->ID ),
 			);
 		}
 		return $teams;

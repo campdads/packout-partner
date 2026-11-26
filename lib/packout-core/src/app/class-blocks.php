@@ -641,6 +641,48 @@ class Blocks {
 			) . '</div>';
 		}
 
+		$labels   = Vocabularies::labels( Vocabularies::GROUP_TYPE );
+		$used     = array();
+		$has_none = false;
+		foreach ( $teams as $team ) {
+			$slug = (string) ( $team['group_type'] ?? '' );
+			if ( '' === $slug ) {
+				$has_none = true;
+			} elseif ( isset( $labels[ $slug ] ) ) {
+				$used[ $slug ] = $labels[ $slug ];
+			} else {
+				$used[ $slug ] = $slug;
+			}
+		}
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Public list filter.
+		$filter = isset( $_GET['group_type'] ) ? sanitize_title( wp_unslash( $_GET['group_type'] ) ) : '';
+		if ( 'not-set' === $filter ) {
+			$teams = array_values( array_filter( $teams, static fn( array $team ): bool => '' === ( $team['group_type'] ?? '' ) ) );
+		} elseif ( '' !== $filter ) {
+			$teams = array_values( array_filter( $teams, static fn( array $team ): bool => ( $team['group_type'] ?? '' ) === $filter ) );
+		}
+
+		$html .= '<form class="pos-teams__filter" method="get" action="">';
+		$html .= '<p><label>' . esc_html__( 'Type of group', 'packout-core' ) . '<br /><select name="group_type" onchange="this.form.submit()">';
+		$html .= '<option value="">' . esc_html__( 'Every type', 'packout-core' ) . '</option>';
+		if ( $has_none ) {
+			$html .= '<option value="not-set"' . selected( $filter, 'not-set', false ) . '>' . esc_html__( 'Not set', 'packout-core' ) . '</option>';
+		}
+		foreach ( $used as $slug => $name ) {
+			$html .= '<option value="' . esc_attr( $slug ) . '"' . selected( $filter, $slug, false ) . '>' . esc_html( $name ) . '</option>';
+		}
+		$html .= '</select></label></p></form>';
+
+		if ( ! $teams ) {
+			return $html . Admin::ui(
+				'empty-state',
+				array(
+					'title'       => __( 'No organizations match', 'packout-core' ),
+					'description' => __( 'Try another type of group.', 'packout-core' ),
+				)
+			) . '</div>';
+		}
+
 		$html .= '<ul class="pos-teams__list">';
 		foreach ( $teams as $team ) {
 			$html .= '<li class="pos-teams__team">' . $team['logo'] . '<h3 class="pos-teams__name"><a href="' . esc_url( $team['url'] ) . '">' . esc_html( $team['name'] ) . '</a></h3>';
@@ -744,26 +786,28 @@ class Blocks {
 	 */
 	public static function map_config(): array {
 		return array(
-			'rest'       => esc_url_raw( rest_url( Rest::NAMESPACE . '/' ) ),
+			'rest'         => esc_url_raw( rest_url( Rest::NAMESPACE . '/' ) ),
 			// On a partner's site that asked for them: where the map reads what packout.spot shows in the site's region.
-			'hub'        => Hub_Layers::config(),
-			'style'      => Settings::get( 'map_style' ),
-			'center'     => array( (float) Settings::get( 'map_lng' ), (float) Settings::get( 'map_lat' ) ),
-			'zoom'       => (float) Settings::get( 'map_zoom' ),
-			'categories' => Schema::categories(),
-			'statuses'   => Schema::statuses(),
-			'hazards'    => Schema::hazards(),
+			'hub'          => Hub_Layers::config(),
+			'style'        => Settings::get( 'map_style' ),
+			'center'       => array( (float) Settings::get( 'map_lng' ), (float) Settings::get( 'map_lat' ) ),
+			'zoom'         => (float) Settings::get( 'map_zoom' ),
+			'categories'   => Schema::categories(),
+			'statuses'     => Schema::statuses(),
+			'hazards'      => Schema::hazards(),
+			'overlays'     => Vocabularies::overlays(),
+			'featureKinds' => App::is_hub() ? Vocabularies::feature_kinds() : array(),
 			// The partners the directory shows, for the partner filter. Empty while there are none.
-			'partners'   => Partners::map_choices(),
+			'partners'     => Partners::map_choices(),
 			// The outline and name of each listed Place.
-			'outlines'   => Places::outlines(),
-			'features'   => Features::public_list(),
+			'outlines'     => Places::outlines(),
+			'features'     => Features::public_list(),
 			// What the Contributions menu lists: what this site keeps. Places and map features are the hub's.
-			'kinds'      => App::is_hub() ? array( 'places', 'spots', 'route', 'point', 'boundary' ) : array( 'spots' ),
-			'icons'      => Feature_Icons::markup(),
-			'canFeature' => Features::can_create(),
-			'addFeature' => __( 'Add a map feature', 'packout-core' ),
-			'text'       => array(
+			'kinds'        => App::is_hub() ? array_merge( array( 'places', 'spots' ), array_column( Vocabularies::feature_kinds(), 'slug' ) ) : array( 'spots' ),
+			'icons'        => Feature_Icons::markup(),
+			'canFeature'   => Features::can_create(),
+			'addFeature'   => __( 'Add a map feature', 'packout-core' ),
+			'text'         => array(
 				'loading'            => __( 'Loading Spots…', 'packout-core' ),
 				'failed'             => __( 'The Spots could not be loaded. Check your connection and reload the page.', 'packout-core' ),
 				'emptyTitle'         => __( 'No Spots on the map yet', 'packout-core' ),

@@ -84,11 +84,7 @@
 				},
 				"hazard": {
 					"type": "string",
-					"enum": [
-						"none",
-						"do_not_touch",
-						"needs_authorization"
-					]
+					"pattern": "^[a-z0-9_-]{1,40}$"
 				},
 				"location": {
 					"$ref": "#/definitions/rounded"
@@ -166,22 +162,11 @@
 				},
 				"status": {
 					"type": "string",
-					"enum": [
-						"spotted",
-						"planned",
-						"in_progress",
-						"pending",
-						"cleaned",
-						"watch"
-					]
+					"pattern": "^[a-z0-9_-]{1,40}$"
 				},
 				"hazard": {
 					"type": "string",
-					"enum": [
-						"none",
-						"do_not_touch",
-						"needs_authorization"
-					]
+					"pattern": "^[a-z0-9_-]{1,40}$"
 				},
 				"needs_authorization": {
 					"type": "boolean"

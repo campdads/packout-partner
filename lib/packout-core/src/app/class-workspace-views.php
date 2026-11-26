@@ -108,7 +108,7 @@ class Workspace_Views {
 			$html .= '</ul>';
 		}
 
-		$open = array_filter( Teams::listed(), static fn( $team ) => ! Teams::includes( $team['id'], $user ) && 'closed' !== Teams::join_policy( $team['id'] ) );
+		$open = array_filter( Teams::listed(), static fn( $team ) => ! Teams::includes( $team['id'], $user ) && 'closed' !== Vocabularies::join_behavior( Teams::join_policy( $team['id'] ) ) );
 		if ( $open ) {
 			$rows = array();
 			foreach ( $open as $team ) {
@@ -116,7 +116,7 @@ class Workspace_Views {
 					'id'    => (string) $team['id'],
 					'title' => $team['name'],
 					'url'   => $team['url'],
-					'join'  => 'open' === Teams::join_policy( $team['id'] ) ? __( 'Open to join', 'packout-core' ) : __( 'Ask to join', 'packout-core' ),
+					'join'  => 'open' === Vocabularies::join_behavior( Teams::join_policy( $team['id'] ) ) ? __( 'Open to join', 'packout-core' ) : __( 'Ask to join', 'packout-core' ),
 				);
 			}
 			$html .= '<h3>' . esc_html__( 'Organizations you can join', 'packout-core' ) . '</h3>';
@@ -175,6 +175,8 @@ class Workspace_Views {
 		);
 		$html .= Workspace::area( 'description', __( 'What the organization does', 'packout-core' ), Workspace::old( $act, 'description', $team ? $team->post_content : '' ), __( 'Shown on the organization\'s public page when the organization is listed.', 'packout-core' ) );
 		$html .= Workspace::input( 'region', __( 'Where the organization works', 'packout-core' ), Workspace::old( $act, 'region', $team ? Teams::field( $team->ID, 'region' ) : '' ), array( 'maxlength' => '80' ), __( 'A region, forest, or county. Not a street address.', 'packout-core' ) );
+		$types = array( '' => __( 'Not set', 'packout-core' ) ) + Vocabularies::labels( Vocabularies::GROUP_TYPE );
+		$html .= Workspace::choose( 'group_type', __( 'Type of group', 'packout-core' ), $types, Workspace::old( $act, 'group_type', $team ? Teams::group_type( $team->ID ) : '' ) );
 		return $html . Workspace::input(
 			'website',
 			__( 'Website', 'packout-core' ),

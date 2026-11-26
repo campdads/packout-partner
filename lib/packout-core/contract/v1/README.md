@@ -46,6 +46,7 @@ A site updates when its owner chooses, so the hub always serves sites older than
 | 0.9.0 | `images` in `profile` |
 | 0.11.0 | `campaigns`; `joint` on a campaign in `listings` |
 | 0.12.0 | `claims`, `move`, `recover` |
+| 0.13.1 | `group_type` and `program_type` on a listing |
 
 A change that cannot keep the first rule raises `PACKOUT_CORE_CONTRACT`, and the hub goes on accepting the version before it.
 
