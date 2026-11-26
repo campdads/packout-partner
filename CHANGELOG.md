@@ -2,6 +2,13 @@
 
 Every version of Pack-Out Spot Partner, newest first.
 
+## 1.0.2
+
+Taxonomies under their own menu, named as themselves.
+
+- Coordinators manage every vocabulary under **Pack-Out Taxonomies**. Each item is the taxonomy's name; the ordered list does not say “Order”.
+- Carries the shared Pack-Out Spot library, version 0.13.2. packout.spot at 0.29.3 or later has the same menu, which it is.
+
 ## 1.0.1
 
 Choosable options as terms.

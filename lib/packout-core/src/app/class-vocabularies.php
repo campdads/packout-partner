@@ -43,6 +43,11 @@ class Vocabularies {
 	public const VERIFICATION   = 'pos_verification';
 
 	/**
+	 * Top-level menu the taxonomies sit under.
+	 */
+	public const MENU = 'packout-taxonomies';
+
+	/**
 	 * Overlay source keys the map already draws.
 	 */
 	public const OVERLAY_SOURCES = array( 'roads', 'trails', 'points', 'mvum', 'nfstrails', 'forests', 'wilderness' );
@@ -53,6 +58,8 @@ class Vocabularies {
 	public static function register(): void {
 		add_action( 'init', array( self::class, 'types' ), 9 );
 		add_action( 'init', array( self::class, 'place_menus' ), 12 );
+		add_action( 'admin_menu', array( self::class, 'menu' ) );
+		add_action( 'admin_menu', array( self::class, 'tidy_menus' ), 1001 );
 		add_action( 'pre_delete_term', array( self::class, 'protect' ), 1, 2 );
 	}
 
@@ -69,17 +76,82 @@ class Vocabularies {
 	}
 
 	/**
-	 * Keep each taxonomy under Pack Out after Content Types syncs it.
+	 * Keep each taxonomy under Pack-Out Taxonomies after Content Types syncs it.
 	 */
 	public static function place_menus(): void {
 		foreach ( array_keys( self::definitions() ) as $key ) {
 			$tax = get_taxonomy( $key );
 			if ( $tax instanceof \WP_Taxonomy ) {
 				$tax->show_ui      = true;
-				$tax->show_in_menu = 'packout-spot';
+				$tax->show_in_menu = self::MENU;
 				$tax->show_in_rest = true;
 			}
 		}
+	}
+
+	/**
+	 * Top-level menu the taxonomies sit under.
+	 */
+	public static function menu(): void {
+		add_menu_page(
+			__( 'Pack-Out Taxonomies', 'packout-core' ),
+			__( 'Pack-Out Taxonomies', 'packout-core' ),
+			Capabilities::MODERATE,
+			self::MENU,
+			array( self::class, 'open' ),
+			'dashicons-tag',
+			27
+		);
+	}
+
+	/**
+	 * Open the first taxonomy in the menu.
+	 */
+	public static function open(): void {
+		global $submenu;
+		$items = isset( $submenu[ self::MENU ] ) && is_array( $submenu[ self::MENU ] ) ? $submenu[ self::MENU ] : array();
+		foreach ( $items as $item ) {
+			if ( ! is_array( $item ) ) {
+				continue;
+			}
+			$slug = (string) ( $item[2] ?? '' );
+			if ( '' === $slug || self::MENU === $slug ) {
+				continue;
+			}
+			if ( false !== strpos( $slug, '.php' ) ) {
+				wp_safe_redirect( admin_url( $slug ) );
+			} else {
+				wp_safe_redirect( admin_url( 'admin.php?page=' . $slug ) );
+			}
+			exit;
+		}
+	}
+
+	/**
+	 * Drop the duplicate parent item and leave each row named as the taxonomy.
+	 */
+	public static function tidy_menus(): void {
+		global $submenu;
+		if ( empty( $submenu[ self::MENU ] ) || ! is_array( $submenu[ self::MENU ] ) ) {
+			return;
+		}
+		$kept = array();
+		foreach ( $submenu[ self::MENU ] as $item ) {
+			if ( ! is_array( $item ) ) {
+				continue;
+			}
+			$slug = (string) ( $item[2] ?? '' );
+			if ( self::MENU === $slug ) {
+				continue;
+			}
+			$title = wp_strip_all_tags( (string) ( $item[0] ?? '' ) );
+			if ( 0 === strpos( $title, 'Order ' ) ) {
+				$item[0] = substr( $title, 6 );
+			}
+			$kept[] = $item;
+		}
+		// phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- The menu WordPress already built.
+		$submenu[ self::MENU ] = $kept;
 	}
 
 	/**
@@ -1026,7 +1098,7 @@ class Vocabularies {
 			'public'             => false,
 			'publicly_queryable' => false,
 			'show_ui'            => true,
-			'show_in_menu'       => 'packout-spot',
+			'show_in_menu'       => self::MENU,
 			'show_in_nav_menus'  => false,
 			'show_tagcloud'      => false,
 			'show_in_quick_edit' => false,
@@ -1058,13 +1130,14 @@ class Vocabularies {
 			'post_types'         => $def['objects'],
 			'show_ui'            => true,
 			'show_in_menu'       => true,
-			'menu_parent'        => 'packout-spot',
+			'menu_parent'        => 'objects',
 			'show_in_nav_menus'  => false,
 			'show_tagcloud'      => false,
 			'show_in_quick_edit' => false,
 			'show_admin_column'  => ! empty( $def['admin_column'] ),
 			'featured_image'     => ! empty( $def['featured_image'] ),
 			'terms_order'        => true,
+			'terms_order_hide'   => true,
 			'rewrite'            => false,
 			'query_var'          => false,
 			'show_in_rest'       => true,
