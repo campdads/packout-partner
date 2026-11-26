@@ -19,7 +19,7 @@ if ( defined( 'PACKOUT_CORE_VERSION' ) ) {
 	return;
 }
 
-define( 'PACKOUT_CORE_VERSION', '0.13.1' );
+define( 'PACKOUT_CORE_VERSION', '0.13.2' );
 define( 'PACKOUT_CORE_DIR', __DIR__ );
 define( 'PACKOUT_CORE_FILE', __FILE__ );
 

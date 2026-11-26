@@ -4,7 +4,7 @@ Tags: stewardship, cleanup, volunteers, map, community
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 8.2
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -276,6 +276,13 @@ Versions released for testing before they become the stable version. Tick "Get b
 On [GitHub](https://github.com/campdads/packout-partner/issues). For a security problem, report it privately as [SECURITY.md](https://github.com/campdads/packout-partner/blob/main/SECURITY.md) describes.
 
 == Changelog ==
+
+= 1.0.2 =
+
+Taxonomies under their own menu, named as themselves.
+
+* Coordinators manage every vocabulary under Pack-Out Taxonomies. Each item is the taxonomy's name; the ordered list does not say "Order".
+* Carries the shared Pack-Out Spot library, version 0.13.2. packout.spot at 0.29.3 or later has the same menu, which it is.
 
 = 1.0.1 =
 

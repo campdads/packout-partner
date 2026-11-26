@@ -105,6 +105,8 @@ try {
 	);
 	foreach ( $shared as $taxonomy ) {
 		$check( $taxonomy . ' is registered', taxonomy_exists( $taxonomy ) );
+		$tax = get_taxonomy( $taxonomy );
+		$check( $taxonomy . ' sits under Pack-Out Taxonomies', $tax instanceof WP_Taxonomy && Vocabularies::MENU === $tax->show_in_menu, $tax instanceof WP_Taxonomy ? $tax->show_in_menu : '' );
 	}
 	$check( 'the six category seeds are terms', isset( Schema::categories()['cleanup-waste'], Schema::categories()['waterways'] ) && 6 <= count( Schema::categories() ), Schema::categories() );
 	$check( 'the six stage seeds are terms', isset( Schema::statuses()['spotted'], Schema::statuses()['cleaned'] ) && 6 <= count( Schema::statuses() ), Schema::statuses() );
@@ -112,6 +114,8 @@ try {
 	$check( 'group types include Volunteer Organizations', isset( Vocabularies::labels( Vocabularies::GROUP_TYPE )['volunteer-organizations'] ), Vocabularies::labels( Vocabularies::GROUP_TYPE ) );
 	if ( $hub ) {
 		$check( 'the hub registers Place kinds and map features', taxonomy_exists( Vocabularies::PLACE_KIND ) && taxonomy_exists( Vocabularies::FEATURE_KIND ) && taxonomy_exists( Vocabularies::PARTNER_STATE ) );
+		$place = get_taxonomy( Vocabularies::PLACE_KIND );
+		$check( 'hub taxonomies sit under Pack-Out Taxonomies', $place instanceof WP_Taxonomy && Vocabularies::MENU === $place->show_in_menu, $place instanceof WP_Taxonomy ? $place->show_in_menu : '' );
 	} else {
 		$skip( 'Place kinds, map features, and partner states are the hub\'s.' );
 	}

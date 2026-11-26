@@ -125,19 +125,20 @@ class Admin {
 	 */
 	public static function menu_icons(): array {
 		return array(
-			'toplevel_page_packout-spot' => 'pin',
-			'page:packout-spot'          => 'home',
-			'page:packout-spots'         => 'pin',
-			'page:packout-missions'      => 'scheduled',
-			'page:packout-teams'         => 'institution',
-			'page:packout-partners'      => 'globe',
-			'page:packout-programs'      => 'category',
-			'page:packout-people'        => 'people',
-			'page:packout-invitations'   => 'envelope',
-			'page:packout-impact'        => 'trending-up',
-			'page:packout-places'        => 'map-marker',
-			'page:packout-export'        => 'download',
-			'page:packout-settings'      => 'settings',
+			'toplevel_page_packout-spot'       => 'pin',
+			'toplevel_page_packout-taxonomies' => 'tag',
+			'page:packout-spot'                => 'home',
+			'page:packout-spots'               => 'pin',
+			'page:packout-missions'            => 'scheduled',
+			'page:packout-teams'               => 'institution',
+			'page:packout-partners'            => 'globe',
+			'page:packout-programs'            => 'category',
+			'page:packout-people'              => 'people',
+			'page:packout-invitations'         => 'envelope',
+			'page:packout-impact'              => 'trending-up',
+			'page:packout-places'              => 'map-marker',
+			'page:packout-export'              => 'download',
+			'page:packout-settings'            => 'settings',
 		);
 	}
 
