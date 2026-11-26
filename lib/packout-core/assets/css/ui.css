@@ -1,0 +1,84 @@
+/*
+ * Components as plain markup.
+ *
+ * A plugin whose screens adapter draws nothing richer lists this stylesheet,
+ * and a badge, a notice, and an empty state look like this. The colors are
+ * the palette's, with the values it falls back to.
+ */
+
+.packout-ui--notice,
+.packout-ui--empty-state {
+	display: block;
+}
+
+.packout-ui--badge > .packout-ui__fallback {
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 999px;
+	background: var(--packout-subtle, #edeae5);
+	color: var(--packout-ink, #2f3232);
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1.5;
+}
+
+.packout-ui--badge.is-success > .packout-ui__fallback {
+	background: #e4efe3;
+	color: #24401f;
+}
+
+.packout-ui--badge.is-info > .packout-ui__fallback {
+	background: #e6edf4;
+	color: #1c3a57;
+}
+
+.packout-ui--badge.is-warning > .packout-ui__fallback,
+.packout-ui--badge.is-medium > .packout-ui__fallback {
+	background: #fbf1e9;
+	color: #6f3210;
+}
+
+.packout-ui--badge.is-error > .packout-ui__fallback,
+.packout-ui--badge.is-high > .packout-ui__fallback {
+	background: #fbecea;
+	color: #7c1f14;
+}
+
+.packout-ui--notice > .packout-ui__fallback,
+.packout-ui--empty-state > .packout-ui__fallback {
+	display: block;
+	padding: 10px 12px;
+	border-left: 4px solid var(--packout-secondary, #25486b);
+	background: #eef2f6;
+	color: var(--packout-ink, #2f3232);
+}
+
+.packout-ui--notice.is-success > .packout-ui__fallback {
+	border-left-color: var(--packout-primary, #415840);
+	background: #edf3ec;
+}
+
+.packout-ui--notice.is-warning > .packout-ui__fallback,
+.packout-ui--notice.is-medium > .packout-ui__fallback {
+	border-left-color: var(--packout-accent, #bb5e28);
+	background: #fbf1e9;
+}
+
+.packout-ui--notice.is-error > .packout-ui__fallback,
+.packout-ui--notice.is-high > .packout-ui__fallback {
+	border-left-color: #a12a1b;
+	background: #fbecea;
+}
+
+.packout-ui--empty-state > .packout-ui__fallback {
+	padding: 20px 16px;
+	border-left: 0;
+	background: var(--packout-subtle, #edeae5);
+	text-align: center;
+}
+
+.packout-ui--empty-state > .packout-ui__fallback > strong {
+	display: block;
+	margin-bottom: 4px;
+	font-size: 1.1em;
+}

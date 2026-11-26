@@ -1,0 +1,23 @@
+name: Pack-Out Spot Partner source
+description: >
+  Copies this plugin's source, at the commit the action is called at, into a
+  directory of the calling job. The hub's repository uses it to install the
+  partner plugin beside a test hub. It needs no token.
+
+inputs:
+  path:
+    description: The directory to copy the source into.
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Copy the source
+      shell: bash
+      env:
+        DESTINATION: ${{ inputs.path }}
+      run: |
+        mkdir -p "$DESTINATION"
+        cp -R "$GITHUB_ACTION_PATH/../../../." "$DESTINATION/"
+        rm -rf "$DESTINATION/.git"
+        test -f "$DESTINATION/packout-partner.php"

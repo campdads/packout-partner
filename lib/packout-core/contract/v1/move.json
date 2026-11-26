@@ -1,0 +1,38 @@
+{
+	"$comment": "POST /partners/move. The site's address changed. `site_url` is the new one, and `challenge` is a number the site made: the hub asks the site for it at the new address, signed with the site's key, before it changes anything.",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"site_url",
+		"challenge",
+		"contract",
+		"core_version",
+		"plugin_version"
+	],
+	"properties": {
+		"contract": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 1000
+		},
+		"core_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"plugin_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"site_url": {
+			"type": "string",
+			"pattern": "^https?://[^\\s/?#]+(/[^\\s?#]*)?$",
+			"maxLength": 200
+		},
+		"challenge": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		}
+	}
+}

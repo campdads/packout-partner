@@ -1,0 +1,34 @@
+{
+	"$comment": "The body of a signed request that carries nothing but the versions: verify, disconnect, and accepting the terms.",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"contract",
+		"core_version",
+		"plugin_version"
+	],
+	"properties": {
+		"contract": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 1000
+		},
+		"core_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"plugin_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"keep": {
+			"type": "boolean"
+		},
+		"terms_version": {
+			"type": "string",
+			"pattern": "^[0-9A-Za-z.-]{1,20}$"
+		}
+	}
+}

@@ -1,0 +1,209 @@
+{
+	"$comment": "POST /partners/listings. The public face of records on the partner site. No person is named in any field. A full send says `full`, carries one `sweep` id on every batch of it, and says `last` on the final one: the hub then removes any listing of the site that the sweep did not name.",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"items",
+		"contract",
+		"core_version",
+		"plugin_version"
+	],
+	"properties": {
+		"contract": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 1000
+		},
+		"core_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"plugin_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"full": {
+			"type": "boolean"
+		},
+		"items": {
+			"type": "array",
+			"maxItems": 200,
+			"items": {
+				"$ref": "#/definitions/item"
+			}
+		},
+		"sweep": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{16}$"
+		},
+		"last": {
+			"type": "boolean"
+		}
+	},
+	"definitions": {
+		"item": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": [
+				"kind",
+				"remote_id",
+				"rev",
+				"updated"
+			],
+			"properties": {
+				"kind": {
+					"type": "string",
+					"enum": [
+						"organization",
+						"team",
+						"program",
+						"campaign",
+						"mission"
+					]
+				},
+				"remote_id": {
+					"type": "string",
+					"pattern": "^[0-9]{1,18}(-[0-9]{1,9})?$"
+				},
+				"rev": {
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 9000000000000000
+				},
+				"updated": {
+					"type": "string",
+					"pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(Z|[+-][0-9]{2}:[0-9]{2})$"
+				},
+				"deleted": {
+					"type": "boolean"
+				},
+				"name": {
+					"type": "string",
+					"maxLength": 200
+				},
+				"title": {
+					"type": "string",
+					"maxLength": 200
+				},
+				"description": {
+					"type": "string",
+					"maxLength": 5000
+				},
+				"region": {
+					"type": "string",
+					"maxLength": 120
+				},
+				"website": {
+					"type": "string",
+					"pattern": "^(https?://[^\\s]+)?$",
+					"maxLength": 200
+				},
+				"join": {
+					"type": "string",
+					"enum": [
+						"request",
+						"open",
+						"closed"
+					]
+				},
+				"url": {
+					"type": "string",
+					"pattern": "^https?://[^\\s]+$",
+					"maxLength": 400
+				},
+				"youth": {
+					"type": "boolean"
+				},
+				"organization": {
+					"type": "string",
+					"pattern": "^[0-9]{1,18}(-[0-9]{1,9})?$"
+				},
+				"organizations": {
+					"type": "array",
+					"maxItems": 200,
+					"items": {
+						"type": "string",
+						"pattern": "^[0-9]{1,18}(-[0-9]{1,9})?$"
+					}
+				},
+				"teams": {
+					"type": "array",
+					"maxItems": 200,
+					"items": {
+						"type": "string",
+						"pattern": "^[0-9]{1,18}(-[0-9]{1,9})?$"
+					}
+				},
+				"program": {
+					"type": "string",
+					"pattern": "^([0-9]{1,18})?$"
+				},
+				"campaign": {
+					"$comment": "The site's own campaign, or `hub:` and the hub's number for a joint campaign the mission's organization takes part in.",
+					"type": "string",
+					"pattern": "^([0-9]{1,18}|hub:[0-9]{1,18})?$"
+				},
+				"joint": {
+					"$comment": "On a campaign of the site's own that it hosts as a joint campaign: `open` while it takes participants, `closed` after.",
+					"type": "string",
+					"enum": [
+						"",
+						"open",
+						"closed"
+					]
+				},
+				"goal": {
+					"type": "string",
+					"maxLength": 300
+				},
+				"state": {
+					"type": "string",
+					"enum": [
+						"open",
+						"closed"
+					]
+				},
+				"status": {
+					"type": "string",
+					"enum": [
+						"planned",
+						"in_progress",
+						"completed",
+						"called_off"
+					]
+				},
+				"start": {
+					"type": "string",
+					"pattern": "^([0-9]{4}-[0-9]{2}-[0-9]{2})?$"
+				},
+				"end": {
+					"type": "string",
+					"pattern": "^([0-9]{4}-[0-9]{2}-[0-9]{2})?$"
+				},
+				"start_time": {
+					"type": "string",
+					"pattern": "^([0-9]{2}:[0-9]{2})?$"
+				},
+				"end_time": {
+					"type": "string",
+					"pattern": "^([0-9]{2}:[0-9]{2})?$"
+				},
+				"timezone": {
+					"type": "string",
+					"pattern": "^[A-Za-z0-9_+/:-]{0,64}$"
+				},
+				"meeting": {
+					"type": "string",
+					"maxLength": 300
+				},
+				"spots": {
+					"type": "integer",
+					"minimum": 0,
+					"maximum": 1000000000
+				}
+			}
+		}
+	}
+}

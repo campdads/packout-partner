@@ -1,0 +1,66 @@
+{
+	"$comment": "PUT /partners/profile. What the partner says about itself.",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"name",
+		"contract",
+		"core_version",
+		"plugin_version"
+	],
+	"properties": {
+		"contract": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 1000
+		},
+		"core_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"plugin_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"name": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 120
+		},
+		"description": {
+			"type": "string",
+			"maxLength": 2000
+		},
+		"region": {
+			"type": "string",
+			"maxLength": 120
+		},
+		"website": {
+			"type": "string",
+			"pattern": "^(https?://[^\\s]+)?$",
+			"maxLength": 200
+		},
+		"url": {
+			"type": "string",
+			"pattern": "^(https?://[^\\s]+)?$",
+			"maxLength": 400
+		},
+		"images": {
+			"$comment": "The partner's logo and cover as they are now, each named by a number that changes when the image does. Empty for none.",
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"logo": {
+					"type": "string",
+					"pattern": "^[0-9]{0,18}$"
+				},
+				"cover": {
+					"type": "string",
+					"pattern": "^[0-9]{0,18}$"
+				}
+			}
+		}
+	}
+}

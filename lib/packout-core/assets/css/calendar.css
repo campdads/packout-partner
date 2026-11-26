@@ -1,0 +1,866 @@
+/**
+ * The calendar block.
+ *
+ * Colors, spacing, and type come from the WordPress design tokens. Each has
+ * a fallback here, so the block looks right where no stylesheet defines them.
+ * Nothing is told by color alone: a status is a word and a shape as well.
+ */
+
+.pos-cal {
+	--pos-cal-ink: var(--wpds-color-foreground-content-neutral, #1e1e1e);
+	--pos-cal-ink-weak: var(--wpds-color-foreground-content-neutral-weak, #50575e);
+	--pos-cal-surface: var(--wpds-color-background-surface-neutral, #fff);
+	--pos-cal-surface-weak: var(--wpds-color-background-surface-neutral-weak, #f6f7f7);
+	--pos-cal-surface-strong: var(--wpds-color-background-surface-neutral-strong, #ececed);
+	--pos-cal-line: var(--wpds-color-stroke-surface-neutral, #c3c4c7);
+	--pos-cal-line-weak: var(--wpds-color-stroke-surface-neutral-weak, #e0e0e0);
+	--pos-cal-control: var(--wpds-color-stroke-interactive-neutral, #8c8f94);
+	--pos-cal-brand: var(--wpds-color-background-interactive-brand-strong, #3858e9);
+	--pos-cal-brand-weak: var(--wpds-color-background-surface-brand, #eef1fd);
+	--pos-cal-on-brand: var(--wpds-color-foreground-interactive-brand-strong, #fff);
+	--pos-cal-info: var(--wpds-color-foreground-content-info, #0b5a87);
+	--pos-cal-info-weak: var(--wpds-color-background-surface-info-weak, #e8f3fa);
+	--pos-cal-caution: var(--wpds-color-foreground-content-caution, #6b4f00);
+	--pos-cal-caution-weak: var(--wpds-color-background-surface-caution-weak, #fbf3d9);
+	--pos-cal-success: var(--wpds-color-foreground-content-success, #0f6a2d);
+	--pos-cal-success-weak: var(--wpds-color-background-surface-success-weak, #e7f5ea);
+	--pos-cal-error: var(--wpds-color-foreground-content-error, #a8201a);
+	--pos-cal-error-weak: var(--wpds-color-background-surface-error-weak, #fbeae9);
+	--pos-cal-focus: var(--wpds-color-stroke-focus, #3858e9);
+	--pos-cal-gap-xs: var(--wpds-dimension-gap-xs, 4px);
+	--pos-cal-gap-sm: var(--wpds-dimension-gap-sm, 8px);
+	--pos-cal-gap-md: var(--wpds-dimension-gap-md, 12px);
+	--pos-cal-gap-lg: var(--wpds-dimension-gap-lg, 16px);
+	--pos-cal-gap-xl: var(--wpds-dimension-gap-xl, 24px);
+	--pos-cal-radius-sm: var(--wpds-border-radius-sm, 2px);
+	--pos-cal-radius-md: var(--wpds-border-radius-md, 4px);
+	--pos-cal-radius-lg: var(--wpds-border-radius-lg, 8px);
+	--pos-cal-border: var(--wpds-border-width-xs, 1px);
+	--pos-cal-focus-width: var(--wpds-border-width-focus, 2px);
+	--pos-cal-size-xs: var(--wpds-typography-font-size-xs, 0.75rem);
+	--pos-cal-size-sm: var(--wpds-typography-font-size-sm, 0.8125rem);
+	--pos-cal-size-md: var(--wpds-typography-font-size-md, 0.9375rem);
+	--pos-cal-size-lg: var(--wpds-typography-font-size-lg, 1.125rem);
+	--pos-cal-size-xl: var(--wpds-typography-font-size-xl, 1.375rem);
+	--pos-cal-weight: var(--wpds-typography-font-weight-default, 400);
+	--pos-cal-weight-strong: var(--wpds-typography-font-weight-emphasis, 600);
+	--pos-cal-hour: 3rem;
+
+	box-sizing: border-box;
+	width: 100%;
+	color: var(--pos-cal-ink);
+	font-size: var(--pos-cal-size-md);
+	line-height: var(--wpds-typography-line-height-md, 1.5);
+	container: pos-cal / inline-size;
+}
+
+.pos-cal *,
+.pos-cal *::before,
+.pos-cal *::after {
+	box-sizing: border-box;
+}
+
+.pos-cal[aria-busy="true"] .pos-cal__body {
+	opacity: 0.55;
+}
+
+.pos-cal__sr {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+.pos-cal a {
+	color: inherit;
+}
+
+.pos-cal a:focus-visible,
+.pos-cal select:focus-visible,
+.pos-cal button:focus-visible,
+.pos-cal__title:focus-visible {
+	outline: var(--pos-cal-focus-width) solid var(--pos-cal-focus);
+	outline-offset: 2px;
+}
+
+/* The title takes the keyboard after a day is opened. It is not a control, so it shows no ring for a pointer. */
+.pos-cal__title:focus:not(:focus-visible) {
+	outline: none;
+}
+
+/* ---------- The bar: move, title, change form ---------- */
+
+.pos-cal__bar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--pos-cal-gap-sm) var(--pos-cal-gap-lg);
+	margin: 0 0 var(--pos-cal-gap-md);
+}
+
+.pos-cal__nav,
+.pos-cal .pos-cal__views {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--pos-cal-gap-xs);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.pos-cal .pos-cal__views {
+	margin-inline-start: auto;
+}
+
+.pos-cal .pos-cal__views li {
+	margin: 0;
+	padding: 0;
+}
+
+.pos-cal .pos-cal__title {
+	flex: 1 1 12rem;
+	margin: 0;
+	font-size: var(--pos-cal-size-xl);
+	font-weight: var(--pos-cal-weight-strong);
+	line-height: var(--wpds-typography-line-height-lg, 1.3);
+}
+
+.pos-cal .pos-cal__button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 2.5rem;
+	min-height: 2.5rem;
+	padding: var(--pos-cal-gap-xs) var(--pos-cal-gap-md);
+	border: var(--pos-cal-border) solid var(--pos-cal-control);
+	border-radius: var(--pos-cal-radius-md);
+	background: var(--pos-cal-surface);
+	color: var(--pos-cal-ink);
+	font: inherit;
+	font-size: var(--pos-cal-size-sm);
+	font-weight: var(--pos-cal-weight-strong);
+	line-height: 1.2;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.pos-cal .pos-cal__button:hover {
+	background: var(--pos-cal-surface-strong);
+}
+
+.pos-cal .pos-cal__button--step {
+	padding-inline: var(--pos-cal-gap-xs);
+	font-size: var(--pos-cal-size-lg);
+}
+
+/* The form that is showing is filled, and underlined so it does not depend on the fill. */
+.pos-cal .pos-cal__button[aria-current="true"] {
+	border-color: var(--pos-cal-brand);
+	background: var(--pos-cal-brand);
+	color: var(--pos-cal-on-brand);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+/* A control, a day, and a chip are not links in running text. A theme that underlines every link in a page's content is outweighed here. */
+.pos-cal .pos-cal__bar a.pos-cal__button,
+.pos-cal .pos-cal__month a.pos-cal__date,
+.pos-cal .pos-cal__body a.pos-cal__chip,
+.pos-cal .pos-cal__body a.pos-cal__event-link {
+	text-decoration: none;
+}
+
+.pos-cal .pos-cal__bar a.pos-cal__button[aria-current="true"] {
+	text-decoration: underline;
+}
+
+/* ---------- Filters ---------- */
+
+.pos-cal__filters {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: end;
+	gap: var(--pos-cal-gap-sm) var(--pos-cal-gap-lg);
+	margin: 0 0 var(--pos-cal-gap-md);
+}
+
+.pos-cal .pos-cal__filter {
+	display: flex;
+	flex-direction: column;
+	gap: var(--pos-cal-gap-xs);
+	margin: 0;
+	color: var(--pos-cal-ink);
+	font-size: var(--pos-cal-size-sm);
+	font-weight: var(--pos-cal-weight-strong);
+}
+
+.pos-cal .pos-cal__filter select {
+	min-width: 12rem;
+	max-width: 100%;
+	min-height: 2.5rem;
+	padding: var(--pos-cal-gap-xs) var(--pos-cal-gap-sm);
+	border: var(--pos-cal-border) solid var(--pos-cal-control);
+	border-radius: var(--pos-cal-radius-md);
+	background-color: var(--pos-cal-surface);
+	color: var(--pos-cal-ink);
+	font: inherit;
+	font-weight: var(--pos-cal-weight);
+}
+
+/* With script the filters apply as they change. Without it the button sends them. */
+.pos-cal.is-live .pos-cal__apply {
+	display: none;
+}
+
+/* ---------- What marks an event ---------- */
+
+.pos-cal__flag {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3em;
+	margin-inline-start: var(--pos-cal-gap-xs);
+	padding: 0 0.45em;
+	border: var(--pos-cal-border) solid currentcolor;
+	border-radius: var(--pos-cal-radius-sm);
+	background: var(--pos-cal-surface);
+	color: var(--pos-cal-ink-weak);
+	font-size: var(--pos-cal-size-xs);
+	font-weight: var(--pos-cal-weight-strong);
+	line-height: 1.5;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+.pos-cal__flag::before {
+	content: "";
+	flex: none;
+	width: 0.6em;
+	height: 0.6em;
+}
+
+/* A span: a bar. */
+.pos-cal__flag--kind {
+	color: var(--pos-cal-info);
+}
+
+.pos-cal__flag--kind::before {
+	height: 0.25em;
+	background: currentcolor;
+}
+
+/* Done: a filled circle. */
+.pos-cal__flag--completed {
+	color: var(--pos-cal-success);
+}
+
+.pos-cal__flag--completed::before {
+	border-radius: 50%;
+	background: currentcolor;
+}
+
+/* Under way: a triangle. */
+.pos-cal__flag--in-progress {
+	color: var(--pos-cal-caution);
+}
+
+.pos-cal__flag--in-progress::before {
+	width: 0;
+	height: 0;
+	border-block: 0.35em solid transparent;
+	border-inline-start: 0.6em solid currentcolor;
+}
+
+/* Called off: a diamond, and the title is struck through. */
+.pos-cal__flag--called-off {
+	color: var(--pos-cal-error);
+}
+
+.pos-cal__flag--called-off::before {
+	width: 0.5em;
+	height: 0.5em;
+	background: currentcolor;
+	transform: rotate(45deg);
+}
+
+/* Not public: a ring. */
+.pos-cal__flag--private::before {
+	border: 0.12em solid currentcolor;
+	border-radius: 50%;
+}
+
+.pos-cal__flag--today {
+	border-color: var(--pos-cal-brand);
+	color: var(--pos-cal-ink);
+}
+
+.pos-cal__flag--today::before {
+	display: none;
+}
+
+.pos-cal__is-called-off .pos-cal__chip-title,
+.pos-cal__is-called-off .pos-cal__event-title,
+.pos-cal__is-called-off .pos-cal__entry-title,
+.pos-cal__is-called-off .pos-cal__card-title {
+	text-decoration: line-through;
+}
+
+/* ---------- An event as a chip: the month and the all-day band ---------- */
+
+.pos-cal .pos-cal__items,
+.pos-cal ul.pos-cal__cell {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.pos-cal .pos-cal__item {
+	margin: 0;
+	padding: 0;
+	border-inline-start: 3px solid var(--pos-cal-brand);
+	border-radius: var(--pos-cal-radius-sm);
+	background: var(--pos-cal-brand-weak);
+	font-size: var(--pos-cal-size-xs);
+	line-height: 1.35;
+}
+
+.pos-cal .pos-cal__item.pos-cal__is-campaign,
+.pos-cal .pos-cal__item.pos-cal__is-program {
+	border-inline-start-color: var(--pos-cal-info);
+	background: var(--pos-cal-info-weak);
+}
+
+/* A program is told from a campaign by its edge as well as its word. */
+.pos-cal .pos-cal__item.pos-cal__is-program {
+	border-inline-start-style: double;
+	border-inline-start-width: 5px;
+}
+
+.pos-cal .pos-cal__item.pos-cal__is-completed {
+	border-inline-start-color: var(--pos-cal-success);
+	background: var(--pos-cal-success-weak);
+}
+
+.pos-cal .pos-cal__item.pos-cal__is-called-off {
+	border-inline-start-color: var(--pos-cal-error);
+	background: var(--pos-cal-error-weak);
+}
+
+.pos-cal__chip {
+	display: block;
+	min-height: 1.5rem;
+	padding: 2px var(--pos-cal-gap-xs);
+	overflow: hidden;
+	color: var(--pos-cal-ink);
+	text-decoration: none;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.pos-cal__chip:hover .pos-cal__chip-title,
+.pos-cal__chip:focus-visible .pos-cal__chip-title {
+	text-decoration: underline;
+}
+
+.pos-cal__chip-time {
+	color: var(--pos-cal-ink-weak);
+	font-variant-numeric: tabular-nums;
+}
+
+.pos-cal__chip-title {
+	font-weight: var(--pos-cal-weight-strong);
+}
+
+/* ---------- Month ---------- */
+
+.pos-cal .pos-cal__month {
+	width: 100%;
+	margin: 0;
+	border: var(--pos-cal-border) solid var(--pos-cal-line);
+	border-collapse: collapse;
+	table-layout: fixed;
+	background: var(--pos-cal-surface);
+}
+
+.pos-cal .pos-cal__month th {
+	padding: var(--pos-cal-gap-xs);
+	border: var(--pos-cal-border) solid var(--pos-cal-line);
+	background: var(--pos-cal-surface-weak);
+	color: var(--pos-cal-ink-weak);
+	font-size: var(--pos-cal-size-xs);
+	font-weight: var(--pos-cal-weight-strong);
+	text-align: center;
+	text-transform: none;
+}
+
+.pos-cal .pos-cal__month abbr {
+	border: 0;
+	text-decoration: none;
+	cursor: default;
+}
+
+.pos-cal .pos-cal__day {
+	height: 6.75rem;
+	padding: var(--pos-cal-gap-xs) 0;
+	border: var(--pos-cal-border) solid var(--pos-cal-line);
+	background: var(--pos-cal-surface);
+	text-align: start;
+	vertical-align: top;
+}
+
+.pos-cal .pos-cal__day.is-outside {
+	background: var(--pos-cal-surface-weak);
+}
+
+.pos-cal .pos-cal__day.is-outside .pos-cal__date {
+	color: var(--pos-cal-ink-weak);
+}
+
+.pos-cal .pos-cal__date {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 1.75rem;
+	height: 1.75rem;
+	margin: 0 var(--pos-cal-gap-xs) 2px;
+	padding: 0 0.3em;
+	border-radius: 999px;
+	color: var(--pos-cal-ink);
+	font-size: var(--pos-cal-size-sm);
+	font-variant-numeric: tabular-nums;
+	text-decoration: none;
+}
+
+.pos-cal .pos-cal__date:hover {
+	background: var(--pos-cal-surface-strong);
+}
+
+/* Today: filled, and ringed so it does not depend on the fill. */
+.pos-cal .pos-cal__date[aria-current="date"] {
+	background: var(--pos-cal-brand);
+	color: var(--pos-cal-on-brand);
+	font-weight: var(--pos-cal-weight-strong);
+	box-shadow: 0 0 0 2px var(--pos-cal-surface), 0 0 0 3px var(--pos-cal-brand);
+}
+
+.pos-cal .pos-cal__month .pos-cal__item {
+	margin-inline: var(--pos-cal-gap-xs);
+}
+
+/* A span runs from the day it starts to the day it ends, across the lines between them. */
+.pos-cal .pos-cal__month .pos-cal__item--span {
+	margin-inline: -1px;
+	border-inline-start-width: 0;
+	border-radius: 0;
+}
+
+.pos-cal .pos-cal__month .pos-cal__item--span.is-first {
+	margin-inline-start: var(--pos-cal-gap-xs);
+	border-inline-start-width: 3px;
+	border-start-start-radius: var(--pos-cal-radius-sm);
+	border-end-start-radius: var(--pos-cal-radius-sm);
+}
+
+.pos-cal .pos-cal__month .pos-cal__item--span.is-last {
+	margin-inline-end: var(--pos-cal-gap-xs);
+	border-start-end-radius: var(--pos-cal-radius-sm);
+	border-end-end-radius: var(--pos-cal-radius-sm);
+}
+
+/* Its title is written where it starts and at the start of each week. In between, the bar alone carries it. */
+.pos-cal .pos-cal__month .pos-cal__item--span.is-carried .pos-cal__chip {
+	text-overflow: clip;
+}
+
+.pos-cal .pos-cal__month .pos-cal__item--span.is-carried .pos-cal__chip > * {
+	opacity: 0;
+}
+
+.pos-cal .pos-cal__more {
+	display: inline-block;
+	min-height: 1.5rem;
+	margin: 2px var(--pos-cal-gap-xs) 0;
+	color: var(--pos-cal-ink);
+	font-size: var(--pos-cal-size-xs);
+	font-weight: var(--pos-cal-weight-strong);
+}
+
+/* ---------- Day and Week ---------- */
+
+.pos-cal__days {
+	border: var(--pos-cal-border) solid var(--pos-cal-line);
+	background: var(--pos-cal-surface);
+}
+
+.pos-cal__row {
+	display: grid;
+	grid-template-columns: 3.75rem repeat(var(--pos-cal-n, 1), minmax(0, 1fr));
+}
+
+.pos-cal__row > * {
+	min-width: 0;
+	border-inline-start: var(--pos-cal-border) solid var(--pos-cal-line-weak);
+}
+
+.pos-cal__row > .pos-cal__gutter {
+	border-inline-start: 0;
+}
+
+.pos-cal__gutter {
+	padding: var(--pos-cal-gap-xs);
+	color: var(--pos-cal-ink-weak);
+	font-size: var(--pos-cal-size-xs);
+	text-align: end;
+}
+
+.pos-cal__row--heads {
+	border-block-end: var(--pos-cal-border) solid var(--pos-cal-line);
+	background: var(--pos-cal-surface-weak);
+}
+
+.pos-cal .pos-cal__head {
+	margin: 0;
+	padding: var(--pos-cal-gap-xs);
+	font-size: var(--pos-cal-size-sm);
+	font-weight: var(--pos-cal-weight-strong);
+	line-height: 1.75rem;
+	text-align: center;
+}
+
+.pos-cal .pos-cal__head a {
+	display: inline-block;
+	min-width: 1.75rem;
+	padding: 0 0.5em;
+	border-radius: 999px;
+	text-decoration: none;
+}
+
+.pos-cal .pos-cal__head a:hover {
+	background: var(--pos-cal-surface-strong);
+}
+
+.pos-cal .pos-cal__head a[aria-current="date"] {
+	background: var(--pos-cal-brand);
+	color: var(--pos-cal-on-brand);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.pos-cal__row--band {
+	min-height: 2.25rem;
+	border-block-end: var(--pos-cal-border) solid var(--pos-cal-line);
+}
+
+.pos-cal .pos-cal__row--band .pos-cal__cell {
+	padding: var(--pos-cal-gap-xs);
+}
+
+.pos-cal .pos-cal__hours {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.pos-cal .pos-cal__hours li {
+	height: var(--pos-cal-hour);
+	margin: 0;
+	padding: 2px var(--pos-cal-gap-xs) 0;
+	line-height: 1.2;
+	white-space: nowrap;
+}
+
+/* A line at each hour. */
+.pos-cal .pos-cal__col {
+	position: relative;
+	height: calc(var(--pos-cal-hours, 10) * var(--pos-cal-hour));
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	background-image: linear-gradient(to bottom, var(--pos-cal-line-weak) 1px, transparent 1px);
+	background-size: 100% var(--pos-cal-hour);
+}
+
+.pos-cal .pos-cal__event {
+	position: absolute;
+	top: var(--pos-cal-top, 0);
+	left: var(--pos-cal-left, 0);
+	width: var(--pos-cal-width, 100%);
+	height: var(--pos-cal-height, auto);
+	min-height: 1.5rem;
+	margin: 0;
+	padding: 0 1px 1px;
+	list-style: none;
+}
+
+.pos-cal__event-link {
+	display: block;
+	height: 100%;
+	padding: 2px var(--pos-cal-gap-xs);
+	overflow: hidden;
+	border: var(--pos-cal-border) solid var(--pos-cal-brand);
+	border-inline-start-width: 3px;
+	border-radius: var(--pos-cal-radius-sm);
+	background: var(--pos-cal-brand-weak);
+	color: var(--pos-cal-ink);
+	font-size: var(--pos-cal-size-xs);
+	line-height: 1.35;
+	text-decoration: none;
+}
+
+.pos-cal__is-completed .pos-cal__event-link {
+	border-color: var(--pos-cal-success);
+	background: var(--pos-cal-success-weak);
+}
+
+.pos-cal__is-called-off .pos-cal__event-link {
+	border-color: var(--pos-cal-error);
+	border-style: dashed;
+	background: var(--pos-cal-error-weak);
+}
+
+/* A short event shows the whole of itself to a pointer or the keyboard. */
+.pos-cal .pos-cal__event:hover,
+.pos-cal .pos-cal__event:focus-within {
+	z-index: 2;
+	height: auto;
+	min-height: var(--pos-cal-height, 1.5rem);
+}
+
+.pos-cal__event-title {
+	font-weight: var(--pos-cal-weight-strong);
+}
+
+.pos-cal__event-link:hover .pos-cal__event-title,
+.pos-cal__event-link:focus-visible .pos-cal__event-title {
+	text-decoration: underline;
+}
+
+.pos-cal__event-when,
+.pos-cal__local {
+	color: var(--pos-cal-ink-weak);
+}
+
+/* ---------- Agenda ---------- */
+
+.pos-cal .pos-cal__agenda,
+.pos-cal .pos-cal__rows,
+.pos-cal .pos-cal__cards {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.pos-cal .pos-cal__group {
+	margin: 0;
+	padding: var(--pos-cal-gap-md) 0;
+	border-block-start: var(--pos-cal-border) solid var(--pos-cal-line);
+}
+
+.pos-cal .pos-cal__group:last-child {
+	border-block-end: var(--pos-cal-border) solid var(--pos-cal-line);
+}
+
+.pos-cal .pos-cal__group-day {
+	margin: 0 0 var(--pos-cal-gap-sm);
+	font-size: var(--pos-cal-size-md);
+	font-weight: var(--pos-cal-weight-strong);
+}
+
+.pos-cal .pos-cal__entry {
+	display: grid;
+	grid-template-columns: minmax(7rem, 12rem) minmax(0, 1fr);
+	gap: var(--pos-cal-gap-xs) var(--pos-cal-gap-lg);
+	margin: 0;
+	padding: var(--pos-cal-gap-sm) var(--pos-cal-gap-md);
+	border-inline-start: 3px solid var(--pos-cal-brand);
+}
+
+.pos-cal .pos-cal__entry + .pos-cal__entry {
+	margin-block-start: var(--pos-cal-gap-xs);
+}
+
+.pos-cal .pos-cal__entry.pos-cal__is-campaign,
+.pos-cal .pos-cal__entry.pos-cal__is-program {
+	border-inline-start-color: var(--pos-cal-info);
+}
+
+.pos-cal .pos-cal__entry.pos-cal__is-program {
+	border-inline-start-style: double;
+	border-inline-start-width: 5px;
+}
+
+.pos-cal .pos-cal__entry.pos-cal__is-completed {
+	border-inline-start-color: var(--pos-cal-success);
+}
+
+.pos-cal .pos-cal__entry.pos-cal__is-called-off {
+	border-inline-start-color: var(--pos-cal-error);
+	border-inline-start-style: dashed;
+}
+
+.pos-cal__entry-when {
+	color: var(--pos-cal-ink-weak);
+	font-size: var(--pos-cal-size-sm);
+	font-variant-numeric: tabular-nums;
+}
+
+.pos-cal__entry-title,
+.pos-cal__card-title {
+	font-weight: var(--pos-cal-weight-strong);
+}
+
+.pos-cal__entry-meta,
+.pos-cal__card-meta,
+.pos-cal__card-when {
+	display: block;
+	color: var(--pos-cal-ink-weak);
+	font-size: var(--pos-cal-size-sm);
+}
+
+.pos-cal .pos-cal__empty {
+	margin: 0;
+	padding: var(--pos-cal-gap-lg);
+	border: var(--pos-cal-border) dashed var(--pos-cal-control);
+	border-radius: var(--pos-cal-radius-md);
+	color: var(--pos-cal-ink-weak);
+}
+
+/* ---------- Upcoming and Past ---------- */
+
+.pos-cal .pos-cal__cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+	gap: var(--pos-cal-gap-md);
+}
+
+.pos-cal .pos-cal__card {
+	display: flex;
+	gap: var(--pos-cal-gap-md);
+	margin: 0;
+	padding: var(--pos-cal-gap-md);
+	border: var(--pos-cal-border) solid var(--pos-cal-line);
+	border-radius: var(--pos-cal-radius-lg);
+	background: var(--pos-cal-surface);
+}
+
+.pos-cal__card-day {
+	display: flex;
+	flex: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 3.25rem;
+	height: 3.5rem;
+	border-radius: var(--pos-cal-radius-md);
+	background: var(--pos-cal-brand-weak);
+	color: var(--pos-cal-ink);
+	line-height: 1.1;
+}
+
+.pos-cal__is-campaign .pos-cal__card-day,
+.pos-cal__is-program .pos-cal__card-day {
+	background: var(--pos-cal-info-weak);
+}
+
+.pos-cal__is-completed .pos-cal__card-day {
+	background: var(--pos-cal-success-weak);
+}
+
+.pos-cal__is-called-off .pos-cal__card-day {
+	background: var(--pos-cal-error-weak);
+}
+
+.pos-cal__card-month {
+	font-size: var(--pos-cal-size-xs);
+	font-weight: var(--pos-cal-weight-strong);
+	text-transform: uppercase;
+}
+
+.pos-cal__card-date {
+	font-size: var(--pos-cal-size-xl);
+	font-weight: var(--pos-cal-weight-strong);
+	font-variant-numeric: tabular-nums;
+}
+
+.pos-cal__card-body {
+	min-width: 0;
+}
+
+/* ---------- Subscribe ---------- */
+
+.pos-cal .pos-cal__feed {
+	margin: var(--pos-cal-gap-md) 0 0;
+	color: var(--pos-cal-ink-weak);
+	font-size: var(--pos-cal-size-sm);
+}
+
+.pos-cal .pos-cal__feed a {
+	display: inline-block;
+	min-height: 1.5rem;
+	color: var(--pos-cal-ink);
+}
+
+/* ---------- A narrow block ---------- */
+
+/* Below 600 pixels of the block's own width, Month and Week are an agenda of the same days. */
+.pos-cal__narrow {
+	display: none;
+}
+
+@container pos-cal (max-width: 599.98px) {
+
+	.pos-cal__wide {
+		display: none;
+	}
+
+	.pos-cal__narrow {
+		display: block;
+	}
+
+	.pos-cal .pos-cal__views {
+		margin-inline-start: 0;
+	}
+
+	.pos-cal .pos-cal__title {
+		flex-basis: 100%;
+		order: -1;
+		font-size: var(--pos-cal-size-lg);
+	}
+
+	.pos-cal .pos-cal__entry {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.pos-cal .pos-cal__filter,
+	.pos-cal .pos-cal__filter select {
+		width: 100%;
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+
+	.pos-cal__body {
+		transition: opacity 0.12s ease-out;
+	}
+}
+
+@media (forced-colors: active) {
+
+	.pos-cal .pos-cal__date[aria-current="date"],
+	.pos-cal .pos-cal__head a[aria-current="date"],
+	.pos-cal .pos-cal__button[aria-current="true"] {
+		outline: 2px solid CanvasText;
+		outline-offset: -2px;
+	}
+
+	.pos-cal__flag::before {
+		forced-color-adjust: none;
+	}
+}

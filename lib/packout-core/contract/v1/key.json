@@ -1,0 +1,32 @@
+{
+	"$comment": "POST /partners/key. Signed with the key being replaced.",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"public_key",
+		"contract",
+		"core_version",
+		"plugin_version"
+	],
+	"properties": {
+		"contract": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 1000
+		},
+		"core_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"plugin_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"public_key": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		}
+	}
+}

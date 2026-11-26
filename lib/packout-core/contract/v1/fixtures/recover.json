@@ -1,0 +1,8 @@
+{
+	"site": "0123456789abcdef0123456789abcdef",
+	"public_key": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+	"challenge": "abababababababababababababababababababababababababababababababab",
+	"contract": 1,
+	"core_version": "0.12.0",
+	"plugin_version": "0.8.0-beta.1"
+}

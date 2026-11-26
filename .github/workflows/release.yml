@@ -1,0 +1,83 @@
+name: Release
+
+# A version tag checks the plugin, builds the package, and makes a GitHub
+# release that carries it.
+#
+# This repository holds no signing key and no credential, and this workflow
+# uses none. Pack-Out Spot's release pipeline takes the package from the
+# GitHub release, installs it on a test site beside a test hub, and only then
+# signs it and stores it in the catalog on packout.spot.
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: read
+
+jobs:
+  version:
+    name: The tag is the version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # v2
+        with:
+          php-version: "8.3"
+          coverage: none
+
+      - name: Compare the tag with the plugin
+        env:
+          TAG: ${{ github.ref_name }}
+        run: php bin/check-versions.php "$TAG"
+
+  check:
+    name: Check
+    needs: version
+    uses: ./.github/workflows/check.yml
+    with:
+      tagged-core: true
+
+  release:
+    name: Release
+    needs: check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # v2
+        with:
+          php-version: "8.3"
+          extensions: zip
+          coverage: none
+
+      - name: Fetch the package the checks ran against
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: packout-partner-package
+          path: dist
+
+      - name: It is still the package for this tag
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          test -f "dist/packout-partner-${TAG#v}.zip"
+          php bin/package-check.php "dist/packout-partner-${TAG#v}.zip"
+          php bin/changelog-entry.php "${TAG#v}" > "$RUNNER_TEMP/notes.md"
+
+      - name: Create the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          flags=()
+          case "$TAG" in *-*) flags+=(--prerelease) ;; esac
+          gh release create "$TAG" dist/* --repo "$GITHUB_REPOSITORY" --title "$TAG" --notes-file "$RUNNER_TEMP/notes.md" --verify-tag "${flags[@]}"

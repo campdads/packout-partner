@@ -1,0 +1,105 @@
+{
+	"contract": 1,
+	"core_version": "0.8.0",
+	"plugin_version": "0.4.0-beta.1",
+	"items": [
+		{
+			"remote_id": "301",
+			"rev": 1764093600,
+			"state": "awaiting",
+			"category": {
+				"slug": "litter",
+				"name": "Litter"
+			},
+			"reported": "2026-11-25",
+			"hazard": "none",
+			"location": {
+				"lat": 34.02,
+				"lng": -89.91
+			}
+		},
+		{
+			"remote_id": "302",
+			"rev": 1764093700,
+			"state": "awaiting",
+			"category": {
+				"slug": "dump-site",
+				"name": "Dump site"
+			},
+			"reported": "2026-11-25",
+			"hazard": "needs_authorization"
+		},
+		{
+			"remote_id": "288",
+			"rev": 1764093800,
+			"state": "published",
+			"title": "Tires below the boat ramp",
+			"url": "https://cleanrivers.example/spot/tires-below-the-boat-ramp/",
+			"category": {
+				"slug": "tires",
+				"name": "Tires"
+			},
+			"status": "planned",
+			"hazard": "none",
+			"needs_authorization": false,
+			"authorized": false,
+			"guidance": "",
+			"description": "Eleven tires in the shallows on the east side of the ramp.",
+			"location": {
+				"kind": "pin",
+				"lat": 34.0312,
+				"lng": -89.9054,
+				"precision": "exact",
+				"landmark": "East side of the ramp"
+			},
+			"reported": "2026-11-20",
+			"updated": "2026-11-25T18:00:00+00:00",
+			"credit": {
+				"label": "Tillatoba Paddlers",
+				"url": "https://cleanrivers.example/team/tillatoba-paddlers/"
+			},
+			"organization": "12",
+			"photos": [
+				{
+					"id": "4410",
+					"of": "report"
+				},
+				{
+					"id": "4502",
+					"of": "cleanup"
+				}
+			]
+		},
+		{
+			"remote_id": "290",
+			"rev": 1764093900,
+			"state": "published",
+			"title": "Dump site near the creek",
+			"url": "https://cleanrivers.example/spot/dump-site-near-the-creek/",
+			"category": {
+				"slug": "dump-site",
+				"name": "Dump site"
+			},
+			"status": "spotted",
+			"hazard": "do_not_touch",
+			"needs_authorization": true,
+			"authorized": false,
+			"guidance": "Leave it where it is and tell the land manager.",
+			"description": "Drums of unknown contents.",
+			"location": {
+				"kind": "pin",
+				"lat": 34.03,
+				"lng": -89.91,
+				"precision": "coarse"
+			},
+			"reported": "2026-11-21",
+			"updated": "2026-11-25T18:05:00+00:00",
+			"photos": []
+		},
+		{
+			"remote_id": "277",
+			"rev": 1764094000,
+			"state": "removed"
+		}
+	]
+}

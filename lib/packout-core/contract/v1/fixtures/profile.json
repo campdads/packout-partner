@@ -1,0 +1,14 @@
+{
+	"contract": 1,
+	"core_version": "0.7.0",
+	"plugin_version": "0.3.0-beta.1",
+	"name": "Clean Rivers Alliance",
+	"description": "Volunteers who look after three rivers.",
+	"region": "Northern Mississippi",
+	"website": "https://cleanrivers.example",
+	"url": "https://cleanrivers.example/partner/clean-rivers-alliance/",
+	"images": {
+		"logo": "412",
+		"cover": ""
+	}
+}

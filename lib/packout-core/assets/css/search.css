@@ -1,0 +1,247 @@
+/*
+ * Pack-Out Spot: the search box of a map.
+ *
+ * Used on the public site, in the field app, and in the dashboard, so it
+ * names its own colors and falls back to plain ones.
+ */
+
+.pos-search {
+	--pos-search-ink: var(--pf-ink, var(--pos-ink, #2f3232));
+	--pos-search-line: var(--pf-line, var(--pos-line, #d9d5cb));
+	--pos-search-ground: var(--pf-surface, #ffffff);
+	--pos-search-accent: var(--pos-accent, #415840);
+	--pos-search-muted: #5d6360;
+	color: var(--pos-search-ink);
+	font-size: 15px;
+	line-height: 1.4;
+	margin: 0 0 12px;
+}
+
+.pos-search__form {
+	display: flex;
+	gap: 8px;
+	align-items: stretch;
+}
+
+.pos-search__label {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.pos-search .pos-search__input {
+	flex: 1 1 auto;
+	min-width: 0;
+	min-height: 44px;
+	margin: 0;
+	padding: 8px 12px;
+	border: 1px solid var(--pos-search-line);
+	border-radius: 8px;
+	background: var(--pos-search-ground);
+	color: inherit;
+	font: inherit;
+	font-size: 16px;
+	box-shadow: none;
+}
+
+.pos-search .pos-search__input:focus-visible {
+	outline: 2px solid var(--pos-search-accent);
+	outline-offset: 1px;
+}
+
+.pos-search .pos-search__button {
+	flex: 0 0 auto;
+	min-height: 44px;
+	margin: 0;
+	padding: 8px 18px;
+	border: 1px solid var(--pos-search-accent);
+	border-radius: 8px;
+	background: var(--pos-search-accent);
+	color: #ffffff;
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.pos-search .pos-search__button:hover {
+	filter: brightness(1.1);
+}
+
+.pos-search .pos-search__button:focus-visible,
+.pos-search .pos-search__result:focus-visible,
+.pos-search .pos-search__clear:focus-visible,
+.pos-search .pos-search__page:focus-visible {
+	outline: 2px solid var(--pos-search-accent);
+	outline-offset: 2px;
+}
+
+.pos-search .pos-search__button[disabled] {
+	opacity: 0.6;
+	cursor: progress;
+}
+
+.pos-search__status {
+	margin: 6px 0 0;
+	color: var(--pos-search-muted);
+	font-size: 14px;
+}
+
+.pos-search__status[hidden],
+.pos-search__results[hidden] {
+	display: none;
+}
+
+.pos-search__results {
+	margin-top: 8px;
+	padding: 4px 12px 12px;
+	border: 1px solid var(--pos-search-line);
+	border-radius: 8px;
+	background: var(--pos-search-ground);
+	max-height: 340px;
+	overflow-y: auto;
+}
+
+.pos-search__group + .pos-search__group {
+	margin-top: 4px;
+	border-top: 1px solid var(--pos-search-line);
+}
+
+.pos-search .pos-search__heading {
+	margin: 12px 0 4px;
+	padding: 0;
+	color: var(--pos-search-muted);
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	line-height: 1.3;
+	text-transform: uppercase;
+}
+
+.pos-search .pos-search__list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.pos-search .pos-search__item {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	margin: 0;
+	padding: 0;
+}
+
+.pos-search .pos-search__result {
+	display: block;
+	flex: 1 1 auto;
+	min-width: 0;
+	min-height: 44px;
+	margin: 0;
+	padding: 6px 8px;
+	border: 0;
+	border-radius: 6px;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	text-align: left;
+	cursor: pointer;
+}
+
+.pos-search .pos-search__result:hover,
+.pos-search .pos-search__result[aria-current] {
+	background: rgba(65, 88, 64, 0.1);
+}
+
+.pos-search__name {
+	display: block;
+	font-weight: 600;
+	overflow-wrap: anywhere;
+}
+
+.pos-search__detail {
+	display: block;
+	color: var(--pos-search-muted);
+	font-size: 13px;
+	overflow-wrap: anywhere;
+}
+
+.pos-search .pos-search__page {
+	flex: 0 0 auto;
+	padding: 6px 4px;
+	color: var(--pos-search-accent);
+	font-size: 13px;
+	white-space: nowrap;
+}
+
+.pos-search__credit {
+	margin: 4px 8px 8px;
+	color: var(--pos-search-muted);
+	font-size: 12px;
+}
+
+.pos-search .pos-search__clear {
+	display: block;
+	margin: 8px 0 0 auto;
+	padding: 6px 8px;
+	border: 0;
+	background: none;
+	color: var(--pos-search-accent);
+	font: inherit;
+	font-size: 14px;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+/* The mark a chosen location leaves on the map. */
+.pos-search__marker {
+	display: block;
+	width: 18px;
+	height: 18px;
+	border: 3px solid #ffffff;
+	border-radius: 50%;
+	background: #b3261e;
+	box-shadow: 0 0 0 2px rgba(47, 50, 50, 0.6);
+}
+
+/* The pin of a report: a search box over a small map. */
+.pos-report__pin {
+	margin: 0 0 16px;
+}
+
+.pos-report__pin-map {
+	height: 320px;
+	border: 1px solid #d9d5cb;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.pos-report__pin-hint {
+	margin: 0 0 8px;
+	font-size: 14px;
+}
+
+.pos-report__pin-marker {
+	display: block;
+	width: 22px;
+	height: 22px;
+	border: 3px solid #ffffff;
+	border-radius: 50%;
+	background: #415840;
+	box-shadow: 0 0 0 2px rgba(47, 50, 50, 0.7);
+}
+
+@media (max-width: 480px) {
+	.pos-search__form {
+		flex-wrap: wrap;
+	}
+
+	.pos-search .pos-search__button {
+		flex: 1 1 100%;
+	}
+}

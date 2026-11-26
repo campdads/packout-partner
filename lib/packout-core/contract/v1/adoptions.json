@@ -1,0 +1,279 @@
+{
+	"$comment": "POST /partners/adoptions. A crew of the partner site takes on a Spot that was reported on packout.spot. `act` says which shape the request has. `adopt` names the hub's Spot and the partner's mission, and the hub answers with the adoption's number, which the other three carry. `complete` carries the figures of the work and the identifiers of its photographs, which follow one at a time by POST /partners/images. No person is named in any field: the work is credited to the organization.",
+	"type": "object",
+	"select": "act",
+	"variants": {
+		"adopt": {
+			"$ref": "#/definitions/adopt"
+		},
+		"start": {
+			"$ref": "#/definitions/start"
+		},
+		"complete": {
+			"$ref": "#/definitions/complete"
+		},
+		"release": {
+			"$ref": "#/definitions/release"
+		}
+	},
+	"definitions": {
+		"adopt": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": [
+				"act",
+				"spot",
+				"mission",
+				"contract",
+				"core_version",
+				"plugin_version"
+			],
+			"properties": {
+				"act": {
+					"type": "string",
+					"enum": [
+						"adopt"
+					]
+				},
+				"spot": {
+					"type": "string",
+					"pattern": "^[0-9]{1,18}$"
+				},
+				"mission": {
+					"type": "object",
+					"additionalProperties": false,
+					"required": [
+						"remote_id",
+						"title",
+						"url"
+					],
+					"properties": {
+						"remote_id": {
+							"type": "string",
+							"pattern": "^[0-9]{1,18}$"
+						},
+						"title": {
+							"type": "string",
+							"minLength": 1,
+							"maxLength": 200
+						},
+						"url": {
+							"type": "string",
+							"pattern": "^https?://",
+							"maxLength": 500
+						},
+						"starts": {
+							"type": "string",
+							"pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+						},
+						"ends": {
+							"type": "string",
+							"pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+						}
+					}
+				},
+				"organization": {
+					"type": "string",
+					"pattern": "^[0-9]{1,18}$"
+				},
+				"contract": {
+					"type": "integer",
+					"minimum": 0,
+					"maximum": 1000
+				},
+				"core_version": {
+					"type": "string",
+					"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+					"maxLength": 40
+				},
+				"plugin_version": {
+					"type": "string",
+					"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+					"maxLength": 40
+				}
+			}
+		},
+		"start": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": [
+				"act",
+				"id",
+				"contract",
+				"core_version",
+				"plugin_version"
+			],
+			"properties": {
+				"act": {
+					"type": "string",
+					"enum": [
+						"start"
+					]
+				},
+				"id": {
+					"type": "string",
+					"pattern": "^[0-9]{1,18}$"
+				},
+				"contract": {
+					"type": "integer",
+					"minimum": 0,
+					"maximum": 1000
+				},
+				"core_version": {
+					"type": "string",
+					"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+					"maxLength": 40
+				},
+				"plugin_version": {
+					"type": "string",
+					"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+					"maxLength": 40
+				}
+			}
+		},
+		"complete": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": [
+				"act",
+				"id",
+				"date",
+				"hours",
+				"people",
+				"bags",
+				"bags_source",
+				"pounds",
+				"pounds_source",
+				"narrative",
+				"photos",
+				"contract",
+				"core_version",
+				"plugin_version"
+			],
+			"properties": {
+				"act": {
+					"type": "string",
+					"enum": [
+						"complete"
+					]
+				},
+				"id": {
+					"type": "string",
+					"pattern": "^[0-9]{1,18}$"
+				},
+				"date": {
+					"type": "string",
+					"pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+				},
+				"hours": {
+					"type": "number",
+					"minimum": 0,
+					"maximum": 1000000
+				},
+				"people": {
+					"type": "integer",
+					"minimum": 0,
+					"maximum": 100000
+				},
+				"bags": {
+					"type": "number",
+					"minimum": 0,
+					"maximum": 1000000
+				},
+				"bags_source": {
+					"type": "string",
+					"enum": [
+						"measured",
+						"self_reported"
+					]
+				},
+				"pounds": {
+					"type": "number",
+					"minimum": 0,
+					"maximum": 1000000
+				},
+				"pounds_source": {
+					"type": "string",
+					"enum": [
+						"measured",
+						"self_reported"
+					]
+				},
+				"narrative": {
+					"type": "string",
+					"maxLength": 2000
+				},
+				"photos": {
+					"type": "array",
+					"maxItems": 12,
+					"items": {
+						"type": "string",
+						"pattern": "^[0-9]{1,18}$"
+					}
+				},
+				"contract": {
+					"type": "integer",
+					"minimum": 0,
+					"maximum": 1000
+				},
+				"core_version": {
+					"type": "string",
+					"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+					"maxLength": 40
+				},
+				"plugin_version": {
+					"type": "string",
+					"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+					"maxLength": 40
+				}
+			}
+		},
+		"release": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": [
+				"act",
+				"id",
+				"reason",
+				"contract",
+				"core_version",
+				"plugin_version"
+			],
+			"properties": {
+				"act": {
+					"type": "string",
+					"enum": [
+						"release"
+					]
+				},
+				"id": {
+					"type": "string",
+					"pattern": "^[0-9]{1,18}$"
+				},
+				"reason": {
+					"type": "string",
+					"enum": [
+						"removed",
+						"called_off",
+						"still_open"
+					]
+				},
+				"contract": {
+					"type": "integer",
+					"minimum": 0,
+					"maximum": 1000
+				},
+				"core_version": {
+					"type": "string",
+					"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+					"maxLength": 40
+				},
+				"plugin_version": {
+					"type": "string",
+					"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+					"maxLength": 40
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,40 @@
+{
+	"$comment": "POST /partners/recover. Unsigned: the site has lost its key. With `site` alone, the hub emails the address it has on file, and answers in the same words whether or not it knows the site. After the link in that email was followed, the site sends a new `public_key` and a `challenge` it made, and the hub asks the site for that challenge, signed with the new key, at the address on file.",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"site",
+		"contract",
+		"core_version",
+		"plugin_version"
+	],
+	"properties": {
+		"contract": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 1000
+		},
+		"core_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"plugin_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"site": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{32}$"
+		},
+		"public_key": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"challenge": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		}
+	}
+}

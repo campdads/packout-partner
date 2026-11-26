@@ -1,0 +1,99 @@
+{
+	"contract": 1,
+	"core_version": "0.7.0",
+	"plugin_version": "0.3.0-beta.1",
+	"items": [
+		{
+			"scope": "partner",
+			"remote_id": "5",
+			"day": "2026-11-25",
+			"effort": {
+				"hours_verified": 12.5,
+				"hours_unverified": 4,
+				"people": 9,
+				"missions_completed": 2,
+				"organizations_active": 1
+			},
+			"outputs": {
+				"spots_cleaned": 6,
+				"bags_measured": 14,
+				"bags_self_reported": 3,
+				"pounds_measured": 210.5,
+				"pounds_self_reported": 40
+			},
+			"outcomes": {
+				"still_clear": 2,
+				"returned": 1
+			},
+			"records": {
+				"total": 7,
+				"verified": 5,
+				"counted": 5
+			},
+			"overview": {
+				"now": {
+					"stages": {
+						"spotted": 3,
+						"planned": 1,
+						"cleaned": 6
+					},
+					"missions": {
+						"count": 1,
+						"planned": 1,
+						"in_progress": 0
+					},
+					"computed_at": "2026-11-25T18:00:00+00:00"
+				},
+				"periods": {
+					"30": {
+						"days": 30,
+						"from": "2026-10-27",
+						"to": "2026-11-25",
+						"a": {
+							"current": {
+								"reported": 8,
+								"cleaned": 6,
+								"net_open": 2,
+								"median_days": 3.5
+							},
+							"previous": {
+								"reported": 2,
+								"cleaned": 0,
+								"net_open": 2,
+								"median_days": null
+							}
+						}
+					}
+				}
+			}
+		},
+		{
+			"scope": "organization",
+			"remote_id": "12",
+			"day": "2026-11-25",
+			"effort": {
+				"hours_verified": 12.5,
+				"hours_unverified": 4,
+				"people": 9,
+				"missions_completed": 2,
+				"organizations_active": 1
+			},
+			"outputs": {
+				"spots_cleaned": 6,
+				"bags_measured": 14,
+				"bags_self_reported": 3,
+				"pounds_measured": 210.5,
+				"pounds_self_reported": 40
+			},
+			"outcomes": {
+				"still_clear": 2,
+				"returned": 1
+			},
+			"records": {
+				"total": 7,
+				"verified": 5,
+				"counted": 5
+			}
+		}
+	]
+}

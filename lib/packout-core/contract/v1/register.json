@@ -1,0 +1,55 @@
+{
+	"$comment": "POST /partners/register. Unsigned: the hub has no key for the site yet.",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"site_url",
+		"name",
+		"admin_email",
+		"public_key",
+		"terms_version",
+		"contract",
+		"core_version",
+		"plugin_version"
+	],
+	"properties": {
+		"contract": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 1000
+		},
+		"core_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"plugin_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"site_url": {
+			"type": "string",
+			"pattern": "^https?://[^\\s/?#]+(/[^\\s?#]*)?$",
+			"maxLength": 200
+		},
+		"name": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 120
+		},
+		"admin_email": {
+			"type": "string",
+			"pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$",
+			"maxLength": 190
+		},
+		"public_key": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"terms_version": {
+			"type": "string",
+			"pattern": "^[0-9A-Za-z.-]{1,20}$"
+		}
+	}
+}

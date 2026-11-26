@@ -1,0 +1,100 @@
+/*
+ * The report form.
+ *
+ * It takes the theme's fonts and its button. The colors are the palette's,
+ * with the values it falls back to.
+ */
+
+.packout-form {
+	display: grid;
+	/* One column that may be narrower than its widest field, so a long choice does not push the form off a phone. */
+	grid-template-columns: minmax(0, 1fr);
+	gap: 16px;
+	max-width: 640px;
+}
+
+.packout-form__field {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 4px;
+	margin: 0;
+}
+
+.packout-form__field label {
+	font-weight: 600;
+}
+
+.packout-form__required {
+	font-weight: 400;
+	color: var(--packout-muted, #838585);
+}
+
+.packout-form__field input[type="text"],
+.packout-form__field input[type="number"],
+.packout-form__field select,
+.packout-form__field textarea {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 8px 10px;
+	border: 1px solid var(--packout-line, #c9c9c9);
+	border-radius: 4px;
+	background: var(--packout-surface, #fff);
+	color: var(--packout-ink, #2f3232);
+	font: inherit;
+}
+
+.packout-form__field input:focus-visible,
+.packout-form__field select:focus-visible,
+.packout-form__field textarea:focus-visible {
+	outline: 2px solid var(--packout-secondary, #25486b);
+	outline-offset: 1px;
+}
+
+.packout-form__help {
+	font-size: 0.875em;
+	color: var(--packout-muted, #6b6d6d);
+}
+
+.packout-form__pair {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 16px;
+}
+
+@media (max-width: 480px) {
+	.packout-form__pair {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+.packout-form__submit {
+	margin: 0;
+}
+
+.packout-form__problem {
+	padding: 10px 12px;
+	border-left: 4px solid #a12a1b;
+	background: #fbecea;
+	color: var(--packout-ink, #2f3232);
+}
+
+.packout-form__problem p,
+.packout-form--done p {
+	margin: 0;
+}
+
+.packout-form--done {
+	padding: 12px 14px;
+	border-left: 4px solid var(--packout-primary, #415840);
+	background: #edf3ec;
+	color: var(--packout-ink, #2f3232);
+}
+
+/* A person never sees this field. A script that fills in every field fills it. */
+.packout-form__website {
+	position: absolute;
+	left: -10000px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}

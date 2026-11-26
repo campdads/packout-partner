@@ -1,0 +1,7 @@
+# The release public keys are public by design. Nothing else is allowed.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Ed25519 public keys of Pack-Out Spot releases"
+regexes = ['''f5ca2b1da9adaaea5e130c2574769cca399d411a1c9632fde1963f09a7f2f018''']

@@ -1,0 +1,101 @@
+{
+	"contract": 1,
+	"core_version": "0.7.0",
+	"plugin_version": "0.3.0-beta.1",
+	"full": false,
+	"items": [
+		{
+			"kind": "organization",
+			"remote_id": "12",
+			"rev": 1764093600,
+			"updated": "2026-11-25T18:00:00+00:00",
+			"name": "Tillatoba Paddlers",
+			"description": "We clean the lake from the water.",
+			"region": "Yalobusha County",
+			"website": "",
+			"join": "request",
+			"url": "https://cleanrivers.example/team/tillatoba-paddlers/",
+			"teams": [
+				"12-1"
+			]
+		},
+		{
+			"kind": "team",
+			"remote_id": "12-1",
+			"rev": 1764093600,
+			"updated": "2026-11-25T18:00:00+00:00",
+			"organization": "12",
+			"name": "Saturday crew",
+			"description": "",
+			"url": "https://cleanrivers.example/team/tillatoba-paddlers/saturday-crew/",
+			"youth": false
+		},
+		{
+			"kind": "program",
+			"remote_id": "30",
+			"rev": 1764093600,
+			"updated": "2026-11-25T18:00:00+00:00",
+			"title": "Clear Water",
+			"description": "Every landing, every spring.",
+			"goal": "Every boat landing cleared by June.",
+			"start": "2027-03-01",
+			"end": "2027-06-30",
+			"state": "open",
+			"organizations": [
+				"12"
+			],
+			"url": "https://cleanrivers.example/program/clear-water/"
+		},
+		{
+			"kind": "campaign",
+			"remote_id": "41",
+			"rev": 1764093600,
+			"updated": "2026-11-25T18:00:00+00:00",
+			"organization": "12",
+			"program": "30",
+			"title": "Spring landings",
+			"description": "",
+			"goal": "Ten landings.",
+			"start": "2027-04-01",
+			"end": "2027-04-30",
+			"start_time": "",
+			"end_time": "",
+			"timezone": "America/Chicago",
+			"teams": [
+				"12-1"
+			],
+			"url": "https://cleanrivers.example/campaign/spring-landings/",
+			"joint": "open"
+		},
+		{
+			"kind": "mission",
+			"remote_id": "57",
+			"rev": 1764093600,
+			"updated": "2026-11-25T18:00:00+00:00",
+			"organization": "12",
+			"campaign": "41",
+			"program": "30",
+			"teams": [
+				"12-1"
+			],
+			"title": "North landing",
+			"description": "Bring gloves.",
+			"status": "planned",
+			"start": "2027-04-17",
+			"end": "2027-04-17",
+			"start_time": "09:00",
+			"end_time": "12:00",
+			"timezone": "America/Chicago",
+			"meeting": "The north boat ramp",
+			"spots": 3,
+			"url": "https://cleanrivers.example/mission/north-landing/"
+		},
+		{
+			"kind": "mission",
+			"remote_id": "58",
+			"rev": 1764093601,
+			"updated": "2026-11-25T18:00:00+00:00",
+			"deleted": true
+		}
+	]
+}

@@ -1,0 +1,42 @@
+name: Something is wrong
+description: The plugin does not do what it should.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: did
+    attributes:
+      label: What you did
+      description: The steps that lead to the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: happened
+    attributes:
+      label: What happened
+      description: Include any error message in full. Leave out passwords, keys, and people's details.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Plugin version
+      description: Shown on the Plugins screen.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: WordPress and PHP versions
+      description: Tools, Site Health, Info shows both.
+    validations:
+      required: true
+  - type: input
+    id: theme
+    attributes:
+      label: Theme

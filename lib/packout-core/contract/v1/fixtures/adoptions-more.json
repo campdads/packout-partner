@@ -1,0 +1,36 @@
+{
+	"start": {
+		"act": "start",
+		"id": "7",
+		"contract": 1,
+		"core_version": "0.8.0",
+		"plugin_version": "0.4.0-beta.1"
+	},
+	"complete": {
+		"act": "complete",
+		"id": "7",
+		"date": "2026-12-05",
+		"hours": 6.5,
+		"people": 4,
+		"bags": 9,
+		"bags_source": "measured",
+		"pounds": 140,
+		"pounds_source": "self_reported",
+		"narrative": "Six tires and a mattress, hauled to the county transfer station.",
+		"photos": [
+			"901",
+			"902"
+		],
+		"contract": 1,
+		"core_version": "0.8.0",
+		"plugin_version": "0.4.0-beta.1"
+	},
+	"release": {
+		"act": "release",
+		"id": "7",
+		"reason": "called_off",
+		"contract": 1,
+		"core_version": "0.8.0",
+		"plugin_version": "0.4.0-beta.1"
+	}
+}

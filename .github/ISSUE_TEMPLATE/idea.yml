@@ -1,0 +1,25 @@
+name: Something it should do
+description: An act the plugin does not have, or one that should work differently.
+labels: ["idea"]
+body:
+  - type: textarea
+    id: who
+    attributes:
+      label: Who needs it, and what are they trying to do
+    validations:
+      required: true
+  - type: textarea
+    id: today
+    attributes:
+      label: What they do today instead
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where it belongs
+      description: Most acts belong to both. An act on one side alone needs a reason.
+      options:
+        - A partner site and packout.spot
+        - A partner site alone
+        - I am not sure
+    validations:
+      required: true

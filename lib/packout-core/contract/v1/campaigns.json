@@ -1,0 +1,35 @@
+{
+	"$comment": "POST /partners/campaigns/{id}/accept, /leave, /invite, and /remove. `{id}` is the hub's number for a joint campaign. To accept an invitation or to leave, `organization` is the site's identifier of its own organization that was invited. To invite or remove a participant of a joint campaign the site hosts, `participant` is the hub's number for the organization. Nothing here names a person.",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"contract",
+		"core_version",
+		"plugin_version"
+	],
+	"properties": {
+		"organization": {
+			"type": "string",
+			"pattern": "^[0-9]{1,18}$"
+		},
+		"participant": {
+			"type": "string",
+			"pattern": "^[0-9]{1,18}$"
+		},
+		"contract": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 1000
+		},
+		"core_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"plugin_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		}
+	}
+}

@@ -1,0 +1,42 @@
+{
+	"$comment": "POST /partners/place-requests. An organization of the partner site asks to adopt a Place that packout.spot lists. `place` is the hub's number for the Place, and `organization` is the site's identifier of an organization the hub lists. A coordinator on the hub answers; the answer reaches the site as a notice. The note is the organization's and names no person.",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"place",
+		"organization",
+		"note",
+		"contract",
+		"core_version",
+		"plugin_version"
+	],
+	"properties": {
+		"place": {
+			"type": "string",
+			"pattern": "^[0-9]{1,18}$"
+		},
+		"organization": {
+			"type": "string",
+			"pattern": "^[0-9]{1,18}$"
+		},
+		"note": {
+			"type": "string",
+			"maxLength": 600
+		},
+		"contract": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 1000
+		},
+		"core_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"plugin_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		}
+	}
+}

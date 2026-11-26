@@ -1,0 +1,237 @@
+{
+	"$comment": "POST /partners/stats. Totals for one scope on one day, cumulative to that day. Sending a day again replaces it.",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"items",
+		"contract",
+		"core_version",
+		"plugin_version"
+	],
+	"properties": {
+		"contract": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 1000
+		},
+		"core_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"plugin_version": {
+			"type": "string",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.]+)?$",
+			"maxLength": 40
+		},
+		"items": {
+			"type": "array",
+			"maxItems": 200,
+			"items": {
+				"$ref": "#/definitions/snapshot"
+			}
+		}
+	},
+	"definitions": {
+		"snapshot": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": [
+				"scope",
+				"remote_id",
+				"day",
+				"effort",
+				"outputs",
+				"outcomes",
+				"records"
+			],
+			"properties": {
+				"scope": {
+					"type": "string",
+					"enum": [
+						"partner",
+						"organization",
+						"team",
+						"program",
+						"campaign",
+						"mission"
+					]
+				},
+				"remote_id": {
+					"$comment": "The site's identifier of the record. For the site's part of a joint campaign that the hub holds, `hub:` and the hub's number for the campaign.",
+					"type": "string",
+					"pattern": "^([0-9]{1,18}(-[0-9]{1,9})?|hub:[0-9]{1,18})$"
+				},
+				"day": {
+					"type": "string",
+					"pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+				},
+				"effort": {
+					"type": "object",
+					"additionalProperties": false,
+					"required": [
+						"hours_verified",
+						"hours_unverified",
+						"people",
+						"missions_completed",
+						"organizations_active"
+					],
+					"properties": {
+						"hours_verified": {
+							"type": "number",
+							"minimum": 0,
+							"maximum": 1000000000
+						},
+						"hours_unverified": {
+							"type": "number",
+							"minimum": 0,
+							"maximum": 1000000000
+						},
+						"people": {
+							"type": "integer",
+							"minimum": 0,
+							"maximum": 1000000000
+						},
+						"missions_completed": {
+							"type": "integer",
+							"minimum": 0,
+							"maximum": 1000000000
+						},
+						"organizations_active": {
+							"type": "integer",
+							"minimum": 0,
+							"maximum": 1000000000
+						}
+					}
+				},
+				"outputs": {
+					"type": "object",
+					"additionalProperties": false,
+					"required": [
+						"spots_cleaned",
+						"bags_measured",
+						"bags_self_reported",
+						"pounds_measured",
+						"pounds_self_reported"
+					],
+					"properties": {
+						"spots_cleaned": {
+							"type": "integer",
+							"minimum": 0,
+							"maximum": 1000000000
+						},
+						"bags_measured": {
+							"type": "number",
+							"minimum": 0,
+							"maximum": 1000000000
+						},
+						"bags_self_reported": {
+							"type": "number",
+							"minimum": 0,
+							"maximum": 1000000000
+						},
+						"pounds_measured": {
+							"type": "number",
+							"minimum": 0,
+							"maximum": 1000000000
+						},
+						"pounds_self_reported": {
+							"type": "number",
+							"minimum": 0,
+							"maximum": 1000000000
+						}
+					}
+				},
+				"outcomes": {
+					"type": "object",
+					"additionalProperties": false,
+					"required": [
+						"still_clear",
+						"returned"
+					],
+					"properties": {
+						"still_clear": {
+							"type": "integer",
+							"minimum": 0,
+							"maximum": 1000000000
+						},
+						"returned": {
+							"type": "integer",
+							"minimum": 0,
+							"maximum": 1000000000
+						}
+					}
+				},
+				"records": {
+					"type": "object",
+					"additionalProperties": false,
+					"required": [
+						"total",
+						"verified",
+						"counted"
+					],
+					"properties": {
+						"total": {
+							"type": "integer",
+							"minimum": 0,
+							"maximum": 1000000000
+						},
+						"verified": {
+							"type": "integer",
+							"minimum": 0,
+							"maximum": 1000000000
+						},
+						"counted": {
+							"type": "integer",
+							"minimum": 0,
+							"maximum": 1000000000
+						}
+					}
+				},
+				"overview": {
+					"type": "object",
+					"additionalProperties": false,
+					"properties": {
+						"now": {
+							"$ref": "#/definitions/tree"
+						},
+						"periods": {
+							"type": "object",
+							"additionalProperties": {
+								"$ref": "#/definitions/tree"
+							},
+							"propertyNames": {
+								"pattern": "^(7|30|90|365)$"
+							},
+							"maxProperties": 4
+						}
+					}
+				}
+			}
+		},
+		"tree": {
+			"$comment": "Figures only: numbers, true or false, nothing, a day or a time, and lists and groups of those under short plain keys. No sentence fits, so no name or address can ride in one.",
+			"type": [
+				"object",
+				"array",
+				"integer",
+				"number",
+				"boolean",
+				"null",
+				"string"
+			],
+			"pattern": "^[0-9T:+Z. -]{0,40}$",
+			"maxItems": 400,
+			"maxProperties": 80,
+			"propertyNames": {
+				"pattern": "^[a-z0-9_]{1,40}$"
+			},
+			"items": {
+				"$ref": "#/definitions/tree"
+			},
+			"additionalProperties": {
+				"$ref": "#/definitions/tree"
+			}
+		}
+	}
+}

@@ -1,0 +1,181 @@
+name: Check
+
+# Runs on every pull request and every push to main, can be started by hand,
+# and is called by the release workflow. Nothing here needs a secret, so a
+# pull request from a fork runs all of it.
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      tagged-core:
+        description: Require that lib/packout-core is a tagged version of the library.
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static:
+    name: Syntax and versions on PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ["8.2", "8.3", "8.4"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: sodium, zip
+          coverage: none
+
+      - name: Syntax
+        run: |
+          failed=0
+          while IFS= read -r -d '' file; do
+            php -l "$file" > /dev/null || failed=1
+          done < <(find . -name '*.php' -not -path './vendor/*' -print0)
+          exit "$failed"
+
+      - name: The version is the same everywhere
+        run: php bin/check-versions.php
+
+      - name: The library is the build the lock names
+        env:
+          TAGGED: ${{ inputs.tagged-core && '1' || '0' }}
+        run: |
+          if [ "$TAGGED" = "1" ]; then
+            php bin/core-check.php
+          else
+            php bin/core-check.php --allow-untagged
+          fi
+
+  standards:
+    name: Coding standards and dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # v2
+        with:
+          php-version: "8.3"
+          coverage: none
+          tools: composer:v2
+
+      - name: Install the tools
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Composer file and known vulnerabilities
+        run: |
+          composer validate --strict --no-check-publish
+          composer audit --locked
+
+      - name: WordPress coding standards
+        run: vendor/bin/phpcs -q
+
+  package:
+    name: Package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # v2
+        with:
+          php-version: "8.3"
+          extensions: zip
+          coverage: none
+
+      - name: Build the package
+        run: php bin/build.php dist
+
+      - name: The package is what a site should run, and nothing else
+        run: php bin/package-check.php dist/*.zip
+
+      - name: The same commit builds the same package
+        run: |
+          php bin/build.php "$RUNNER_TEMP/again"
+          cmp dist/*.zip "$RUNNER_TEMP"/again/*.zip
+
+      - name: Keep the package
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: packout-partner-package
+          path: dist/
+          if-no-files-found: error
+          retention-days: 14
+
+  wordpress:
+    name: ${{ matrix.name }}
+    needs: package
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: WordPress 6.8 on PHP 8.2, the oldest supported
+            wordpress: wordpress:6.8.3-php8.2-apache
+            cli: wordpress:cli-2.12.0-php8.2
+          - name: WordPress 7.1 on PHP 8.4, the newest
+            wordpress: wordpress:7.1.5-php8.4-apache
+            cli: wordpress:cli-2.12.0-php8.4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Fetch the package
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: packout-partner-package
+          path: dist
+
+      - name: Unpack it as a site would
+        run: |
+          mkdir -p "$RUNNER_TEMP/site"
+          unzip -q dist/*.zip -d "$RUNNER_TEMP/site"
+          test -f "$RUNNER_TEMP/site/packout-partner/packout-partner.php"
+
+      - name: Run the checks against the package
+        env:
+          CI_PLUGIN_DIR: ${{ runner.temp }}/site/packout-partner
+          PACKOUT_REQUIRE_TAGGED_CORE: ${{ inputs.tagged-core && '1' || '0' }}
+          WORDPRESS_IMAGE: ${{ matrix.wordpress }}
+          CLI_IMAGE: ${{ matrix.cli }}
+        run: ci/run.sh "$WORDPRESS_IMAGE" "$CLI_IMAGE"
+
+  secrets:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Install gitleaks
+        run: |
+          version=8.30.1
+          sha256=551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
+          curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v${version}/gitleaks_${version}_linux_x64.tar.gz" -o "$RUNNER_TEMP/gitleaks.tar.gz"
+          echo "${sha256}  $RUNNER_TEMP/gitleaks.tar.gz" | sha256sum --check --strict
+          tar -xzf "$RUNNER_TEMP/gitleaks.tar.gz" -C "$RUNNER_TEMP" gitleaks
+
+      - name: Scan the history
+        run: '"$RUNNER_TEMP/gitleaks" detect --redact --no-banner --exit-code 1'

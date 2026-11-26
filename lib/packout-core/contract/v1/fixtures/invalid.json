@@ -1,0 +1,3072 @@
+{
+	"register-http-less": {
+		"schema": "register",
+		"fault": "site_url",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.7.0",
+			"plugin_version": "0.3.0-beta.1",
+			"site_url": "ftp://cleanrivers.example",
+			"name": "Clean Rivers Alliance",
+			"admin_email": "admin@cleanrivers.example",
+			"public_key": "abababababababababababababababababababababababababababababababab",
+			"terms_version": "1"
+		}
+	},
+	"register-extra-field": {
+		"schema": "register",
+		"fault": "member_email",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.7.0",
+			"plugin_version": "0.3.0-beta.1",
+			"site_url": "https://cleanrivers.example",
+			"name": "Clean Rivers Alliance",
+			"admin_email": "admin@cleanrivers.example",
+			"public_key": "abababababababababababababababababababababababababababababababab",
+			"terms_version": "1",
+			"member_email": "someone@example.org"
+		}
+	},
+	"register-short-key": {
+		"schema": "register",
+		"fault": "public_key",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.7.0",
+			"plugin_version": "0.3.0-beta.1",
+			"site_url": "https://cleanrivers.example",
+			"name": "Clean Rivers Alliance",
+			"admin_email": "admin@cleanrivers.example",
+			"public_key": "abcd",
+			"terms_version": "1"
+		}
+	},
+	"listings-member-email": {
+		"schema": "listings",
+		"fault": "items/0/lead_email",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.7.0",
+			"plugin_version": "0.3.0-beta.1",
+			"items": [
+				{
+					"kind": "organization",
+					"remote_id": "12",
+					"rev": 1764093600,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"name": "Tillatoba Paddlers",
+					"description": "We clean the lake from the water.",
+					"region": "Yalobusha County",
+					"website": "",
+					"join": "request",
+					"url": "https://cleanrivers.example/team/tillatoba-paddlers/",
+					"teams": [
+						"12-1"
+					],
+					"lead_email": "lead@example.org"
+				}
+			]
+		}
+	},
+	"listings-too-many": {
+		"schema": "listings",
+		"fault": "items",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.7.0",
+			"plugin_version": "0.3.0-beta.1",
+			"items": [
+				{
+					"kind": "mission",
+					"remote_id": "1",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "2",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "3",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "4",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "5",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "6",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "7",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "8",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "9",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "10",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "11",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "12",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "13",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "14",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "15",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "16",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "17",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "18",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "19",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "20",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "21",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "22",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "23",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "24",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "25",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "26",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "27",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "28",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "29",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "30",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "31",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "32",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "33",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "34",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "35",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "36",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "37",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "38",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "39",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "40",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "41",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "42",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "43",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "44",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "45",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "46",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "47",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "48",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "49",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "50",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "51",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "52",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "53",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "54",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "55",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "56",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "57",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "58",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "59",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "60",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "61",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "62",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "63",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "64",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "65",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "66",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "67",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "68",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "69",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "70",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "71",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "72",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "73",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "74",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "75",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "76",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "77",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "78",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "79",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "80",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "81",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "82",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "83",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "84",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "85",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "86",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "87",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "88",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "89",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "90",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "91",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "92",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "93",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "94",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "95",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "96",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "97",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "98",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "99",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "100",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "101",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "102",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "103",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "104",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "105",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "106",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "107",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "108",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "109",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "110",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "111",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "112",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "113",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "114",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "115",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "116",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "117",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "118",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "119",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "120",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "121",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "122",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "123",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "124",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "125",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "126",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "127",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "128",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "129",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "130",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "131",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "132",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "133",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "134",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "135",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "136",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "137",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "138",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "139",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "140",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "141",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "142",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "143",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "144",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "145",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "146",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "147",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "148",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "149",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "150",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "151",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "152",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "153",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "154",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "155",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "156",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "157",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "158",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "159",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "160",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "161",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "162",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "163",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "164",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "165",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "166",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "167",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "168",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "169",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "170",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "171",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "172",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "173",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "174",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "175",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "176",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "177",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "178",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "179",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "180",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "181",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "182",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "183",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "184",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "185",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "186",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "187",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "188",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "189",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "190",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "191",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "192",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "193",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "194",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "195",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "196",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "197",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "198",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "199",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "200",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				},
+				{
+					"kind": "mission",
+					"remote_id": "201",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"deleted": true
+				}
+			]
+		}
+	},
+	"listings-bad-kind": {
+		"schema": "listings",
+		"fault": "items/0/kind",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.7.0",
+			"plugin_version": "0.3.0-beta.1",
+			"items": [
+				{
+					"kind": "person",
+					"remote_id": "1",
+					"rev": 1,
+					"updated": "2026-11-25T18:00:00+00:00"
+				}
+			]
+		}
+	},
+	"listings-no-rev": {
+		"schema": "listings",
+		"fault": "items/0/rev",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.7.0",
+			"plugin_version": "0.3.0-beta.1",
+			"items": [
+				{
+					"kind": "mission",
+					"remote_id": "1",
+					"updated": "2026-11-25T18:00:00+00:00"
+				}
+			]
+		}
+	},
+	"stats-sentence-in-figures": {
+		"schema": "stats",
+		"fault": "items/0/overview/now/note",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.7.0",
+			"plugin_version": "0.3.0-beta.1",
+			"items": [
+				{
+					"scope": "partner",
+					"remote_id": "5",
+					"day": "2026-11-25",
+					"effort": {
+						"hours_verified": 12.5,
+						"hours_unverified": 4,
+						"people": 9,
+						"missions_completed": 2,
+						"organizations_active": 1
+					},
+					"outputs": {
+						"spots_cleaned": 6,
+						"bags_measured": 14,
+						"bags_self_reported": 3,
+						"pounds_measured": 210.5,
+						"pounds_self_reported": 40
+					},
+					"outcomes": {
+						"still_clear": 2,
+						"returned": 1
+					},
+					"records": {
+						"total": 7,
+						"verified": 5,
+						"counted": 5
+					},
+					"overview": {
+						"now": {
+							"note": "Call Sam Jones about the ramp"
+						}
+					}
+				}
+			]
+		}
+	},
+	"stats-negative": {
+		"schema": "stats",
+		"fault": "items/0/outputs/spots_cleaned",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.7.0",
+			"plugin_version": "0.3.0-beta.1",
+			"items": [
+				{
+					"scope": "partner",
+					"remote_id": "5",
+					"day": "2026-11-25",
+					"effort": {
+						"hours_verified": 12.5,
+						"hours_unverified": 4,
+						"people": 9,
+						"missions_completed": 2,
+						"organizations_active": 1
+					},
+					"outputs": {
+						"spots_cleaned": -1,
+						"bags_measured": 14,
+						"bags_self_reported": 3,
+						"pounds_measured": 210.5,
+						"pounds_self_reported": 40
+					},
+					"outcomes": {
+						"still_clear": 2,
+						"returned": 1
+					},
+					"records": {
+						"total": 7,
+						"verified": 5,
+						"counted": 5
+					},
+					"overview": {
+						"now": {
+							"stages": {
+								"spotted": 3,
+								"planned": 1,
+								"cleaned": 6
+							},
+							"missions": {
+								"count": 1,
+								"planned": 1,
+								"in_progress": 0
+							},
+							"computed_at": "2026-11-25T18:00:00+00:00"
+						},
+						"periods": {
+							"30": {
+								"days": 30,
+								"from": "2026-10-27",
+								"to": "2026-11-25",
+								"a": {
+									"current": {
+										"reported": 8,
+										"cleaned": 6,
+										"net_open": 2,
+										"median_days": 3.5
+									},
+									"previous": {
+										"reported": 2,
+										"cleaned": 0,
+										"net_open": 2,
+										"median_days": null
+									}
+								}
+							}
+						}
+					}
+				}
+			]
+		}
+	},
+	"stats-person-key": {
+		"schema": "stats",
+		"fault": "items/0/effort/volunteers",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.7.0",
+			"plugin_version": "0.3.0-beta.1",
+			"items": [
+				{
+					"scope": "partner",
+					"remote_id": "5",
+					"day": "2026-11-25",
+					"effort": {
+						"hours_verified": 12.5,
+						"hours_unverified": 4,
+						"people": 9,
+						"missions_completed": 2,
+						"organizations_active": 1,
+						"volunteers": [
+							"Sam"
+						]
+					},
+					"outputs": {
+						"spots_cleaned": 6,
+						"bags_measured": 14,
+						"bags_self_reported": 3,
+						"pounds_measured": 210.5,
+						"pounds_self_reported": 40
+					},
+					"outcomes": {
+						"still_clear": 2,
+						"returned": 1
+					},
+					"records": {
+						"total": 7,
+						"verified": 5,
+						"counted": 5
+					},
+					"overview": {
+						"now": {
+							"stages": {
+								"spotted": 3,
+								"planned": 1,
+								"cleaned": 6
+							},
+							"missions": {
+								"count": 1,
+								"planned": 1,
+								"in_progress": 0
+							},
+							"computed_at": "2026-11-25T18:00:00+00:00"
+						},
+						"periods": {
+							"30": {
+								"days": 30,
+								"from": "2026-10-27",
+								"to": "2026-11-25",
+								"a": {
+									"current": {
+										"reported": 8,
+										"cleaned": 6,
+										"net_open": 2,
+										"median_days": 3.5
+									},
+									"previous": {
+										"reported": 2,
+										"cleaned": 0,
+										"net_open": 2,
+										"median_days": null
+									}
+								}
+							}
+						}
+					}
+				}
+			]
+		}
+	},
+	"profile-no-name": {
+		"schema": "profile",
+		"fault": "name",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.7.0",
+			"plugin_version": "0.3.0-beta.1",
+			"description": "Volunteers who look after three rivers.",
+			"region": "Northern Mississippi",
+			"website": "https://cleanrivers.example",
+			"url": "https://cleanrivers.example/partner/clean-rivers-alliance/"
+		}
+	},
+	"signed-no-contract": {
+		"schema": "signed",
+		"fault": "contract",
+		"payload": {
+			"core_version": "0.7.0",
+			"plugin_version": "0.3.0"
+		}
+	},
+	"spots-awaiting-with-title": {
+		"schema": "spots",
+		"fault": "items/0/title",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1",
+			"items": [
+				{
+					"remote_id": "301",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					},
+					"title": "Bags by the gate"
+				}
+			]
+		}
+	},
+	"spots-awaiting-with-description": {
+		"schema": "spots",
+		"fault": "items/0/description",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1",
+			"items": [
+				{
+					"remote_id": "301",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					},
+					"description": "Behind the third house on Mill Road"
+				}
+			]
+		}
+	},
+	"spots-awaiting-with-landmark": {
+		"schema": "spots",
+		"fault": "items/0/location/landmark",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1",
+			"items": [
+				{
+					"remote_id": "301",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91,
+						"landmark": "By the gate"
+					}
+				}
+			]
+		}
+	},
+	"spots-awaiting-with-photos": {
+		"schema": "spots",
+		"fault": "items/0/photos",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1",
+			"items": [
+				{
+					"remote_id": "301",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					},
+					"photos": [
+						{
+							"id": "1",
+							"of": "report"
+						}
+					]
+				}
+			]
+		}
+	},
+	"spots-awaiting-with-credit": {
+		"schema": "spots",
+		"fault": "items/0/credit",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1",
+			"items": [
+				{
+					"remote_id": "301",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					},
+					"credit": {
+						"label": "A. Reporter"
+					}
+				}
+			]
+		}
+	},
+	"spots-no-state": {
+		"schema": "spots",
+		"fault": "items/0/state",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1",
+			"items": [
+				{
+					"remote_id": "301",
+					"rev": 1764093600,
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				}
+			]
+		}
+	},
+	"spots-unknown-state": {
+		"schema": "spots",
+		"fault": "items/0/state",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1",
+			"items": [
+				{
+					"remote_id": "301",
+					"rev": 1764093600,
+					"state": "private",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				}
+			]
+		}
+	},
+	"spots-removed-with-title": {
+		"schema": "spots",
+		"fault": "items/0/title",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1",
+			"items": [
+				{
+					"remote_id": "277",
+					"rev": 5,
+					"state": "removed",
+					"title": "Gone"
+				}
+			]
+		}
+	},
+	"spots-published-with-reporter": {
+		"schema": "spots",
+		"fault": "items/0/reporter",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1",
+			"items": [
+				{
+					"remote_id": "288",
+					"rev": 1764093800,
+					"state": "published",
+					"title": "Tires below the boat ramp",
+					"url": "https://cleanrivers.example/spot/tires-below-the-boat-ramp/",
+					"category": {
+						"slug": "tires",
+						"name": "Tires"
+					},
+					"status": "planned",
+					"hazard": "none",
+					"needs_authorization": false,
+					"authorized": false,
+					"guidance": "",
+					"description": "Eleven tires in the shallows on the east side of the ramp.",
+					"location": {
+						"kind": "pin",
+						"lat": 34.0312,
+						"lng": -89.9054,
+						"precision": "exact",
+						"landmark": "East side of the ramp"
+					},
+					"reported": "2026-11-20",
+					"updated": "2026-11-25T18:00:00+00:00",
+					"credit": {
+						"label": "Tillatoba Paddlers",
+						"url": "https://cleanrivers.example/team/tillatoba-paddlers/"
+					},
+					"organization": "12",
+					"photos": [
+						{
+							"id": "4410",
+							"of": "report"
+						},
+						{
+							"id": "4502",
+							"of": "cleanup"
+						}
+					],
+					"reporter": 14
+				}
+			]
+		}
+	},
+	"spots-published-with-accuracy": {
+		"schema": "spots",
+		"fault": "items/0/location/accuracy",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1",
+			"items": [
+				{
+					"remote_id": "288",
+					"rev": 1764093800,
+					"state": "published",
+					"title": "Tires below the boat ramp",
+					"url": "https://cleanrivers.example/spot/tires-below-the-boat-ramp/",
+					"category": {
+						"slug": "tires",
+						"name": "Tires"
+					},
+					"status": "planned",
+					"hazard": "none",
+					"needs_authorization": false,
+					"authorized": false,
+					"guidance": "",
+					"description": "Eleven tires in the shallows on the east side of the ramp.",
+					"location": {
+						"kind": "pin",
+						"lat": 34.0312,
+						"lng": -89.9054,
+						"precision": "exact",
+						"landmark": "East side of the ramp",
+						"accuracy": 4.5
+					},
+					"reported": "2026-11-20",
+					"updated": "2026-11-25T18:00:00+00:00",
+					"credit": {
+						"label": "Tillatoba Paddlers",
+						"url": "https://cleanrivers.example/team/tillatoba-paddlers/"
+					},
+					"organization": "12",
+					"photos": [
+						{
+							"id": "4410",
+							"of": "report"
+						},
+						{
+							"id": "4502",
+							"of": "cleanup"
+						}
+					]
+				}
+			]
+		}
+	},
+	"spots-too-many": {
+		"schema": "spots",
+		"fault": "items",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1",
+			"items": [
+				{
+					"remote_id": "1000",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1001",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1002",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1003",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1004",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1005",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1006",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1007",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1008",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1009",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1010",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1011",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1012",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1013",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1014",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1015",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1016",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1017",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1018",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1019",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1020",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1021",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1022",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1023",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1024",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1025",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1026",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1027",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1028",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1029",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1030",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1031",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1032",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1033",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1034",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1035",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1036",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1037",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1038",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1039",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1040",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1041",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1042",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1043",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1044",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1045",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1046",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1047",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1048",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1049",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				},
+				{
+					"remote_id": "1050",
+					"rev": 1764093600,
+					"state": "awaiting",
+					"category": {
+						"slug": "litter",
+						"name": "Litter"
+					},
+					"reported": "2026-11-25",
+					"hazard": "none",
+					"location": {
+						"lat": 34.02,
+						"lng": -89.91
+					}
+				}
+			]
+		}
+	},
+	"adoptions-unknown-act": {
+		"schema": "adoptions",
+		"fault": "act",
+		"payload": {
+			"act": "claim",
+			"spot": "4411",
+			"mission": {
+				"remote_id": "1200",
+				"title": "Mill Bridge cleanup",
+				"url": "https://partner.example.org/mission/mill-bridge-cleanup/",
+				"starts": "2026-12-05",
+				"ends": "2026-12-05"
+			},
+			"organization": "310",
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1"
+		}
+	},
+	"adoptions-adopt-with-a-person": {
+		"schema": "adoptions",
+		"fault": "lead",
+		"payload": {
+			"act": "adopt",
+			"spot": "4411",
+			"mission": {
+				"remote_id": "1200",
+				"title": "Mill Bridge cleanup",
+				"url": "https://partner.example.org/mission/mill-bridge-cleanup/",
+				"starts": "2026-12-05",
+				"ends": "2026-12-05"
+			},
+			"organization": "310",
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1",
+			"lead": "Ana Lopez"
+		}
+	},
+	"adoptions-mission-off-the-web": {
+		"schema": "adoptions",
+		"fault": "mission/url",
+		"payload": {
+			"act": "adopt",
+			"spot": "4411",
+			"mission": {
+				"remote_id": "1200",
+				"title": "Mill Bridge cleanup",
+				"url": "javascript:alert(1)",
+				"starts": "2026-12-05",
+				"ends": "2026-12-05"
+			},
+			"organization": "310",
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1"
+		}
+	},
+	"adoptions-complete-without-figures": {
+		"schema": "adoptions",
+		"fault": "hours",
+		"payload": {
+			"act": "complete",
+			"id": "7",
+			"date": "2026-12-05",
+			"people": 4,
+			"bags": 9,
+			"bags_source": "measured",
+			"pounds": 140,
+			"pounds_source": "self_reported",
+			"narrative": "Six tires and a mattress, hauled to the county transfer station.",
+			"photos": [
+				"901",
+				"902"
+			],
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1"
+		}
+	},
+	"adoptions-complete-too-many-photos": {
+		"schema": "adoptions",
+		"fault": "photos",
+		"payload": {
+			"act": "complete",
+			"id": "7",
+			"date": "2026-12-05",
+			"hours": 6.5,
+			"people": 4,
+			"bags": 9,
+			"bags_source": "measured",
+			"pounds": 140,
+			"pounds_source": "self_reported",
+			"narrative": "Six tires and a mattress, hauled to the county transfer station.",
+			"photos": [
+				"900",
+				"901",
+				"902",
+				"903",
+				"904",
+				"905",
+				"906",
+				"907",
+				"908",
+				"909",
+				"910",
+				"911",
+				"912"
+			],
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1"
+		}
+	},
+	"adoptions-release-without-reason": {
+		"schema": "adoptions",
+		"fault": "reason",
+		"payload": {
+			"act": "release",
+			"id": "7",
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1"
+		}
+	},
+	"place-requests-note-too-long": {
+		"schema": "place-requests",
+		"fault": "note",
+		"payload": {
+			"place": "88",
+			"organization": "310",
+			"note": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1"
+		}
+	},
+	"place-requests-with-an-email": {
+		"schema": "place-requests",
+		"fault": "email",
+		"payload": {
+			"place": "88",
+			"organization": "310",
+			"note": "Our crews walk this trail every month and would like to look after it.",
+			"contract": 1,
+			"core_version": "0.8.0",
+			"plugin_version": "0.4.0-beta.1",
+			"email": "lead@example.org"
+		}
+	},
+	"listings-mission-in-a-campaign-that-is-not-a-number": {
+		"schema": "listings",
+		"fault": "items/0/campaign",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.7.0",
+			"plugin_version": "0.3.0-beta.1",
+			"full": false,
+			"items": [
+				{
+					"kind": "mission",
+					"remote_id": "57",
+					"rev": 1764093600,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"organization": "12",
+					"campaign": "hub:spring",
+					"program": "30",
+					"teams": [
+						"12-1"
+					],
+					"title": "North landing",
+					"description": "Bring gloves.",
+					"status": "planned",
+					"start": "2027-04-17",
+					"end": "2027-04-17",
+					"start_time": "09:00",
+					"end_time": "12:00",
+					"timezone": "America/Chicago",
+					"meeting": "The north boat ramp",
+					"spots": 3,
+					"url": "https://cleanrivers.example/mission/north-landing/"
+				}
+			]
+		}
+	},
+	"listings-campaign-joint-in-a-word-of-its-own": {
+		"schema": "listings",
+		"fault": "items/0/joint",
+		"payload": {
+			"contract": 1,
+			"core_version": "0.7.0",
+			"plugin_version": "0.3.0-beta.1",
+			"full": false,
+			"items": [
+				{
+					"kind": "campaign",
+					"remote_id": "41",
+					"rev": 1764093600,
+					"updated": "2026-11-25T18:00:00+00:00",
+					"organization": "12",
+					"program": "30",
+					"title": "Spring landings",
+					"description": "",
+					"goal": "Ten landings.",
+					"start": "2027-04-01",
+					"end": "2027-04-30",
+					"start_time": "",
+					"end_time": "",
+					"timezone": "America/Chicago",
+					"teams": [
+						"12-1"
+					],
+					"url": "https://cleanrivers.example/campaign/spring-landings/",
+					"joint": "yes"
+				}
+			]
+		}
+	},
+	"campaigns-with-a-name": {
+		"schema": "campaigns",
+		"fault": "lead",
+		"payload": {
+			"organization": "12",
+			"contract": 1,
+			"core_version": "0.11.0",
+			"plugin_version": "0.7.0-beta.1",
+			"lead": "Ana Lead"
+		}
+	},
+	"campaigns-organization-by-name": {
+		"schema": "campaigns",
+		"fault": "organization",
+		"payload": {
+			"organization": "River Crew",
+			"contract": 1,
+			"core_version": "0.11.0",
+			"plugin_version": "0.7.0-beta.1"
+		}
+	}
+}

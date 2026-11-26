@@ -1,0 +1,1960 @@
+/**
+ * Pack-Out Spot: Sign up, My teams, and the Join section of a team page.
+ *
+ * Colors are the site's palette, which the page prints as --packout-*
+ * properties, and fall back to the Pack-Out Spot palette without it.
+ */
+
+.pos-ws {
+	--pos-ink: var(--packout-ink, #2f3232);
+	--pos-accent: var(--packout-accent-dark, #863d14);
+	--pos-accent-hover: var(--packout-primary, #415840);
+	--pos-line: #d9d4c8;
+	--pos-muted: #5b6060;
+	--pos-field: #7b7f7f;
+	box-sizing: border-box;
+	width: 100%;
+	color: var(--pos-ink);
+}
+
+.pos-account {
+	max-width: 560px;
+}
+
+.pos-ws *,
+.pos-ws *::before,
+.pos-ws *::after {
+	box-sizing: border-box;
+}
+
+.pos-ws h2 {
+	margin: 0 0 0.5em;
+	font-size: 1.75rem;
+}
+
+.pos-ws h3 {
+	margin: 1.6em 0 0.5em;
+	font-size: 1.25rem;
+}
+
+.pos-ws__view > h3:first-child,
+.pos-ws__card > h3,
+.pos-ws__panel h3 {
+	margin-top: 0;
+}
+
+.pos-ws__muted,
+.pos-ws__help {
+	color: var(--pos-muted);
+	font-size: 0.95rem;
+	font-weight: 400;
+}
+
+.pos-ws__back {
+	margin: 0 0 12px;
+	font-size: 0.95rem;
+}
+
+.pos-ws__back a::before {
+	content: "\2190\00a0";
+}
+
+/* Notices */
+
+.pos-ws__notice {
+	margin: 0 0 20px;
+	padding: 12px 16px;
+	border: 1px solid var(--pos-line);
+	border-left-width: 4px;
+	border-radius: 4px;
+	background: #fff;
+}
+
+.pos-ws__notice--success {
+	border-left-color: #2f6b3a;
+}
+
+.pos-ws__notice--info {
+	border-left-color: #25486b;
+}
+
+.pos-ws__notice--warning {
+	border-left-color: #b26200;
+}
+
+.pos-ws__notice--error {
+	border-left-color: #b32d2e;
+}
+
+/* Header and tabs */
+
+.pos-ws__head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 16px;
+	margin-bottom: 16px;
+}
+
+.pos-ws__head h2,
+.pos-ws__head p {
+	margin: 0;
+}
+
+.pos-ws__badges {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin: 0 0 12px;
+}
+
+.pos-ws__tabs {
+	margin: 0 0 24px;
+	border-bottom: 1px solid var(--pos-line);
+	overflow-x: auto;
+}
+
+.pos-ws .pos-ws__tabs ul {
+	display: flex;
+	gap: 4px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.pos-ws__tabs li {
+	margin: 0;
+}
+
+.pos-ws__tabs a {
+	display: block;
+	min-height: 44px;
+	padding: 10px 14px;
+	border-bottom: 3px solid transparent;
+	color: var(--pos-ink);
+	font-weight: 600;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.pos-ws .pos-ws__tabs a {
+	text-decoration: none;
+}
+
+.pos-ws__tabs a:hover,
+.pos-ws__tabs a:focus-visible {
+	border-bottom-color: var(--pos-line);
+	color: var(--pos-ink);
+}
+
+.pos-ws__tabs a[aria-current="page"] {
+	border-bottom-color: var(--pos-accent);
+	color: var(--pos-accent);
+}
+
+/* Forms */
+
+.pos-ws__form {
+	margin: 0 0 20px;
+	max-width: 640px;
+}
+
+.pos-ws__form--inline {
+	display: inline-block;
+	margin: 0;
+	max-width: none;
+}
+
+.pos-ws__form--row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: end;
+	gap: 10px;
+	margin: 12px 0 0;
+}
+
+.pos-ws__form--row .pos-ws__field {
+	flex: 1 1 220px;
+	margin: 0;
+}
+
+.pos-ws__field {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin: 0 0 16px;
+}
+
+.pos-ws__field label,
+.pos-ws__set legend {
+	font-weight: 600;
+}
+
+.pos-ws input[type="text"],
+.pos-ws input[type="email"],
+.pos-ws input[type="url"],
+.pos-ws input[type="password"],
+.pos-ws input[type="date"],
+.pos-ws input[type="search"],
+.pos-ws select,
+.pos-ws textarea {
+	width: 100%;
+	min-height: 44px;
+	padding: 9px 12px;
+	border: 1px solid var(--pos-field);
+	border-radius: 4px;
+	background: #fff;
+	color: var(--pos-ink);
+	font: inherit;
+	line-height: 1.4;
+}
+
+.pos-ws input[type="file"] {
+	max-width: 100%;
+	font: inherit;
+}
+
+.pos-ws input:focus-visible,
+.pos-ws select:focus-visible,
+.pos-ws textarea:focus-visible,
+.pos-ws button:focus-visible,
+.pos-ws a:focus-visible,
+.pos-ws summary:focus-visible {
+	outline: 2px solid #25486b;
+	outline-offset: 2px;
+}
+
+.pos-ws__pair {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	gap: 0 16px;
+}
+
+.pos-ws__tick {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	margin: 0 0 12px;
+	font-weight: 400;
+	cursor: pointer;
+}
+
+.pos-ws__tick input {
+	flex: none;
+	width: 20px;
+	height: 20px;
+	margin: 3px 0 0;
+}
+
+.pos-ws__set {
+	margin: 0 0 20px;
+	padding: 14px 16px 6px;
+	border: 1px solid var(--pos-line);
+	border-radius: 4px;
+}
+
+.pos-ws__set legend {
+	padding: 0 6px;
+}
+
+.pos-ws__set .pos-ws__help {
+	margin: 0 0 12px;
+}
+
+.pos-ws__line {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0 0 8px;
+}
+
+.pos-ws__filter {
+	margin-bottom: 10px;
+}
+
+.pos-ws__list {
+	max-height: 320px;
+	margin-bottom: 8px;
+	overflow-y: auto;
+}
+
+.pos-ws__item {
+	padding: 8px 4px;
+	border-bottom: 1px solid var(--pos-line);
+	margin: 0;
+}
+
+.pos-ws__item[hidden] {
+	display: none;
+}
+
+/* Kept in the page for scripts that fill every field, and out of sight for people. */
+.pos-ws__trap {
+	position: absolute;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+/* Buttons */
+
+.pos-ws__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin: 0 0 20px;
+}
+
+.pos-ws .pos-ws__button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 44px;
+	padding: 9px 18px;
+	border: 1px solid var(--pos-field);
+	border-radius: 4px;
+	background: #fff;
+	color: var(--pos-ink);
+	font: inherit;
+	font-weight: 600;
+	line-height: 1.2;
+	text-decoration: none;
+	text-transform: none;
+	letter-spacing: 0;
+	cursor: pointer;
+}
+
+.pos-ws .pos-ws__button:hover {
+	border-color: var(--pos-ink);
+	background: #f6f4f0;
+	color: var(--pos-ink);
+}
+
+.pos-ws .pos-ws__button--primary {
+	border-color: var(--pos-accent);
+	background: var(--pos-accent);
+	color: #fff;
+}
+
+.pos-ws .pos-ws__button--primary:hover {
+	border-color: var(--pos-accent-hover);
+	background: var(--pos-accent-hover);
+	color: #fff;
+}
+
+.pos-ws .pos-ws__button--danger {
+	border-color: #b32d2e;
+	color: #8a2424;
+}
+
+.pos-ws .pos-ws__button--danger:hover {
+	background: #fcf0f1;
+	color: #8a2424;
+}
+
+.pos-ws__aside {
+	margin-top: 8px;
+}
+
+.pos-ws .pos-ws__who {
+	margin: 40px 0 0;
+	padding-top: 16px;
+	border-top: 1px solid var(--pos-line);
+	font-size: 0.9em;
+}
+
+/* Cards, rows, and facts */
+
+.pos-ws .pos-ws__cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+	gap: 16px;
+	margin: 0 0 24px;
+	padding: 0;
+	list-style: none;
+}
+
+.pos-ws__card {
+	margin: 0 0 16px;
+	padding: 18px 20px;
+	border: 1px solid var(--pos-line);
+	border-radius: 6px;
+	background: #fff;
+}
+
+.pos-ws__cards .pos-ws__card {
+	margin: 0;
+}
+
+.pos-ws__card h3 {
+	margin: 0 0 8px;
+}
+
+.pos-ws__card p:last-child {
+	margin-bottom: 0;
+}
+
+.pos-ws__card--sponsor img {
+	display: block;
+	width: auto;
+	max-width: 180px;
+	max-height: 80px;
+	margin-bottom: 10px;
+}
+
+.pos-ws .pos-ws__rows {
+	margin: 0 0 20px;
+	padding: 0;
+	list-style: none;
+}
+
+.pos-ws__rows li {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px 16px;
+	margin: 0;
+	padding: 10px 0;
+	border-bottom: 1px solid var(--pos-line);
+}
+
+.pos-ws__rows--tall li {
+	padding: 14px 0;
+}
+
+.pos-ws__group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.pos-ws__facts {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	gap: 6px 18px;
+	margin: 0 0 20px;
+}
+
+.pos-ws__facts dt {
+	font-weight: 600;
+}
+
+.pos-ws__facts dd {
+	margin: 0;
+	overflow-wrap: anywhere;
+}
+
+.pos-ws__figures {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	gap: 12px;
+	margin: 0 0 24px;
+}
+
+.pos-ws__figures > div {
+	padding: 12px 14px;
+	border: 1px solid var(--pos-line);
+	border-radius: 6px;
+	background: #fff;
+}
+
+.pos-ws__figures dt {
+	color: var(--pos-muted);
+	font-size: 0.9rem;
+}
+
+.pos-ws__figures dd {
+	margin: 2px 0 0;
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+
+/* Panels that open */
+
+.pos-ws__panel {
+	margin: 0 0 20px;
+	padding: 0 18px;
+	border: 1px solid var(--pos-line);
+	border-radius: 6px;
+	background: #fff;
+}
+
+.pos-ws__panel > summary {
+	min-height: 44px;
+	margin: 0 -18px;
+	padding: 12px 18px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.pos-ws__panel[open] {
+	padding-bottom: 18px;
+}
+
+.pos-ws__panel[open] > summary {
+	margin-bottom: 8px;
+	border-bottom: 1px solid var(--pos-line);
+}
+
+.pos-ws__panel--quiet {
+	margin-top: 16px;
+	border-style: dashed;
+	background: transparent;
+}
+
+.pos-ws__card .pos-ws__panel--quiet {
+	margin-bottom: 0;
+}
+
+/* Public pages: team, campaign, and sponsor credits */
+
+/* Joining on the page of a team or a sub-team. */
+.pos-team-page__join .pos-ws__notice {
+	margin-bottom: 16px;
+}
+
+.pos-subteam-page__preview {
+	margin: 24px 0 0;
+	padding: 12px 16px;
+	border: 1px solid #d9d4c8;
+	border-radius: 6px;
+	background: #fff;
+}
+
+.pos-campaign-page h2 {
+	margin: 1.6em 0 0.5em;
+	font-size: 1.5rem;
+}
+
+.pos-campaign-page dl {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	gap: 6px 18px;
+	margin: 0 0 18px;
+}
+
+.pos-campaign-page dt {
+	font-weight: 600;
+}
+
+.pos-campaign-page dd {
+	margin: 0;
+}
+
+.pos-campaign-page .pos-team-page__missions {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.pos-campaign-page .pos-team-page__missions li {
+	padding: 12px 0;
+	border-bottom: 1px solid #d9d4c8;
+}
+
+.pos-campaign-page .pos-team-page__facts {
+	display: block;
+	color: #5b6060;
+	font-size: 0.95rem;
+}
+
+/* A joint campaign: who takes part, one line each, by name. */
+.pos-joint .pos-joint__lines {
+	margin: 0 0 16px;
+	padding: 0;
+	list-style: none;
+}
+
+.pos-joint__lines li {
+	padding: 12px 0;
+	border-bottom: 1px solid #d9d4c8;
+}
+
+.pos-joint__name {
+	font-weight: 600;
+}
+
+.pos-joint__figures {
+	display: block;
+	overflow-wrap: anywhere;
+}
+
+.pos-sponsors {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 16px 28px;
+	margin: 0 0 20px;
+	padding: 0;
+	list-style: none;
+}
+
+.pos-sponsors__item {
+	margin: 0;
+}
+
+.pos-sponsors__item img {
+	display: block;
+	width: auto;
+	max-width: 180px;
+	height: auto;
+	max-height: 72px;
+}
+
+.pos-sponsors__name {
+	font-weight: 600;
+}
+
+.pos-resources {
+	margin: 0 0 20px;
+	padding: 0;
+	list-style: none;
+}
+
+.pos-resources li {
+	padding: 10px 0;
+	border-bottom: 1px solid #d9d4c8;
+}
+
+.pos-resources__kind {
+	margin-left: 6px;
+	padding: 1px 8px;
+	border: 1px solid #c9c9c9;
+	border-radius: 999px;
+	color: #5b6060;
+	font-size: 0.8rem;
+}
+
+.pos-resources__note {
+	display: block;
+	color: #5b6060;
+	font-size: 0.95rem;
+}
+
+@media (max-width: 600px) {
+	.pos-ws__facts,
+	.pos-campaign-page dl {
+		grid-template-columns: 1fr;
+		gap: 0;
+	}
+
+	.pos-ws__facts dd,
+	.pos-campaign-page dd {
+		margin-bottom: 10px;
+	}
+}
+
+/* Public Place page
+ *
+ * The header carries the name, so a theme's own page title is not repeated above it.
+ */
+
+body.single-pos_place h1.entry-title,
+body.single-pos_team h1.entry-title,
+body.single-pos_campaign h1.entry-title,
+body.single-pos_mission h1.entry-title {
+	display: none;
+}
+
+.pos-place {
+	--pos-place-ink: #2f3232;
+	--pos-place-line: #d9d4c8;
+	--pos-place-width: 1200px;
+}
+
+.pos-place__hero {
+	position: relative;
+	overflow: hidden;
+	background-color: #2f3232;
+	color: #edeae5;
+}
+
+.pos-place__cover {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	max-width: none;
+	object-fit: cover;
+}
+
+/* The photo is darkened so the words on it keep their contrast, most of all on the side that holds them. */
+.pos-place__hero--cover::after {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(90deg, rgba(24, 26, 26, 0.86) 0%, rgba(24, 26, 26, 0.68) 55%, rgba(24, 26, 26, 0.5) 100%);
+	content: "";
+}
+
+.pos-place__hero-inner {
+	position: relative;
+	z-index: 1;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(220px, 320px);
+	gap: 32px 56px;
+	align-items: end;
+	box-sizing: border-box;
+	max-width: var(--pos-place-width);
+	margin: 0 auto;
+	padding: 56px 24px 64px;
+}
+
+.pos-place__hero-inner > :only-child {
+	grid-column: 1 / -1;
+	max-width: 760px;
+}
+
+.pos-place__logo {
+	display: block;
+	width: auto;
+	max-width: 160px;
+	height: auto;
+	max-height: 88px;
+	margin: 0 0 20px;
+	padding: 8px;
+	border-radius: 6px;
+	background: #fff;
+	object-fit: contain;
+}
+
+.pos-place .pos-place__kind {
+	margin: 0 0 8px;
+	color: #edeae5;
+	font-size: 0.95rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+.pos-place .pos-place__name {
+	margin: 0 0 16px;
+	color: #fff;
+	font-size: clamp(2.2rem, 5vw, 3.6rem);
+	line-height: 1.05;
+}
+
+.pos-place .pos-place__description p {
+	margin: 0 0 12px;
+	color: #edeae5;
+	font-size: 1.15rem;
+	line-height: 1.55;
+}
+
+.pos-place .pos-place__facts {
+	margin: 20px 0 0;
+	color: #edeae5;
+	font-size: 1rem;
+	font-weight: 600;
+}
+
+.pos-place .pos-place__facts a {
+	color: #fff;
+	text-decoration: underline;
+}
+
+.pos-place__support {
+	padding: 20px 22px;
+	border-radius: 6px;
+	background: #fff;
+	color: var(--pos-place-ink);
+}
+
+.pos-place .pos-place__support h2 {
+	margin: 0 0 14px;
+	color: #5b6060;
+	font-size: 0.95rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+.pos-place__support .pos-sponsors {
+	margin: 0;
+}
+
+/* The card is light inside a dark header, so its words take the dark ink back from a theme's dark-section rules. */
+body .pos-place .pos-place__support :is(li, span, a) {
+	color: var(--pos-place-ink);
+}
+
+.pos-place__support .pos-sponsors__item img {
+	max-width: 100%;
+}
+
+.pos-place__body {
+	box-sizing: border-box;
+	max-width: var(--pos-place-width);
+	margin: 0 auto;
+	padding: 24px 24px 72px;
+}
+
+.pos-place__section {
+	padding: 32px 0 8px;
+	border-bottom: 1px solid var(--pos-place-line);
+}
+
+.pos-place__section:last-child {
+	border-bottom: 0;
+}
+
+.pos-place .pos-place__section > h2 {
+	margin: 0 0 16px;
+	font-size: 1.75rem;
+}
+
+.pos-place .pos-place__section > h3 {
+	margin: 24px 0 8px;
+	font-size: 1.2rem;
+}
+
+.pos-place .pos-place__adopters {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+	gap: 20px;
+	margin: 0 0 16px;
+	padding: 0;
+	list-style: none;
+}
+
+.pos-place__adopter {
+	display: flex;
+	gap: 16px;
+	align-items: flex-start;
+	margin: 0;
+	padding: 20px 22px;
+	border: 1px solid var(--pos-place-line);
+	border-radius: 6px;
+	background: #fff;
+}
+
+.pos-place__adopter-logo {
+	flex: 0 0 auto;
+	width: 64px;
+	height: 64px;
+	border-radius: 6px;
+	object-fit: contain;
+}
+
+.pos-place__adopter-text {
+	min-width: 0;
+}
+
+.pos-place .pos-place__adopter h3 {
+	margin: 0 0 2px;
+	font-size: 1.25rem;
+}
+
+.pos-place__adopter p {
+	margin: 0 0 8px;
+}
+
+.pos-place__adopter p:last-child {
+	margin-bottom: 0;
+}
+
+.pos-place .pos-place__since {
+	color: #5b6060;
+	font-size: 0.95rem;
+}
+
+.pos-place__promise {
+	padding-left: 12px;
+	border-left: 3px solid var(--packout-accent, #bb5e28);
+}
+
+.pos-place__more {
+	font-weight: 600;
+}
+
+.pos-place .pos-place__figures {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr));
+	gap: 12px;
+	margin: 0 0 16px;
+}
+
+.pos-place__figure {
+	display: flex;
+	flex-direction: column-reverse;
+	gap: 2px;
+	margin: 0;
+	padding: 16px 18px;
+	border: 1px solid var(--pos-place-line);
+	border-radius: 6px;
+	background: #fff;
+}
+
+.pos-place__figure dt {
+	margin: 0;
+	color: #5b6060;
+	font-size: 0.95rem;
+	font-weight: 400;
+}
+
+.pos-place__figure dd {
+	margin: 0;
+	color: var(--pos-place-ink);
+	font-size: 1.9rem;
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+	line-height: 1.1;
+}
+
+.pos-place-page__note {
+	color: #5b6060;
+	font-size: 0.95rem;
+}
+
+.pos-place-page .pos-map--place {
+	margin: 0 0 24px;
+}
+
+.pos-place__report {
+	margin: 20px 0 16px;
+	font-weight: 600;
+}
+
+@media (max-width: 800px) {
+	.pos-place__hero-inner {
+		grid-template-columns: minmax(0, 1fr);
+		padding: 40px 20px 48px;
+	}
+
+	.pos-place__body {
+		padding: 8px 20px 56px;
+	}
+}
+
+/* Cleaning a Spot from its public page. */
+.pos-claim {
+	margin-block-start: var(--wp--preset--spacing--40, 2rem);
+	padding-block-start: var(--wp--preset--spacing--30, 1.5rem);
+	border-block-start: 1px solid var(--pos-line, #d9d4c8);
+}
+
+.pos-claim__state {
+	font-weight: 600;
+}
+
+/* Team address. */
+.pos-ws__address {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.35rem;
+}
+
+.pos-ws__address-base {
+	overflow-wrap: anywhere;
+	color: var(--pos-muted, #5b6060);
+	font-size: 0.9375rem;
+}
+
+.pos-ws .pos-ws__address input[type="text"] {
+	flex: 1 1 12rem;
+	width: auto;
+	min-width: 0;
+}
+
+.pos-ws__address-status {
+	display: block;
+	min-height: 1.5em;
+	font-size: 0.9375rem;
+	overflow-wrap: anywhere;
+}
+
+.pos-ws__address-status[data-state="yes"] {
+	color: #2f5d34;
+	font-weight: 600;
+}
+
+.pos-ws__address-status[data-state="no"] {
+	color: #a12a1b;
+	font-weight: 600;
+}
+
+/* Logos. */
+.pos-ws__logo {
+	width: 3rem;
+	height: 3rem;
+	object-fit: contain;
+	border-radius: 6px;
+	background: #fff;
+}
+
+.pos-ws__logo--large {
+	width: auto;
+	max-width: 12rem;
+	height: auto;
+	max-height: 8rem;
+}
+
+.pos-ws__card-title {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+}
+
+.pos-ws__card-title .pos-ws__logo {
+	width: 2.25rem;
+	height: 2.25rem;
+}
+
+
+.pos-ws__shared {
+	font-size: 0.95rem;
+	overflow-wrap: anywhere;
+}
+
+/* Messages. */
+.pos-ws__message summary {
+	cursor: pointer;
+}
+
+.pos-ws__message summary .pos-ws__muted {
+	display: block;
+	margin-block-start: 0.15rem;
+}
+
+.pos-ws__message-body {
+	margin-block-start: 0.75rem;
+	overflow-wrap: anywhere;
+}
+
+.pos-ws__message-body p {
+	margin: 0 0 0.9em;
+}
+
+/* My account. */
+.pos-profile {
+	max-width: 760px;
+}
+
+.pos-ws .pos-profile__nav ul {
+	flex-wrap: wrap;
+}
+
+.pos-profile--overview {
+	max-width: 1000px;
+}
+
+.pos-profile section:first-of-type {
+	margin-block-start: 0;
+	padding-block-start: 0;
+	border-block-start: 0;
+}
+
+.pos-ws .pos-profile__cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+	gap: 16px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.pos-profile__card {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin: 0;
+}
+
+.pos-profile__card h2 {
+	margin: 0 0 4px;
+	font-size: 1.25rem;
+}
+
+.pos-profile__card p {
+	margin: 0;
+	overflow-wrap: anywhere;
+}
+
+.pos-profile__card .pos-profile__go {
+	margin-top: auto;
+	padding-top: 10px;
+	font-weight: 600;
+}
+
+.pos-profile section {
+	margin-block-start: 2.25rem;
+	padding-block-start: 1.5rem;
+	border-block-start: 1px solid var(--pos-line, #d9d4c8);
+}
+
+.pos-profile section.pos-ws__card {
+	margin-block-start: 1rem;
+	border-block-start-width: 1px;
+}
+
+.pos-profile__stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+	gap: 0.75rem;
+	margin: 0 0 1rem;
+}
+
+.pos-profile__stats > div {
+	padding: 0.75rem 0.9rem;
+	border: 1px solid var(--pos-line, #d9d4c8);
+	border-radius: 8px;
+	background: #fff;
+}
+
+.pos-profile__stats dt {
+	color: var(--pos-muted, #5b6060);
+	font-size: 0.875rem;
+	font-weight: 400;
+}
+
+.pos-profile__stats dd {
+	margin: 0.15rem 0 0;
+	font-size: 1.5rem;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.pos-profile__rule {
+	margin-block: 2rem;
+	border: 0;
+	border-block-start: 1px solid var(--pos-line, #d9d4c8);
+}
+
+/* Lists as Data Views, and the drawer beside them */
+
+.pos-view {
+	position: relative;
+	margin: 0 0 24px;
+}
+
+/* Table, Cards, List: one control, beside the view's own options. */
+.pos-view__layouts {
+	position: absolute;
+	top: 0;
+	right: 44px;
+	z-index: 1;
+	display: inline-flex;
+	overflow: hidden;
+	border: 1px solid var(--pos-field);
+	border-radius: 6px;
+	background: #fff;
+}
+
+.pos-ws .pos-view__layout,
+.pos-ws .pos-view__layout:hover,
+.pos-ws .pos-view__layout:focus {
+	min-height: 34px;
+	margin: 0;
+	padding: 6px 14px;
+	border: 0;
+	border-right: 1px solid var(--pos-line);
+	border-radius: 0;
+	background: #fff;
+	box-shadow: none;
+	color: var(--pos-ink);
+	font-family: inherit;
+	font-size: 0.85rem;
+	font-weight: 600;
+	letter-spacing: 0;
+	line-height: 1.2;
+	text-transform: none;
+	cursor: pointer;
+}
+
+.pos-ws .pos-view__layout:last-child {
+	border-right: 0;
+}
+
+.pos-ws .pos-view__layout:hover {
+	background: #f3f0ea;
+}
+
+.pos-ws .pos-view__layout[aria-pressed="true"],
+.pos-ws .pos-view__layout[aria-pressed="true"]:hover,
+.pos-ws .pos-view__layout[aria-pressed="true"]:focus {
+	background: var(--pos-ink);
+	color: #fff;
+}
+
+.pos-ws .pos-view__layout:focus-visible {
+	outline: 2px solid var(--pos-accent);
+	outline-offset: -3px;
+}
+
+.pos-view .dataviews__view-actions {
+	box-sizing: border-box;
+	min-height: 48px;
+	padding: 0 0 12px;
+}
+
+.pos-view .dataviews__search {
+	/* Room for the layout buttons on the same line. */
+	max-width: calc(100% - 290px);
+}
+
+.pos-view .dataviews-wrapper,
+.pos-view .pos-view__mount > div {
+	color: var(--pos-ink);
+	font-size: 0.95rem;
+}
+
+.pos-view .dataviews-title-field,
+.pos-view .dataviews-title-field a {
+	color: var(--pos-ink);
+	font-size: 1rem;
+	font-weight: 600;
+}
+
+.pos-view .dataviews-title-field a:hover,
+.pos-view .dataviews-title-field a:focus {
+	color: var(--pos-accent);
+}
+
+/* Table */
+
+.pos-view table.dataviews-view-table {
+	margin: 0;
+	border: 0;
+	border-top: 1px solid var(--pos-line);
+	background: #fff;
+}
+
+.pos-view table.dataviews-view-table th,
+.pos-view table.dataviews-view-table td {
+	padding: 12px 14px;
+	border: 0;
+	border-bottom: 1px solid var(--pos-line);
+	font-size: 0.95rem;
+	vertical-align: top;
+}
+
+.pos-view table.dataviews-view-table th {
+	background: #f6f4ef;
+}
+
+/* Cards */
+
+.pos-view .dataviews-view-grid {
+	padding: 0;
+}
+
+.pos-view .dataviews-view-grid__card {
+	box-sizing: border-box;
+	padding: 16px;
+	border: 1px solid var(--pos-line);
+	border-radius: 6px;
+	background: #fff;
+}
+
+.pos-view .dataviews-view-grid__media {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	aspect-ratio: 16 / 9;
+	margin-bottom: 8px;
+	padding: 12px;
+	border: 0;
+	border-radius: 4px;
+	background: #f6f4ef;
+}
+
+.pos-view .dataviews-view-grid__media::after {
+	content: none;
+}
+
+.pos-view .dataviews-view-grid__media:empty,
+.pos-view .dataviews-view-list__media-wrapper:empty,
+.pos-view--no-media .dataviews-view-grid__media,
+.pos-view--no-media .dataviews-view-list__media-wrapper {
+	display: none;
+}
+
+.pos-ws .pos-view .pos-view__mount .dataviews-view-grid__media img,
+.pos-ws .pos-view .pos-view__mount .dataviews-view-list__media-wrapper img {
+	width: 100%;
+	height: 100%;
+	border-radius: 0;
+	object-fit: contain;
+}
+
+/* A list whose picture is a photo: it fills the top of the card, and a card with none shows a pin. */
+.pos-ws .pos-view.pos-view--photos .dataviews-view-grid .dataviews-view-grid__card {
+	padding: 0 0 14px;
+	overflow: hidden;
+}
+
+.pos-ws .pos-view.pos-view--photos .dataviews-view-grid .dataviews-view-grid__card > * {
+	box-sizing: border-box;
+	padding-right: 16px;
+	padding-left: 16px;
+}
+
+.pos-ws .pos-view.pos-view--photos .dataviews-view-grid .dataviews-view-grid__card > .dataviews-view-grid__media,
+.pos-ws .pos-view.pos-view--photos .dataviews-view-grid .dataviews-view-grid__card > .dataviews-view-grid__media:empty {
+	display: block;
+	width: 100%;
+	aspect-ratio: 3 / 2;
+	margin: 0 0 12px;
+	padding: 0;
+	border-radius: 0;
+	background: #ece9e2 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23b9b3a5' d='M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.800 7-13a7 7 0 0 0-7-7zm0 9.500A2.500 2.500 0 1 1 12 6.500a2.500 2.500 0 0 1 0 5z'/%3E%3C/svg%3E") center / 44px no-repeat;
+}
+
+.pos-ws .pos-view.pos-view--photos .pos-view__mount .dataviews-view-grid__media img,
+.pos-ws .pos-view.pos-view--photos .pos-view__mount .dataviews-view-list__media-wrapper img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* The view's own buttons keep their plain look inside the theme. */
+.pos-view .components-button.has-icon,
+.pos-view .components-button.has-icon:hover,
+.pos-view .components-button.has-icon:focus {
+	border: 0;
+	background: transparent;
+	box-shadow: none;
+	color: var(--pos-ink);
+}
+
+.pos-view .components-button.has-icon:focus-visible {
+	outline: 2px solid var(--pos-accent);
+	outline-offset: 1px;
+}
+
+.pos-view .dataviews-view-grid__field-name {
+	color: var(--pos-muted);
+}
+
+/* List */
+
+.pos-view .dataviews-view-list {
+	border-top: 1px solid var(--pos-line);
+	background: #fff;
+}
+
+.pos-view .dataviews-view-list__media-wrapper {
+	background: #f6f4ef;
+}
+
+.pos-view .dataviews-view-list__field,
+.pos-view .dataviews-view-list__field-value {
+	color: var(--pos-muted);
+}
+
+@media (max-width: 640px) {
+	.pos-view__layouts {
+		position: static;
+		display: flex;
+		width: max-content;
+		margin: 0 0 12px;
+	}
+
+	.pos-view .dataviews__search {
+		max-width: none;
+	}
+}
+
+.pos-view__mount[hidden] {
+	display: none;
+}
+
+.pos-ws .pos-view__empty {
+	margin: 0 0 24px;
+}
+
+/* Panes wait out of sight for the drawer. Without scripts, or without the drawer, they are sections under the list. */
+.pos-ws__panes--drawer {
+	display: none;
+}
+
+.pos-ws__pane {
+	margin: 32px 0 0;
+	padding: 24px 0 0;
+	border-top: 1px solid var(--pos-line);
+}
+
+.pos-ws__pane-title {
+	margin: 0 0 12px;
+}
+
+.pos-ws .pos-ws__pane h4 {
+	margin: 28px 0 10px;
+	font-size: 1.05rem;
+}
+
+.pos-ws__pane-actions {
+	margin-top: 24px;
+	padding-top: 16px;
+	border-top: 1px solid var(--pos-line);
+}
+
+.pos-drawer[hidden] {
+	display: none;
+}
+
+.pos-drawer {
+	position: fixed;
+	inset: 0;
+	z-index: 100000;
+	overflow: hidden;
+}
+
+.pos-drawer .packout-drawer__backdrop,
+.pos-drawer .packout-drawer__backdrop:hover,
+.pos-drawer .packout-drawer__backdrop:focus {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: rgba(24, 26, 26, 0.5);
+	box-shadow: none;
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity 0.2s ease;
+}
+
+.pos-drawer.is-open .packout-drawer__backdrop {
+	opacity: 1;
+}
+
+.pos-drawer .packout-drawer__panel {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	width: min(560px, 100%);
+	background: #fff;
+	box-shadow: -18px 0 40px rgba(0, 0, 0, 0.22);
+	transform: translateX(100%);
+	transition: transform 0.2s ease;
+}
+
+/* Half the screen on a large one, the whole of it on a phone. */
+@media (min-width: 1100px) {
+	.pos-drawer .packout-drawer__panel {
+		width: 50%;
+	}
+}
+
+.admin-bar .pos-drawer .packout-drawer__panel {
+	top: var(--wp-admin--admin-bar--height, 32px);
+}
+
+.pos-drawer.is-open .packout-drawer__panel {
+	transform: translateX(0);
+}
+
+.pos-drawer .packout-drawer__bar {
+	display: flex;
+	flex: 0 0 auto;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 18px 24px;
+	border-bottom: 1px solid #d9d4c8;
+	background: var(--packout-ink, #2f3232);
+}
+
+.pos-drawer .packout-drawer__title {
+	margin: 0;
+	color: #fff;
+	font-size: 1.35rem;
+	line-height: 1.2;
+	overflow-wrap: anywhere;
+}
+
+.pos-drawer .packout-drawer__close,
+.pos-drawer .packout-drawer__close:hover,
+.pos-drawer .packout-drawer__close:focus {
+	display: inline-flex;
+	flex: 0 0 auto;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	margin: 0;
+	padding: 0;
+	border: 1px solid rgba(255, 255, 255, 0.45);
+	border-radius: 4px;
+	background: transparent;
+	box-shadow: none;
+	color: #fff;
+	font-size: 1.6rem;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.pos-drawer .packout-drawer__close:hover,
+.pos-drawer .packout-drawer__close:focus-visible {
+	border-color: #fff;
+	background: rgba(255, 255, 255, 0.12);
+}
+
+.pos-drawer .packout-drawer__body {
+	flex: 1 1 auto;
+	min-height: 0;
+	padding: 24px;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+}
+
+.pos-drawer .packout-drawer__pane[hidden] {
+	display: none;
+}
+
+.pos-drawer .pos-ws__pane {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+/* The drawer's bar carries the title. */
+.pos-drawer .pos-ws__pane-title {
+	display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.pos-drawer .packout-drawer__panel,
+	.pos-drawer .packout-drawer__backdrop {
+		transition: none;
+	}
+}
+
+/* ---------- Round 8: one width, scrolling tabs, sections, buttons, and the question ---------- */
+
+/* Every page of My account is one width: the page's own, as My teams is. */
+.pos-profile,
+.pos-profile--overview {
+	max-width: none;
+}
+
+/* A row of tabs stays on one line. It scrolls when it does not fit, and fades where more of it is out of view. */
+.pos-ws__tabs {
+	overflow: visible;
+}
+
+.pos-ws .pos-ws__tabs ul,
+.pos-ws .pos-profile__nav ul,
+.pos-ws .pos-sections.is-tabs > .pos-sections__nav ul {
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	overscroll-behavior-x: contain;
+	scrollbar-width: none;
+	-webkit-overflow-scrolling: touch;
+}
+
+.pos-ws .pos-ws__tabs ul::-webkit-scrollbar,
+.pos-ws .pos-sections__nav ul::-webkit-scrollbar {
+	display: none;
+}
+
+.pos-ws__tabs li,
+.pos-sections__nav li {
+	flex: 0 0 auto;
+}
+
+.pos-ws .is-clipped-end {
+	-webkit-mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent);
+	mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent);
+}
+
+.pos-ws .is-clipped-start {
+	-webkit-mask-image: linear-gradient(to right, transparent, #000 56px);
+	mask-image: linear-gradient(to right, transparent, #000 56px);
+}
+
+.pos-ws .is-clipped-start.is-clipped-end {
+	-webkit-mask-image: linear-gradient(to right, transparent, #000 56px, #000 calc(100% - 56px), transparent);
+	mask-image: linear-gradient(to right, transparent, #000 56px, #000 calc(100% - 56px), transparent);
+}
+
+/* The row clips what is outside it, so the focus ring is drawn inside the tab. */
+.pos-ws .pos-ws__tabs a:focus-visible,
+.pos-ws .pos-sections__nav a:focus-visible {
+	outline: 2px solid var(--pos-accent);
+	outline-offset: -3px;
+}
+
+/* Sections. Without the script they are one under another, with links to each at the top. */
+.pos-sections {
+	margin: 0 0 24px;
+}
+
+.pos-ws .pos-sections__nav ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px 16px;
+	margin: 0 0 20px;
+	padding: 0;
+	list-style: none;
+}
+
+.pos-sections__nav li {
+	margin: 0;
+}
+
+.pos-ws .pos-sections__title {
+	margin: 0 0 14px;
+	font-size: 1.35rem;
+}
+
+.pos-sections__panel + .pos-sections__panel {
+	margin-top: 32px;
+	padding-top: 24px;
+	border-top: 1px solid var(--pos-line);
+}
+
+.pos-sections__panel[hidden] {
+	display: none;
+}
+
+.pos-sections.is-tabs .pos-sections__panel,
+.pos-profile .pos-sections.is-tabs .pos-sections__panel {
+	margin-top: 0;
+	padding-top: 0;
+	border-top: 0;
+}
+
+.pos-profile .pos-sections__panel section:first-child,
+.pos-profile .pos-sections__panel > section {
+	margin-block-start: 0;
+	padding-block-start: 0;
+	border-block-start: 0;
+}
+
+.pos-sections__panel > :last-child {
+	margin-bottom: 0;
+}
+
+.pos-ws .pos-sections.is-tabs > .pos-sections__nav a {
+	display: block;
+	min-height: 44px;
+	padding: 10px 14px;
+	color: var(--pos-ink);
+	font-weight: 600;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.pos-ws .pos-sections.is-tabs > .pos-sections__nav a[aria-selected="true"] {
+	color: var(--pos-accent);
+}
+
+/* Tabs across the top: a pane, and a narrow screen. */
+.pos-ws .pos-sections.is-tabs > .pos-sections__nav ul {
+	gap: 4px;
+	margin: 0 0 20px;
+	border-bottom: 1px solid var(--pos-line);
+}
+
+.pos-ws .pos-sections.is-tabs > .pos-sections__nav a {
+	border-bottom: 3px solid transparent;
+}
+
+.pos-ws .pos-sections.is-tabs > .pos-sections__nav a:hover {
+	border-bottom-color: var(--pos-line);
+}
+
+.pos-ws .pos-sections.is-tabs > .pos-sections__nav a[aria-selected="true"] {
+	border-bottom-color: var(--pos-accent);
+}
+
+/* The tab above says what the section is. */
+.pos-sections--top.is-tabs > .pos-sections__body > .pos-sections__panel > .pos-sections__title {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Tabs down the left of a page that has room for them. */
+@media (min-width: 783px) {
+	.pos-sections--side.is-tabs {
+		display: grid;
+		grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+		gap: 40px;
+		align-items: start;
+	}
+
+	.pos-ws .pos-sections--side.is-tabs > .pos-sections__nav ul {
+		flex-direction: column;
+		gap: 2px;
+		margin: 0;
+		overflow: visible;
+		border-bottom: 0;
+		border-right: 1px solid var(--pos-line);
+		-webkit-mask-image: none;
+		mask-image: none;
+	}
+
+	.pos-ws .pos-sections--side.is-tabs > .pos-sections__nav a {
+		margin-right: -1px;
+		border-bottom: 0;
+		border-right: 3px solid transparent;
+		white-space: normal;
+	}
+
+	.pos-ws .pos-sections--side.is-tabs > .pos-sections__nav a:hover {
+		border-right-color: var(--pos-line);
+		background: #f6f4f0;
+	}
+
+	.pos-ws .pos-sections--side.is-tabs > .pos-sections__nav a[aria-selected="true"] {
+		border-right-color: var(--pos-accent);
+		background: #f6f4f0;
+	}
+}
+
+/* Buttons that act sit on the right, the main one last. */
+.pos-ws__actions,
+.pos-ws__pane-actions,
+.pos-ws__group {
+	justify-content: flex-end;
+}
+
+.pos-ws__pane-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.pos-ws p.pos-ws__actions {
+	margin-top: 20px;
+}
+
+/* A change that cannot be undone is a red link until it is pointed at. */
+.pos-ws .pos-ws__button--danger {
+	padding-inline: 10px;
+	border-color: transparent;
+	background: transparent;
+	color: #a02626;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.pos-ws .pos-ws__button--danger:hover,
+.pos-ws .pos-ws__button--danger:focus-visible {
+	border-color: #b32d2e;
+	background: #fcf0f1;
+	color: #7a1d1d;
+	text-decoration-thickness: 2px;
+}
+
+.pos-ws .pos-ws__button--danger:focus-visible {
+	outline: 2px solid #b32d2e;
+	outline-offset: 2px;
+}
+
+/* The question before it. */
+dialog.pos-confirm {
+	width: min(calc(100vw - 32px), 460px);
+	max-width: none;
+	margin: auto;
+	padding: 24px;
+	border: 0;
+	border-radius: 8px;
+	background: #fff;
+	color: var(--pos-ink);
+	box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
+}
+
+dialog.pos-confirm::backdrop {
+	background: rgba(24, 26, 26, 0.55);
+}
+
+.pos-ws .pos-confirm__question {
+	margin: 0 0 10px;
+	font-size: 1.3rem;
+	line-height: 1.3;
+}
+
+.pos-confirm__note {
+	margin: 0;
+	color: var(--pos-muted);
+}
+
+.pos-confirm__actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 10px;
+	margin-top: 22px;
+}
+
+.pos-ws .pos-confirm__yes--danger,
+.pos-ws .pos-confirm__yes--danger:hover {
+	border-color: #b32d2e;
+	background: #b32d2e;
+	color: #fff;
+}
+
+.pos-ws .pos-confirm__yes--danger:hover {
+	border-color: #8a2424;
+	background: #8a2424;
+}
+
+/* Small things the panes use. */
+.pos-ws .pos-ws__checks,
+.pos-ws .pos-ws__plain {
+	margin: 0 0 20px;
+	padding: 0;
+	list-style: none;
+}
+
+.pos-ws__checks li,
+.pos-ws__plain li {
+	margin: 0;
+	padding: 8px 0;
+	border-bottom: 1px solid var(--pos-line);
+}
+
+.pos-ws__empty {
+	margin: 0 0 20px;
+	color: var(--pos-muted);
+}
+
+.pos-ws__cover {
+	margin: 0 0 20px;
+}
+
+.pos-ws__cover img {
+	display: block;
+	width: 100%;
+	max-height: 260px;
+	border-radius: 6px;
+	object-fit: cover;
+}
+
+.pos-ws__logo-now {
+	margin: 0 0 16px;
+}
+
+.pos-ws__leave {
+	margin-top: 32px;
+}
+
+/* Signing up on the page of a campaign or a mission. */
+.pos-signup {
+	width: auto;
+}
+
+.pos-signup .pos-ws__form {
+	margin-bottom: 0;
+}
+
+.pos-signup .pos-ws__actions {
+	justify-content: flex-start;
+}
+
+.pos-signup__subteam {
+	font-weight: 600;
+}
+
+/* The facts of a campaign or a mission on its public page. */
+.pos-event__facts {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	gap: 8px 24px;
+	margin: 0;
+}
+
+.pos-event__facts dt {
+	font-weight: 600;
+}
+
+.pos-event__facts dd {
+	margin: 0;
+	overflow-wrap: anywhere;
+}
+
+@media (max-width: 520px) {
+	.pos-event__facts {
+		grid-template-columns: 1fr;
+		gap: 2px;
+	}
+
+	.pos-event__facts dd {
+		margin-bottom: 10px;
+	}
+}
+
+/* A reported Spot in the drawer of My impact: its photos, and the person's notes on it. */
+.pos-myspot__photos {
+	margin: 0 0 20px;
+}
+
+.pos-myspot__photos .pos-slider {
+	--pos-slider-ratio: 3 / 2;
+}
+
+.pos-myspot__story {
+	margin: 0 0 16px;
+}
+
+.pos-ws .pos-notes {
+	margin: 24px 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.pos-ws .pos-note {
+	margin: 0 0 16px;
+	padding: 14px 16px 12px;
+	border: 1px solid var(--pos-line);
+	border-left: 4px solid var(--pos-line);
+	border-radius: 8px;
+	background: #fff;
+}
+
+.pos-ws .pos-note--public {
+	border-left-color: var(--pos-accent-hover);
+}
+
+.pos-note__head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px 12px;
+	margin: 0 0 8px;
+	color: var(--pos-muted);
+	font-size: 14px;
+}
+
+.pos-note__state {
+	padding: 1px 10px;
+	border: 1px solid var(--pos-line);
+	border-radius: 999px;
+	color: var(--pos-ink);
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.pos-note--public .pos-note__state {
+	border-color: var(--pos-accent-hover);
+	color: var(--pos-accent-hover);
+}
+
+.pos-note .pos-ws__form {
+	margin: 0;
+}
+
+.pos-note .pos-ws__actions {
+	margin-bottom: 4px;
+}

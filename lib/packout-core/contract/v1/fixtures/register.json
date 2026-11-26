@@ -1,0 +1,10 @@
+{
+	"contract": 1,
+	"core_version": "0.7.0",
+	"plugin_version": "0.3.0-beta.1",
+	"site_url": "https://cleanrivers.example",
+	"name": "Clean Rivers Alliance",
+	"admin_email": "admin@cleanrivers.example",
+	"public_key": "abababababababababababababababababababababababababababababababab",
+	"terms_version": "1"
+}
