@@ -328,6 +328,7 @@ class Field_App {
 			'categories'      => Schema::categories(),
 			'defaultCategory' => Settings::get( 'default_category' ),
 			'statuses'        => Schema::statuses(),
+			'locationKinds'   => Schema::location_kinds(),
 			'missionStatuses' => Missions::statuses(),
 			'outcomes'        => Missions::outcomes(),
 			'doneWords'       => Schema::done_words(),

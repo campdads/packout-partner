@@ -202,6 +202,42 @@
 					"type": "integer",
 					"minimum": 0,
 					"maximum": 1000000000
+				},
+				"group_type": {
+					"type": "object",
+					"additionalProperties": false,
+					"required": [
+						"slug",
+						"name"
+					],
+					"properties": {
+						"slug": {
+							"type": "string",
+							"pattern": "^[a-z0-9-]{0,60}$"
+						},
+						"name": {
+							"type": "string",
+							"maxLength": 80
+						}
+					}
+				},
+				"program_type": {
+					"type": "object",
+					"additionalProperties": false,
+					"required": [
+						"slug",
+						"name"
+					],
+					"properties": {
+						"slug": {
+							"type": "string",
+							"pattern": "^[a-z0-9-]{0,60}$"
+						},
+						"name": {
+							"type": "string",
+							"maxLength": 80
+						}
+					}
 				}
 			}
 		}

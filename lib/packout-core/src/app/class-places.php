@@ -42,14 +42,7 @@ class Places {
 	 * @return array<string, string>
 	 */
 	public static function kinds(): array {
-		return array(
-			'trail'     => __( 'Trail', 'packout-core' ),
-			'trailhead' => __( 'Trailhead', 'packout-core' ),
-			'road'      => __( 'Road corridor', 'packout-core' ),
-			'campsites' => __( 'Campsites', 'packout-core' ),
-			'water'     => __( 'Creek, river, or shoreline', 'packout-core' ),
-			'other'     => __( 'Other area', 'packout-core' ),
-		);
+		return Vocabularies::labels( Vocabularies::PLACE_KIND );
 	}
 
 	/**
@@ -1034,7 +1027,9 @@ class Places {
 
 		if ( array_key_exists( 'kind', $input ) || ! $existing ) {
 			$kind = sanitize_key( (string) ( $input['kind'] ?? '' ) );
-			update_post_meta( $saved, '_pos_kind', isset( self::kinds()[ $kind ] ) ? $kind : 'other' );
+			$kind = isset( self::kinds()[ $kind ] ) ? $kind : 'other';
+			update_post_meta( $saved, '_pos_kind', $kind );
+			Vocabularies::assign( $saved, Vocabularies::PLACE_KIND, $kind );
 		}
 		if ( null !== $ring ) {
 			Schema::write_list( $saved, 'shape', $ring );

@@ -32,6 +32,7 @@ class App {
 		add_action( 'init', array( self::class, 'load_textdomain' ), 1 );
 		Capabilities::register();
 		Schema::register();
+		Vocabularies::register();
 		Teams::register();
 		Team_Page::register();
 		Remote::register();

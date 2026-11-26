@@ -271,15 +271,7 @@ class Schema {
 	 * @return array<string, string>
 	 */
 	public static function statuses(): array {
-		return array(
-			'spotted'     => __( 'Spotted', 'packout-core' ),
-			'planned'     => __( 'Planned', 'packout-core' ),
-			'in_progress' => __( 'In progress', 'packout-core' ),
-			// Someone said they cleaned it. No photo or coordinator has confirmed that yet.
-			'pending'     => __( 'Cleanup reported', 'packout-core' ),
-			'cleaned'     => __( 'Cleaned', 'packout-core' ),
-			'watch'       => __( 'Watch', 'packout-core' ),
-		);
+		return Vocabularies::labels( Vocabularies::STAGE );
 	}
 
 	/**
@@ -288,11 +280,7 @@ class Schema {
 	 * @return array<string, string>
 	 */
 	public static function hazards(): array {
-		return array(
-			'none'                => __( 'No hazard noted', 'packout-core' ),
-			'do_not_touch'        => __( 'Do not touch', 'packout-core' ),
-			'needs_authorization' => __( 'Needs authorization', 'packout-core' ),
-		);
+		return Vocabularies::labels( Vocabularies::HAZARD );
 	}
 
 	/**
@@ -301,12 +289,16 @@ class Schema {
 	 * @return array<string, string>
 	 */
 	public static function location_kinds(): array {
-		return array(
-			'pin'         => __( 'Pin', 'packout-core' ),
-			'area'        => __( 'Area', 'packout-core' ),
-			'landmark'    => __( 'Landmark', 'packout-core' ),
-			'description' => __( 'Description only', 'packout-core' ),
-		);
+		return Vocabularies::labels( Vocabularies::LOCATION_KIND );
+	}
+
+	/**
+	 * Precision choices and their labels.
+	 *
+	 * @return array<string, string>
+	 */
+	public static function precisions(): array {
+		return Vocabularies::labels( Vocabularies::PRECISION );
 	}
 
 	/**
@@ -315,14 +307,7 @@ class Schema {
 	 * @return array<string, string>
 	 */
 	public static function categories(): array {
-		return array(
-			'cleanup-waste'             => __( 'Cleanup and waste', 'packout-core' ),
-			'campsites-recreation'      => __( 'Campsites and recreation', 'packout-core' ),
-			'trails-access'             => __( 'Trails and access', 'packout-core' ),
-			'land-habitat'              => __( 'Land and habitat', 'packout-core' ),
-			'waterways'                 => __( 'Waterways', 'packout-core' ),
-			'facilities-infrastructure' => __( 'Facilities and infrastructure', 'packout-core' ),
-		);
+		return Vocabularies::labels( Vocabularies::CATEGORY );
 	}
 
 	/**
@@ -333,8 +318,7 @@ class Schema {
 	 * @param string $category Category slug.
 	 */
 	public static function done_word( string $category ): string {
-		$words = self::done_words();
-		return $words[ $category ] ?? $words['cleanup-waste'];
+		return Vocabularies::done_word( $category );
 	}
 
 	/**
@@ -343,14 +327,7 @@ class Schema {
 	 * @return array<string, string>
 	 */
 	public static function done_words(): array {
-		return array(
-			'cleanup-waste'             => __( 'Cleaned', 'packout-core' ),
-			'campsites-recreation'      => __( 'Cleaned', 'packout-core' ),
-			'trails-access'             => __( 'Cleared', 'packout-core' ),
-			'land-habitat'              => __( 'Restored', 'packout-core' ),
-			'waterways'                 => __( 'Cleared', 'packout-core' ),
-			'facilities-infrastructure' => __( 'Repaired', 'packout-core' ),
-		);
+		return Vocabularies::done_words();
 	}
 
 	/**
@@ -359,13 +336,7 @@ class Schema {
 	 * @param string $hazard Hazard flag.
 	 */
 	public static function hazard_guidance( string $hazard ): string {
-		if ( 'do_not_touch' === $hazard ) {
-			return __( 'Leave this material where it is. Do not move, open, or pack it out. A coordinator will decide what happens next. If anyone is in danger, call 911 or the local land management office.', 'packout-core' );
-		}
-		if ( 'needs_authorization' === $hazard ) {
-			return __( 'This work needs permission from the land manager before anyone starts. Leave it in place and let a coordinator arrange it.', 'packout-core' );
-		}
-		return '';
+		return Vocabularies::hazard_guidance( $hazard );
 	}
 
 	/**
@@ -640,23 +611,6 @@ class Schema {
 				'capabilities'        => self::record_capabilities( Capabilities::IMPACT ),
 			)
 		);
-
-		register_taxonomy(
-			self::CATEGORY,
-			self::SPOT,
-			array(
-				'labels'            => array(
-					'name'          => __( 'Stewardship categories', 'packout-core' ),
-					'singular_name' => __( 'Stewardship category', 'packout-core' ),
-				),
-				'public'            => false,
-				'show_ui'           => false,
-				'show_in_rest'      => false,
-				'hierarchical'      => false,
-				'show_admin_column' => false,
-				'rewrite'           => false,
-			)
-		);
 	}
 
 	/**
@@ -679,14 +633,7 @@ class Schema {
 	 * Create the category terms that are missing.
 	 */
 	public static function install_terms(): void {
-		if ( ! taxonomy_exists( self::CATEGORY ) ) {
-			self::types();
-		}
-		foreach ( self::categories() as $slug => $name ) {
-			if ( ! term_exists( $slug, self::CATEGORY ) ) {
-				wp_insert_term( $name, self::CATEGORY, array( 'slug' => $slug ) );
-			}
-		}
+		Vocabularies::install();
 	}
 
 	/**

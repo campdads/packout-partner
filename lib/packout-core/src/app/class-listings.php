@@ -138,10 +138,14 @@ final class Listings {
 					'description' => self::text( $post->post_content, 5000 ),
 					'region'      => self::text( Teams::field( $id, 'region' ), 120 ),
 					'website'     => self::web( Teams::field( $id, 'website' ), 200 ),
-					'join'        => in_array( $join, array( 'request', 'open', 'closed' ), true ) ? $join : 'closed',
+					'join'        => in_array( $join, array( 'request', 'open', 'closed' ), true ) ? $join : 'request',
 					'url'         => (string) get_permalink( $post ),
 					'teams'       => array_map( static fn( array $subteam ): string => $id . '-' . (int) $subteam['id'], Subteams::listed( $id ) ),
 				);
+				$type  = Vocabularies::listing_type( $id, Vocabularies::GROUP_TYPE );
+				if ( $type ) {
+					$item['group_type'] = $type;
+				}
 				break;
 
 			case 'team':
@@ -166,6 +170,10 @@ final class Listings {
 					'organizations' => array_values( array_map( 'strval', array_filter( array_map( 'intval', Programs::taking_part( $id ) ), static fn( int $team ): bool => self::listable( 'organization', (string) $team ) ) ) ),
 					'url'           => (string) get_permalink( $post ),
 				);
+				$type  = Vocabularies::listing_type( $id, Vocabularies::PROGRAM_TYPE );
+				if ( $type ) {
+					$item['program_type'] = $type;
+				}
 				break;
 
 			case 'campaign':

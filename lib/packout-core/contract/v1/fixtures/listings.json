@@ -17,7 +17,11 @@
 			"url": "https://cleanrivers.example/team/tillatoba-paddlers/",
 			"teams": [
 				"12-1"
-			]
+			],
+			"group_type": {
+				"slug": "volunteer-organizations",
+				"name": "Volunteer Organizations"
+			}
 		},
 		{
 			"kind": "team",
@@ -44,7 +48,11 @@
 			"organizations": [
 				"12"
 			],
-			"url": "https://cleanrivers.example/program/clear-water/"
+			"url": "https://cleanrivers.example/program/clear-water/",
+			"program_type": {
+				"slug": "cleanup",
+				"name": "Cleanup Programs"
+			}
 		},
 		{
 			"kind": "campaign",

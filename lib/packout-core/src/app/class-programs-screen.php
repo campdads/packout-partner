@@ -98,18 +98,24 @@ class Programs_Screen {
 			return;
 		}
 
-		$rows = array();
+		$rows         = array();
+		$type_labels  = Programs::types();
+		$state_labels = Vocabularies::labels( Vocabularies::PROGRAM_STATE );
+		$unset        = __( 'Not set', 'packout-core' );
 		foreach ( $programs as $program ) {
 			$id     = $program->ID;
 			$owner  = Programs::owner_post( $id );
 			$filed  = Programs::filed( $id );
+			$type   = Programs::type( $id );
+			$state  = Programs::state( $id );
 			$rows[] = array(
 				'id'        => (string) $id,
 				'title'     => $program->post_title,
 				'url'       => Admin::pane_url( (string) $id ),
 				'owner'     => $owner ? $owner->post_title : '—',
 				'kind'      => 'partner' === Programs::owner( $id )['kind'] ? __( 'Partner', 'packout-core' ) : __( 'Organization', 'packout-core' ),
-				'state'     => 'open' === Programs::state( $id ) ? __( 'Open', 'packout-core' ) : __( 'Closed', 'packout-core' ),
+				'type'      => '' === $type ? $unset : ( $type_labels[ $type ] ?? $type ),
+				'state'     => $state_labels[ $state ] ?? $state,
 				'window'    => '' !== Programs::window_line( $id ) ? Programs::window_line( $id ) : '—',
 				'campaigns' => $filed['campaigns'],
 				'missions'  => $filed['missions'],
@@ -124,6 +130,10 @@ class Programs_Screen {
 					'search' => true,
 				),
 				'kind'      => array( 'label' => __( 'Owned by a', 'packout-core' ) ),
+				'type'      => array(
+					'label'   => __( 'Type of program', 'packout-core' ),
+					'primary' => true,
+				),
 				'state'     => array(
 					'label'   => __( 'State', 'packout-core' ),
 					'primary' => true,

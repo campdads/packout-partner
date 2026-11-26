@@ -257,17 +257,18 @@ class Partner_Workspace {
 					break;
 				}
 				$input = array(
-					'owner_kind'  => Partners::get( $owner ) ? 'partner' : 'team',
-					'owner'       => $owner,
-					'title'       => $text( 'title' ),
-					'description' => $long( 'description' ),
-					'goal'        => $text( 'goal' ),
-					'start'       => $text( 'start' ),
-					'end'         => $text( 'end' ),
-					'sponsors'    => $list( 'sponsors' ),
-					'public'      => $on( 'public' ),
+					'owner_kind'   => Partners::get( $owner ) ? 'partner' : 'team',
+					'owner'        => $owner,
+					'title'        => $text( 'title' ),
+					'description'  => $long( 'description' ),
+					'goal'         => $text( 'goal' ),
+					'start'        => $text( 'start' ),
+					'end'          => $text( 'end' ),
+					'program_type' => $text( 'program_type' ),
+					'sponsors'     => $list( 'sponsors' ),
+					'public'       => $on( 'public' ),
 					// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Checked above. Each value is read as two whole numbers by Programs::save().
-					'subteams'    => isset( $_POST['program_subteams'] ) && is_array( $_POST['program_subteams'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['program_subteams'] ) ) : array(),
+					'subteams'     => isset( $_POST['program_subteams'] ) && is_array( $_POST['program_subteams'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['program_subteams'] ) ) : array(),
 				);
 				// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Checked above.
 				if ( isset( $_POST['has_orgs'] ) ) {
@@ -1721,6 +1722,8 @@ class Partner_Workspace {
 			)
 		);
 		$html .= Workspace::input( 'goal', __( 'Goal', 'packout-core' ), $old( 'goal', $program ? Programs::field( $id, 'goal' ) : '' ), array( 'maxlength' => (string) \PackOut\Core\Program::MAX_GOAL ), __( 'One sentence, such as "Every adopted road walked four times a year".', 'packout-core' ) );
+		$types = array( '' => __( 'Not set', 'packout-core' ) ) + Programs::types();
+		$html .= Workspace::choose( 'program_type', __( 'Type of program', 'packout-core' ), $types, $old( 'program_type', $program ? Programs::type( $id ) : '' ) );
 		$html .= Workspace::area( 'description', __( 'Description', 'packout-core' ), $old( 'description', $program ? $program->post_content : '' ), __( 'Shown in the header of the public program page when the program is public.', 'packout-core' ) );
 		$html .= '<div class="pos-ws__pair">' . Workspace::input( 'start', __( 'Starts', 'packout-core' ), $old( 'start', $program ? Programs::field( $id, 'start' ) : '' ), array( 'type' => 'date' ) );
 		$html .= Workspace::input( 'end', __( 'Ends', 'packout-core' ), $old( 'end', $program ? Programs::field( $id, 'end' ) : '' ), array( 'type' => 'date' ), __( 'Leave empty for a program with no last day.', 'packout-core' ) ) . '</div>';

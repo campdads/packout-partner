@@ -131,6 +131,7 @@ class Workspace {
 						'description' => $long( 'description' ),
 						'region'      => $text( 'region' ),
 						'website'     => $text( 'website' ),
+						'group_type'  => $text( 'group_type' ),
 					)
 				);
 				if ( ! is_wp_error( $result ) ) {
@@ -527,6 +528,7 @@ class Workspace {
 						'region'       => $text( 'region' ),
 						'website'      => $text( 'website' ),
 						'join'         => $text( 'join' ),
+						'group_type'   => $text( 'group_type' ),
 						'listed'       => $on( 'listed' ),
 						'member_plans' => $on( 'member_plans' ),
 						'show_leads'   => $on( 'show_leads' ),

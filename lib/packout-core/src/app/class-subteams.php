@@ -648,11 +648,7 @@ class Subteams {
 	 * @return array<string, string>
 	 */
 	public static function join_policies(): array {
-		return array(
-			'closed'  => __( 'Its lead chooses its members', 'packout-core' ),
-			'request' => __( 'People ask, and the team\'s lead accepts or declines', 'packout-core' ),
-			'open'    => __( 'Anyone signed in can join at once', 'packout-core' ),
-		);
+		return Vocabularies::labels( Vocabularies::JOIN );
 	}
 
 	/**

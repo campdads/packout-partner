@@ -520,8 +520,9 @@ class Spots_Screen {
 
 		self::open_form( $id, 'settings' );
 		echo '<p><label>' . esc_html__( 'What the public sees of the location', 'packout-core' ) . '<br /><select name="precision">';
-		echo '<option value="exact"' . selected( $precision, 'exact', false ) . '>' . esc_html__( 'The exact pin', 'packout-core' ) . '</option>';
-		echo '<option value="coarse"' . selected( $precision, 'coarse', false ) . '>' . esc_html__( 'An approximate point, about 2 km wide', 'packout-core' ) . '</option>';
+		foreach ( Schema::precisions() as $value => $label ) {
+			echo '<option value="' . esc_attr( $value ) . '"' . selected( $precision, $value, false ) . '>' . esc_html( $label ) . '</option>';
+		}
 		echo '</select></label></p>';
 		echo '<p class="description">' . esc_html__( 'With an approximate point, a generated title and the Spot\'s address no longer name the pin or the landmark. A title someone typed is left as it is, so check that it does not give the location away.', 'packout-core' ) . '</p>';
 		echo '<p><label>' . esc_html__( 'Hazard', 'packout-core' ) . '<br /><select name="hazard">';

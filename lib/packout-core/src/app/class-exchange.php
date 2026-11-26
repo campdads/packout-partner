@@ -154,7 +154,7 @@ final class Exchange {
 			'name' => $term ? self::text( $term->name, 80 ) : '',
 		);
 		$hazard   = Spots::field( $id, 'hazard', 'none' );
-		$hazard   = isset( Schema::hazards()[ $hazard ] ) ? $hazard : 'none';
+		$hazard   = '' !== $hazard ? $hazard : 'none';
 
 		if ( 'awaiting' === $state ) {
 			$item += array(
@@ -174,7 +174,8 @@ final class Exchange {
 
 		// What a visitor to this site is shown, and nothing a visitor is not.
 		$public = Spots::payload( $post, 'public' );
-		$status = isset( Schema::statuses()[ $public['status'] ] ) ? (string) $public['status'] : 'spotted';
+		$status = sanitize_key( (string) ( $public['status'] ?? 'spotted' ) );
+		$status = '' !== $status ? $status : 'spotted';
 		$title  = self::text( (string) $public['title'], 200 );
 		$item  += array(
 			'title'               => '' !== $title ? $title : ( '' !== $category['name'] ? $category['name'] : __( 'Spot', 'packout-core' ) ),

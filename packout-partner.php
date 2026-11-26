@@ -13,7 +13,7 @@
  * Plugin Name:       Pack-Out Spot Partner
  * Plugin URI:        https://packout.spot/plugins/packout-partner
  * Description:       Community stewardship for places that need attention, on your own site. Report Spots, plan missions, record the result, and share it with packout.spot.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 6.8
  * Requires PHP:      8.2
  * Author:            CampDads Digital
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'PACKOUT_PARTNER_FILE', __FILE__ );
-define( 'PACKOUT_PARTNER_VERSION', '1.0.0' );
+define( 'PACKOUT_PARTNER_VERSION', '1.0.1' );
 
 /*
  * The last phase of the partner build this plugin has reached. The parity

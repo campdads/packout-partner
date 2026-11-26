@@ -69,11 +69,7 @@ class Impact {
 	 * @return array<string, string>
 	 */
 	public static function kinds(): array {
-		return array(
-			self::CLEANUP     => __( 'Cleanup', 'packout-core' ),
-			self::STILL_CLEAR => __( 'Still clear', 'packout-core' ),
-			self::RETURNED    => __( 'It\'s back', 'packout-core' ),
-		);
+		return Vocabularies::labels( Vocabularies::IMPACT_KIND );
 	}
 
 	/**
@@ -82,10 +78,7 @@ class Impact {
 	 * @return array<string, string>
 	 */
 	public static function sources(): array {
-		return array(
-			'self_reported' => __( 'Self-reported', 'packout-core' ),
-			'measured'      => __( 'Measured', 'packout-core' ),
-		);
+		return Vocabularies::labels( Vocabularies::IMPACT_SOURCE );
 	}
 
 	/**
@@ -94,10 +87,7 @@ class Impact {
 	 * @return array<string, string>
 	 */
 	public static function verifications(): array {
-		return array(
-			'unverified' => __( 'Unverified', 'packout-core' ),
-			'verified'   => __( 'Verified', 'packout-core' ),
-		);
+		return Vocabularies::labels( Vocabularies::VERIFICATION );
 	}
 
 	/**
@@ -571,6 +561,7 @@ class Impact {
 			return true;
 		}
 		update_post_meta( $id, '_pos_verification', 'unverified' );
+		Vocabularies::assign( $id, Vocabularies::VERIFICATION, 'unverified' );
 		delete_post_meta( $id, '_pos_verified_by' );
 		delete_post_meta( $id, '_pos_verified_at' );
 		update_post_meta( $id, '_pos_unverified_at', gmdate( 'c' ) );
@@ -1160,7 +1151,21 @@ class Impact {
 	 */
 	private static function set( int $id, array $fields ): void {
 		foreach ( $fields as $key => $value ) {
-			update_post_meta( $id, '_pos_' . $key, is_bool( $value ) ? ( $value ? '1' : '' ) : (string) $value );
+			$stored = is_bool( $value ) ? ( $value ? '1' : '' ) : (string) $value;
+			update_post_meta( $id, '_pos_' . $key, $stored );
+			if ( 'kind' === $key ) {
+				Vocabularies::assign( $id, Vocabularies::IMPACT_KIND, $stored );
+			}
+			if ( 'verification' === $key ) {
+				Vocabularies::assign( $id, Vocabularies::VERIFICATION, $stored );
+			}
+			if ( in_array( $key, array( 'bags_source', 'pounds_source' ), true ) && '' !== $stored ) {
+				Vocabularies::ensure_term( Vocabularies::IMPACT_SOURCE, $stored );
+				$current = wp_get_object_terms( $id, Vocabularies::IMPACT_SOURCE, array( 'fields' => 'slugs' ) );
+				$slugs   = is_array( $current ) ? $current : array();
+				$slugs[] = $stored;
+				wp_set_object_terms( $id, array_values( array_unique( $slugs ) ), Vocabularies::IMPACT_SOURCE );
+			}
 		}
 	}
 
