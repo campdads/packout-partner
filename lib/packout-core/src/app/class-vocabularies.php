@@ -57,9 +57,9 @@ class Vocabularies {
 	 */
 	public static function register(): void {
 		add_action( 'init', array( self::class, 'types' ), 9 );
-		add_action( 'init', array( self::class, 'place_menus' ), 12 );
 		add_action( 'admin_menu', array( self::class, 'menu' ) );
 		add_action( 'admin_menu', array( self::class, 'tidy_menus' ), 1001 );
+		add_action( 'load-toplevel_page_' . self::MENU, array( self::class, 'open' ) );
 		add_action( 'pre_delete_term', array( self::class, 'protect' ), 1, 2 );
 	}
 
@@ -76,23 +76,25 @@ class Vocabularies {
 	}
 
 	/**
-	 * Keep each taxonomy under Pack-Out Taxonomies after Content Types syncs it.
-	 */
-	public static function place_menus(): void {
-		foreach ( array_keys( self::definitions() ) as $key ) {
-			$tax = get_taxonomy( $key );
-			if ( $tax instanceof \WP_Taxonomy ) {
-				$tax->show_ui      = true;
-				$tax->show_in_menu = self::MENU;
-				$tax->show_in_rest = true;
-			}
-		}
-	}
-
-	/**
-	 * Top-level menu the taxonomies sit under.
+	 * Top-level menu the taxonomies sit under when Content Types is not placing them.
+	 *
+	 * The hub names this menu as an admin page and sets each taxonomy's
+	 * `menu_parent` to it, so Content Types hangs the lists and the ordered
+	 * view keeps each taxonomy's name. A partner site has no Content Types:
+	 * this adds the same menu with WordPress's own term lists.
 	 */
 	public static function menu(): void {
+		/**
+		 * Whether this plugin should register the Pack-Out Taxonomies menu.
+		 *
+		 * The hub returns false: Content Types already hangs the taxonomies
+		 * under an admin page of the same slug.
+		 *
+		 * @param bool $own Whether to register the menu.
+		 */
+		if ( ! apply_filters( 'packout_vocabularies_own_menu', true ) ) {
+			return;
+		}
 		add_menu_page(
 			__( 'Pack-Out Taxonomies', 'packout-core' ),
 			__( 'Pack-Out Taxonomies', 'packout-core' ),
@@ -102,6 +104,15 @@ class Vocabularies {
 			'dashicons-tag',
 			27
 		);
+		foreach ( self::definitions() as $key => $def ) {
+			add_submenu_page(
+				self::MENU,
+				(string) $def['plural'],
+				(string) $def['plural'],
+				Capabilities::MODERATE,
+				'edit-tags.php?taxonomy=' . $key
+			);
+		}
 	}
 
 	/**
@@ -128,7 +139,7 @@ class Vocabularies {
 	}
 
 	/**
-	 * Drop the duplicate parent item and leave each row named as the taxonomy.
+	 * Drop the duplicate parent item WordPress adds for the top-level menu.
 	 */
 	public static function tidy_menus(): void {
 		global $submenu;
@@ -140,13 +151,8 @@ class Vocabularies {
 			if ( ! is_array( $item ) ) {
 				continue;
 			}
-			$slug = (string) ( $item[2] ?? '' );
-			if ( self::MENU === $slug ) {
+			if ( self::MENU === (string) ( $item[2] ?? '' ) ) {
 				continue;
-			}
-			$title = wp_strip_all_tags( (string) ( $item[0] ?? '' ) );
-			if ( 0 === strpos( $title, 'Order ' ) ) {
-				$item[0] = substr( $title, 6 );
 			}
 			$kept[] = $item;
 		}
@@ -1098,7 +1104,7 @@ class Vocabularies {
 			'public'             => false,
 			'publicly_queryable' => false,
 			'show_ui'            => true,
-			'show_in_menu'       => self::MENU,
+			'show_in_menu'       => false,
 			'show_in_nav_menus'  => false,
 			'show_tagcloud'      => false,
 			'show_in_quick_edit' => false,
@@ -1130,7 +1136,7 @@ class Vocabularies {
 			'post_types'         => $def['objects'],
 			'show_ui'            => true,
 			'show_in_menu'       => true,
-			'menu_parent'        => 'objects',
+			'menu_parent'        => self::MENU,
 			'show_in_nav_menus'  => false,
 			'show_tagcloud'      => false,
 			'show_in_quick_edit' => false,
